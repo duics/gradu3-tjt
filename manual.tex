@@ -18,7 +18,7 @@
 \newcommand{\opt}[1]{\texttt{#1}}
 \newcommand{\env}[1]{\texttt{#1}}
 
-\author{Matthieu Weber\\ \texttt{mweber@mit.jyu.fi}}
+\author{Matthieu Weber\\ \texttt{mweber@mit.jyu.fi} \and Antti-Juhani Kaijanaho\\ \texttt{antkaij@mit.jyu.fi}
 \title{Gradu --- A Class for Writing Master's Thesis at the Faculty of
 Information Technology of the University of Jyväskylä}
 
@@ -127,7 +127,7 @@ lowercase roman to arabic, starting from 1 again.
 Note that \cmd{subsubsection}, \cmd{paragraph} and \cmd{subparagraph} are
 forbidden.
 
-In addition to the previous commands, there are two useful environments:
+In addition to the previous commands, there are three useful environments:
 
 \begin{envs}
 \item[thebibliography] allows to specify a list of references. Should be put
@@ -135,6 +135,10 @@ before the appendices.
 \item[appendix] inserts an ``Appendices'' line into the table of contents and
 the chapters inside the environments will be numbered with
 letters instead of numbers, beginning from ``A''.
+\item[chapterquote] allows you to add a quote to the beginning of a
+  chapter.  It takes one mandatory argument: the attribution line for
+  the quote.  You should start the text of the chapter immediately
+  after this environment; do not leave empty lines there.
 \end{envs}
 
 

@@ -1,6 +1,6 @@
 % Originally written by Antti-Juhani Kaijanaho on December 2001.
 % You may treat this file as if it were in the public domain.
-% Subsequently modified by Matthieu Weber.
+% Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
 \def\filedate{2002/04/28}
 \def\fileversion{1.0}
@@ -251,3 +251,12 @@
 \renewcommand\subparagraph{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
 
 \setcounter{secnumdepth}{2}
+
+\newenvironment{chapterquote}[1]{%
+  \begin{quote}\em
+  \def\gradu@quoteattr{#1}
+}{%
+  \\\mbox{}\hfill---~\gradu@quoteattr
+  \end{quote}
+  \@endparenv
+}
