@@ -2,8 +2,8 @@
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\filedate{2002/10/20}
-\def\fileversion{1.1}
+\def\filedate{2002/10/23}
+\def\fileversion{1.2}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -78,7 +78,7 @@
 \def\appendicesname{Appendices}
 \fi
 
-\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\baselinestretch}{1.1}
 %\linespread{1.3}
 
 \newcounter{pages}
@@ -295,11 +295,31 @@
     \center{\textbf{\gradu@laitos}}%
     \center{\textbf{\gradu@paikka}}%
   \end{titlepage}%
+\ifcopyright%
+  \begin{titlepage}%
+    \mbox{}\vfill%
+    \centering%
+    \noindent Copyright \copyright\ \gradu@copyrightyear\ \gradu@copyrightowner\par%
+    \medskip%
+    \noindent\gradu@license%
+    \par\vskip 3 cm plus 1 cm minus 1 cm\par%
+    \noindent \gradu@yliopisto\\%
+    \gradu@paikka~\number\year
+    %\par\vfill%
+  \end{titlepage}%
+\fi%
+  \iffi%
+    \def\gradu@finishtitle{\gradu@title}%
+    \def\gradu@englishtitle{\gradu@titletrans}%
+  \else%
+    \def\gradu@finnishtitle{\gradu@titletrans}%
+    \def\gradu@englishtitle{\gradu@title}%
+  \fi%
   \def\gradu@finnishabstract{%
     \begin{titlepage}%
       \section*{Tiivistelm\"a}%
       \gradu@rohtau\\%
-      {\let\\\relax\gradu@title / \gradu@author}\\%
+      {\let\\\relax\gradu@finnishtitle / \gradu@author}\\%
       \gradu@paikka: \gradu@yliopisto, \number\year \\%
       \pageref{gradu@pages}~s.\\%
       \gradu@tyyppi\par%
@@ -313,7 +333,7 @@
     \begin{titlepage}%
       \section*{Abstract}%
       \gradu@rohtau\\%
-      {\let\\\relax\gradu@title / \gradu@author}\\%
+      {\let\\\relax\gradu@englishtitle / \gradu@author}\\%
       \gradu@paikka: \gradu@university, \number\year \\%
       \pageref{gradu@pages}~p.\\%
       \gradu@type\par%
