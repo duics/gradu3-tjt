@@ -232,7 +232,7 @@
   {section}%
   {1}%
   {\z@}%
-  {2em}%
+  {-2em}%
   {1em}%
   {\normalfont\bfseries\large}%
 }
@@ -241,7 +241,7 @@
   {subsection}%
   {2}%
   {\z@}%
-  {\baselineskip}%
+  {-\baselineskip}%
   {-2ex}%
   {\normalfont\normalsize\bfseries}%
 }
