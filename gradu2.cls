@@ -56,6 +56,12 @@
 
 \DeclareOption{shortthesis}{\shortthesistrue}
 
+\let\gradu@lof\relax
+\let\gradu@lot\relax
+\DeclareOption{lof}{\gdef\gradu@lof{\listoffigures}}
+\DeclareOption{lot}{\gdef\gradu@lot{\listoftables}}
+
+
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
@@ -232,8 +238,8 @@
 
 \newcommand{\mainmatter}{
   \tableofcontents
-%  \IfFileExists{\jobname.lot}{\listoftables}{}
-%  \IfFileExists{\jobname.lof}{\listoffigures}{}
+  \gradu@lof
+  \gradu@lot
   \setcounter{pages}{\value{page}}
   \clearpage
   \pagenumbering{arabic}
