@@ -91,13 +91,15 @@
 
 \newcounter{pages}
 
+\iffi
+\def\selectdefaultlanguage{\selectlanguage{finnish}}
+\else
+\def\selectdefaultlanguage{\selectlanguage{english}}
+\fi
+
 \AtBeginDocument{%
 \pagenumbering{roman}
-\iffi
-\selectlanguage{finnish}
-\else
-\selectlanguage{english}
-\fi
+\selectdefaultlanguage
 \maketitle
 }
 
@@ -172,6 +174,8 @@
 \def\gradu@copyrightowner{\gradu@author}
 \def\gradu@license{All rights reserved.}
 \def\gradu@copyrightyear{\the\year}
+\def\gradu@acmccs{}
+\def\gradu@ysa{}
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtau{#2, #1}}
@@ -188,8 +192,8 @@
 \newcommand{\linja}[1]{\gdef\gradu@linja{(#1)}}
 \newcommand{\tyyppi}[1]{\gdef\gradu@tyyppi{#1}}
 \newcommand{\type}[1]{\gdef\gradu@type{#1}}
-\newcommand{\keywords}[1]{\gdef\gradu@keywords{\foreignlanguage{english}{#1}}}
-\newcommand{\avainsanat}[1]{\gdef\gradu@avainsanat{\foreignlanguage{finnish}{#1}}}
+\newcommand{\keywords}[1]{\gdef\gradu@keywords{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
+\newcommand{\avainsanat}[1]{\gdef\gradu@avainsanat{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
 \newcommand{\contactinformation}[1]{\gdef\gradu@yhteystiedot{#1}}
 \newcommand{\yhteystiedot}[1]{\gdef\gradu@yhteystiedot{#1}}
 \long\def\tiivistelma#1{\gdef\gradu@tiivistelma{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
@@ -198,7 +202,11 @@
 \newcommand{\copyrightowner}[1]{\gdef\gradu@copyrightowner{#1}}
 \newcommand{\license}[1]{\gdef\gradu@license{#1}}
 \newcommand{\copyrightyear}[1]{\gdef\gradu@copyrightyear{#1}}
+\newcommand{\acmccs}[1]{\gdef\gradu@acmccs{\textbf{ACM Categories and Subject Descriptors:} \begin{foreignlanguage}{english}#1\end{foreignlanguage}\par}}
+\newcommand{\ysa}[1]{\gdef\gradu@ysa{\textbf{Asiasanat (YSA):} \begin{foreignlanguage}{finnish}#1\end{foreignlanguage}\par}}
+
 \newcommand{\fulltitle}{\gradu@title: \gradu@tyo}
+
 
 \newcommand{\gradu@toolate}{%
   \ClassError{gradu2}{%
@@ -224,8 +232,8 @@
 
 \newcommand{\mainmatter}{
   \tableofcontents
-  \IfFileExists{\jobname.lot}{\listoftables}{}
-  \IfFileExists{\jobname.lof}{\listoffigures}{}
+%  \IfFileExists{\jobname.lot}{\listoftables}{}
+%  \IfFileExists{\jobname.lof}{\listoffigures}{}
   \setcounter{pages}{\value{page}}
   \clearpage
   \pagenumbering{arabic}
@@ -282,7 +290,9 @@
     \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
     \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
     \noindent\textbf{English abstract:} \gradu@abstract\par%
+    \noindent\gradu@ysa%
     \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+    \noindent\gradu@acmccs%
     \noindent\textbf{Keywords:} \gradu@keywords\par%
 \else%
     \noindent\textbf{Author:} \gradu@author\par%
@@ -293,7 +303,9 @@
     \noindent\textbf{Page count:} \ref{TotPages}\par%
     \noindent\textbf{Abstract:} \gradu@abstract\par%
     \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
+    \noindent\gradu@acmccs%
     \noindent\textbf{Keywords:} \gradu@keywords\par%
+    \noindent\gradu@ysa%
     \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
 \fi%
 \ifcopyright%
@@ -356,6 +368,7 @@
   \fi%
   \def\gradu@finnishabstract{%
     \begin{titlepage}%
+      %\selectlanguage{finnish}%
       \section*{Tiivistelm\"a}%
       \gradu@rohtau\\%
       {\def\\{ }\gradu@finnishtitle{} / \gradu@author}\\%
@@ -365,7 +378,9 @@
       \bigskip%
       \noindent\gradu@tiivistelma\par%
       \bigskip%
+      \noindent\gradu@ysa%
       \noindent\textbf{Avainsanat: } \gradu@avainsanat%
+      %\selectdefaultlanguage%
     \end{titlepage}%
   }%
   \def\gradu@englishabstract{%
@@ -379,6 +394,7 @@
       \bigskip%
       \noindent\gradu@abstract\par%
       \bigskip%
+      \noindent\gradu@acmccs%
       \noindent\textbf{Keywords: } \gradu@keywords%
     \end{titlepage}%
   }%
