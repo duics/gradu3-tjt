@@ -279,7 +279,7 @@
       \gradu@aine\ \gradu@linja\par%
       \gradu@tyyppi%
 \else%
-     \parindent6truecm\parskip0pt%
+     \parindent9truecm\parskip0pt%
       \gradu@type\par%
       \gradu@aine\ \gradu@linja%
 \fi%
