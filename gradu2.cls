@@ -358,7 +358,7 @@
     \begin{titlepage}%
       \section*{Tiivistelm\"a}%
       \gradu@rohtau\\%
-      {\let\\\relax\gradu@finnishtitle / \gradu@author}\\%
+      {\def\\{ }\gradu@finnishtitle{} / \gradu@author}\\%
       \gradu@paikka: \gradu@yliopisto, \number\year \\%
       \ref{TotPages}~s.\\%
       \gradu@tyyppi\par%
@@ -372,7 +372,7 @@
     \begin{titlepage}%
       \section*{Abstract}%
       \gradu@rohtau\\%
-      {\let\\\relax\gradu@englishtitle / \gradu@author}\\%
+      {\def\\{ }\gradu@englishtitle{} / \gradu@author}\\%
       \gradu@paikka: \gradu@university, \number\year \\%
       \ref{TotPages}~p.\\%
       \gradu@type\par%
