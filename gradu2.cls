@@ -15,6 +15,9 @@
 \newif\ifcopyright
 \copyrighttrue
 
+\newif\ifnumbib
+\numbibtrue
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -38,6 +41,9 @@
 \DeclareOption{copyright}{\copyrighttrue}
 \DeclareOption{nocopyright}{\copyrightfalse}
 
+\DeclareOption{numbib}{\numbibtrue}
+\DeclareOption{nonumbib}{\numbibfalse}
+
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
@@ -48,7 +54,9 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm]{geometry}
 \RequirePackage[finnish,english]{babel}
+\ifnumbib
 \RequirePackage[numbib]{tocbibind}
+\fi
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
