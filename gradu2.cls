@@ -48,7 +48,7 @@
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
 \def\gradu@msg@komentoa{-komentoa?}
 \def\gradu@msg@progradu{pro gradu -tutkielma}
-\def\termlistname{Termiluettelo}
+\def\termlistname{Sanasto}
 \def\appendicesname{Liitteet}
 \else
 \def\gradu@msg@muistitko{Did you remember to use the}
