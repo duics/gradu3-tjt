@@ -190,7 +190,12 @@
 \def\gradu@ysa{}
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
-\renewcommand{\author}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtau{#2, #1}}
+\renewcommand{\author}[1]{%
+ \ClassWarning{gradu2}{\textbackslash author is deprecated!}%
+ \gdef\gradu@author{#1 \ifoldtitle\else(Use \textbackslash setauthor!)\fi}
+ \gdef\gradu@rohtau{#1 \ifoldtitle\else(Use \textbackslash setauthor!)\fi}
+}
+\newcommand{\setauthor}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtau{#2, #1}}
 \renewcommand{\date}[1]{%
   \ClassWarning{gradu2}{\textbackslash date is deprecated!}%
   \gdef\gradu@date{#1}%
