@@ -23,13 +23,7 @@
 
 \newif\ifshortthesis
 \shortthesisfalse
-\def\gradu@baseclass{%
-  \ifshortthesis%
-  article%
-  \else%
-  report
-  \fi%
-}
+\def\gradu@baseclass{\ifshortthesis article\else report\fi}
 
 %% Input encoding
 \def\gradu@inputenc{latin1}
@@ -167,8 +161,8 @@
 \newcommand{\avainsanat}[1]{\gdef\gradu@avainsanat{\foreignlanguage{finnish}{#1}}}
 \newcommand{\contactinformation}[1]{\gdef\gradu@yhteystiedot{#1}}
 \newcommand{\yhteystiedot}[1]{\gdef\gradu@yhteystiedot{#1}}
-\newcommand{\tiivistelma}[1]{\gdef\gradu@tiivistelma{\foreignlanguage{finnish}{#1}}}
-\renewcommand{\abstract}[1]{\gdef\gradu@abstract{\foreignlanguage{english}{#1}}}
+\long\def\tiivistelma#1{\gdef\gradu@tiivistelma{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
+\long\def\abstract#1{\gdef\gradu@abstract{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
 \newcommand{\translatedtitle}[1]{\gdef\gradu@titletrans{#1}}
 \newcommand{\copyrightowner}[1]{\gdef\gradu@copyrightowner{#1}}
 \newcommand{\license}[1]{\gdef\gradu@license{#1}}
