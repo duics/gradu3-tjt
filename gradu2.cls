@@ -1,9 +1,9 @@
-% Originally written by Antti-Juhani Kaijanaho on December 2001.
+% Originally written by Antti-Juhani Kaijanaho on December 2002.
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\filedate{2002/04/28}
-\def\fileversion{1.0}
+\def\filedate{2002/10/20}
+\def\fileversion{1.1}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -115,6 +115,24 @@
 \newcommand{\copyrightyear}[1]{\gdef\gradu@copyrightyear{#1}}
 \newcommand{\fulltitle}{\gradu@title: \gradu@tyo}
 
+\newcommand{\gradu@toolate}{%
+  \ClassError{gradu2}{%
+    \iffi%
+    Bibliografiatietoja ei voi antaa en‰‰ dokumentin alun j‰lkeen.%
+    \else%
+    Bibliographical data cannot be given after the beginning of document.%
+    \fi%
+  }{%
+    \iffi%
+    Komennot kuten \textbackslash title voi antaa vain ennen
+    \textbackslash begin\{document\}-komentoa.
+    \else%
+    You can give commands like \textbackslash title only before
+    the \textbackslash begin\{document\} command.
+    \fi%
+  }%
+}
+
 %\@ifundefined{\csname gradu@numpages \endcsname}
 %  \def\gradu@numpages{\textbf{?}}
 %\fi
@@ -192,7 +210,25 @@
     \medskip%
     \noindent\gradu@license%
   \end{titlepage}%
-  }
+  \global\let\title\gradu@toolate%
+  \global\let\author\gradu@toolate%
+  \global\let\date\gradu@toolate%  
+  \global\let\linja\gradu@toolate%  
+  \global\let\tyyppi\gradu@toolate%  
+  \global\let\keywords\gradu@toolate%  
+  \global\let\linja\gradu@toolate%  
+  \global\let\tyyppi\gradu@toolate%  
+  \global\let\keywords\gradu@toolate%  
+  \global\let\avainsanat\gradu@toolate%  
+  \global\let\contactinformation\gradu@toolate%  
+  \global\let\yhteystiedot\gradu@toolate%  
+  \global\let\tiivistelma\gradu@toolate%  
+  \global\let\abstract\gradu@toolate%  
+  \global\let\translatedtitle\gradu@toolate%  
+  \global\let\copyrightowner\gradu@toolate%  
+  \global\let\license\gradu@toolate%  
+  \global\let\copyrightyear\gradu@toolate%  
+}
 
 \newcommand{\preface}{\chapter*{\prefacename}
 \addcontentsline{toc}{chapter}{\prefacename}
