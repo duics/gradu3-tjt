@@ -131,7 +131,7 @@
 
 \renewcommand{\maketitle}{%
   \begin{titlepage}%
-    \vspace*{7truecm}%
+    \vspace*{7truecm plus 1truecm minus 3truecm}%
     \centerline{\textbf{\gradu@author}}%
     \vspace{2truecm}%
     \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
@@ -150,6 +150,7 @@
       \gradu@date%
       }%
     \vfill%
+    \vspace{1truecm plus 1truecm minus .5truecm}%
 \iffi%
     \center{\large\textbf{Jyv\"askyl\"an yliopisto}}%
     \center{\textbf{Tietotekniikan laitos}}%
@@ -163,7 +164,7 @@
 \iffi%
     \noindent\textbf{Tekij\"a:} \gradu@author\par%
     \noindent\textbf{Yhteystiedot:} \gradu@yhteystiedot\par%
-    \noindent\textbf{Ty\"on nimi:} \gradu@title\par%
+    \noindent\textbf{Ty\"on nimi:} {\let\\\relax gradu@title\par}%
     \noindent\textbf{Title in English:} \gradu@titletrans\par%
     \def\gradu@tyo{Tietotekniikan %
     \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
@@ -176,7 +177,7 @@
 \else%
     \noindent\textbf{Author:} \gradu@author\par%
     \noindent\textbf{Contact information:} \gradu@yhteystiedot\par%
-    \noindent\textbf{Title:} \gradu@title\par%
+    \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
     \def\gradu@tyo{\gradu@tyyppi{} in Information Technology \gradu@linja}%
     \noindent\textbf{Project:} \gradu@tyo\par%
