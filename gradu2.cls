@@ -195,12 +195,12 @@
     \par{%
 \iffi%
      \parindent9truecm\parskip0pt%
-      \gradu@aine \gradu@linja\par%
+      \gradu@aine\ \gradu@linja\par%
       \gradu@tyyppi%
 \else%
      \parindent6truecm\parskip0pt%
       \gradu@tyyppi\par%
-      \gradu@aine \gradu@linja%
+      \gradu@aine\ \gradu@linja%
 \fi%
       \par%
       \gradu@date%
@@ -217,7 +217,7 @@
     \noindent\textbf{Yhteystiedot:} \gradu@yhteystiedot\par%
     \noindent\textbf{Ty\"on nimi:} {\let\\\relax gradu@title\par}%
     \noindent\textbf{Title in English:} \gradu@titletrans\par%
-    \def\gradu@tyo{Tietotekniikan %
+    \def\gradu@tyo{\gradu@aine\ %
     \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
     \noindent\textbf{Ty\"o:} \gradu@tyo\par%
     \noindent\textbf{Sivum\"a\"ar\"a:} \pageref{gradu@pages}\par%
@@ -230,7 +230,7 @@
     \noindent\textbf{Contact information:} \gradu@yhteystiedot\par%
     \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
-    \def\gradu@tyo{\gradu@tyyppi{} in Information Technology \gradu@linja}%
+    \def\gradu@tyo{\gradu@tyyppi{} \gradu@aine{} \gradu@linja}%
     \noindent\textbf{Project:} \gradu@tyo\par%
     \noindent\textbf{Page count:} \pageref{gradu@pages}\par%
     \noindent\textbf{Abstract:} \gradu@abstract\par%
