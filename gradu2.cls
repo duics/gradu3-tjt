@@ -21,6 +21,8 @@
 \newif\ifoldtitle
 \oldtitletrue
 
+\def\gradu@baseclass{report}
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -50,11 +52,13 @@
 \DeclareOption{oldtitle}{\oldtitletrue}
 \DeclareOption{newtitle}{\oldtitlefalse}
 
+\DeclareOption{shortthesis}{\gdef\gradu@baseclass{article}}
+
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions
-\LoadClass[a4paper,12pt]{report}
+\LoadClass[a4paper,12pt]{\gradu@baseclass}
 
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
