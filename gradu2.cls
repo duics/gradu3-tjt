@@ -10,9 +10,8 @@
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-\ExecuteOptions{a4paper,12pt}
 \ProcessOptions
-\LoadClass{report}
+\LoadClass[a4paper,12pt]{report}
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
