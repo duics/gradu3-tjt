@@ -2,9 +2,10 @@
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\CvsKeywordValue$#1: #2 ${#2}
-\def\filedate{\CvsKeywordValue$Date: 2003/08/28 13:11:01 $}
-\def\fileversion{\CvsKeywordValue$Revision: 1.41 $}
+\def\CvsRevision$#1: #2 ${#2}
+\def\CvsDate$#1: #2 #3 ${#2}
+\def\filedate{\CvsKeywordValue$Date: 2003/08/28 13:13:09 $}
+\def\fileversion{\CvsKeywordValue$Revision: 1.42 $}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
