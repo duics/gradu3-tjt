@@ -21,7 +21,15 @@
 \newif\ifoldtitle
 \oldtitletrue
 
-\def\gradu@baseclass{report}
+\newif\ifshortthesis
+\shortthesisfalse
+\def\gradu@baseclass{%
+  \ifshortthesis%
+  article%
+  \else%
+  report
+  \fi%
+}
 
 %% Input encoding
 \def\gradu@inputenc{latin1}
@@ -52,11 +60,11 @@
 \DeclareOption{oldtitle}{\oldtitletrue}
 \DeclareOption{newtitle}{\oldtitlefalse}
 
-\DeclareOption{shortthesis}{\gdef\gradu@baseclass{article}}
+\DeclareOption{shortthesis}{\shortthesistrue}
 
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
 
@@ -196,7 +204,9 @@
   \setcounter{pages}{\value{page}}
   \clearpage
   \pagenumbering{arabic}
+\ifshortthesis\else
   \setcounter{chapter}{0}
+\fi
 }
 
 \renewcommand{\maketitle}{%
