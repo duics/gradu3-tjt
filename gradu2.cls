@@ -18,6 +18,9 @@
 \newif\ifnumbib
 \numbibtrue
 
+\newif\ifoldtitle
+\oldtitletrue
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -44,6 +47,9 @@
 \DeclareOption{numbib}{\numbibtrue}
 \DeclareOption{nonumbib}{\numbibfalse}
 
+\DeclareOption[oldtitle]{\oldtitletrue}
+\DeclareOption[newtitle]{\oldtitlefalse}
+
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
@@ -56,6 +62,8 @@
 \RequirePackage[finnish,english]{babel}
 \ifnumbib
 \RequirePackage[numbib]{tocbibind}
+\else
+\RequirePackage{tocbibind}
 \fi
 
 \iffi
@@ -186,6 +194,7 @@
 }
 
 \renewcommand{\maketitle}{%
+\ifoldtitle%
   \begin{titlepage}%
     \vspace*{7truecm plus 1truecm minus 3truecm}%
     \centerline{\textbf{\gradu@author}}%
@@ -263,6 +272,35 @@
   \global\let\copyrightowner\gradu@toolate%  
   \global\let\license\gradu@toolate%  
   \global\let\copyrightyear\gradu@toolate%  
+\else%
+  % ------------- NEW TITLEPAGE FORMAT -------------
+  \begin{titlepage}%
+    \vspace*{7truecm plus 1truecm minus 3truecm}%
+    \centerline{\textbf{\gradu@author}}%
+    \vspace{2truecm}%
+    \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
+    \vspace{4truecm}%
+    \par{%
+\iffi%
+     \parindent9truecm\parskip0pt%
+      \gradu@aine\ \gradu@linja\par%
+      \gradu@tyyppi%
+\else%
+     \parindent6truecm\parskip0pt%
+      \gradu@tyyppi\par%
+      \gradu@aine\ \gradu@linja%
+\fi%
+      \par%
+      \gradu@date%
+      }%
+    \vfill%
+    \vspace{1truecm plus 1truecm minus .5truecm}%
+    \center{\large\textbf{\gradu@yliopisto}}%
+    \center{\textbf{\gradu@laitos}}%
+  \end{titlepage}%
+  \newpage%
+  \begin{titlepage}%
+\fi%
 }
 
 \newcommand{\preface}{\chapter*{\prefacename}
