@@ -79,7 +79,7 @@
 \RequirePackage{hyperref}
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm]{geometry}
+\RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
 \ifnumbib
 \RequirePackage[numbib]{tocbibind}
