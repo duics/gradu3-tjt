@@ -26,7 +26,21 @@
 \renewcommand{\baselinestretch}{1.2}
 %\linespread{1.3}
 
+\RequirePackage[T1]{fontenc}
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm]{geometry}
+
+\def\gradu@input@charset{latin1}
+\newcommand{\charset}[1]{\gdef\gradu@input@charset{#1}}
+
+\AtBeginDocument{%
+\RequirePackage[\gradu@input@charset]{inputenc}
+\maketitle
+\thispagestyle{empty}
+\setcounter{page}{2}
+\null\cleardoublepage
+\tableofcontents
+
+}
 
 \AtEndDocument{%
 %\addtocounter{page}{-1}%
@@ -34,7 +48,6 @@
 \string{\string{0\string}\string{\thepage\string}\string}}%
 }
 %\string\def\string\gradu@numpages\string{\thepage\string}}}
-
 
 \def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
 
