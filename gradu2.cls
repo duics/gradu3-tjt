@@ -306,7 +306,7 @@
 \else%
   % ------------- NEW TITLEPAGE FORMAT -------------
   \begin{titlepage}%
-    \vspace*{7truecm plus 1truecm minus 3truecm}%
+    \vspace*{5truecm plus 2truecm minus 3truecm}%
     \centerline{\textbf{\gradu@author}}%
     \vspace{2truecm}%
     \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
