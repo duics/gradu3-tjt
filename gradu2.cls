@@ -4,8 +4,8 @@
 
 \def\CvsRevision$#1: #2 ${#2}
 \def\CvsDate$#1: #2 #3 ${#2}
-\def\filedate{\CvsDate$Date: 2003/12/15 08:50:29 $}
-\def\fileversion{\CvsRevision$Revision: 1.45 $}
+\def\filedate{\CvsDate$Date: 2003/12/15 08:53:38 $}
+\def\fileversion{\CvsRevision$Revision: 1.46 $}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -537,7 +537,7 @@
   \@endparenv
 }
 
-\iffi%
+\iffi
 \def\refname{Viitteet}
 \def\bibname{Viitteet}
 \else
