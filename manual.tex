@@ -108,16 +108,22 @@ used, a reminder will be printed inside the document.
 
 \begin{cmds}
 \item[title] document's title (mandatory)
-\item[author] document's author (mandatory)
+\item[author] document's author (two arguments: first names and surname) (mandatory)
 \item[date] document's publishing date (defaults to the current date)
-\item[yliopisto] the university to which this thesis will be submitted (defaults to ``Jyväskylän yliopisto'' in Finnish and ``University of Jyväskylä'' in English)
+  \textbf{deprecated, use \textbackslash setdate instead}
+\item[setdate] takes three arguments: day, month, year (all numeric);
+  sets document's publishing date (defaults to the current date)
+\item[yliopisto] the university to which this thesis will be
+  submitted, in Finnish (defaults to ``Jyväskylän yliopisto'')
+\item[yliopisto] the university to which this thesis will be
+  submitted, in English (defaults to ``University of Jyväskylä'')
 \item[laitos] the department  to which this thesis will be submitted (defaults to ``Tietotekniikan laitos'' in Finnish and ``Department of Mathematical Information Technology'' in English)
 \item[aine] the formal subject (major or minor) whose thesis this is
   (defaults to ``Tietotekniikan'' in Finnish and ``in Information
   Technology'' in English
 \item[linja] study line (optional)
-\item[tyyppi] type of work (defaults to ``pro gradu -tutkielma'' in Finnish or
-``A Master's Thesis'' in English)
+\item[tyyppi] type of work in Finnish (defaults to ``pro gradu -tutkielma'')
+\item[type] type of work in English (defaults to ``A Master's Thesis'')
 \item[keywords] document's keywords in English (mandatory)
 \item[avainsanat] document's keywords in Finnish (mandatory)
 \item[contactinformation] author's contact information (mandatory)

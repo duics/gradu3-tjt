@@ -69,13 +69,11 @@
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
 \def\gradu@msg@komentoa{-komentoa?}
-\def\gradu@msg@progradu{pro gradu -tutkielma}
 \def\termlistname{Sanasto}
 \def\appendicesname{Liitteet}
 \else
 \def\gradu@msg@muistitko{Did you remember to use the}
 \def\gradu@msg@komentoa{ command?}
-\def\gradu@msg@progradu{A Master's Thesis}
 \def\termlistname{Glossary}
 \def\appendicesname{Appendices}
 \fi
@@ -108,13 +106,9 @@
 \def\gradu@title{\gradu@muistitko{title}}
 \def\gradu@author{\gradu@muistitko{author}}
 \def\gradu@date{\today}
-\def\gradu@yliopisto{%
-  \iffi%
-  Jyv\"askyl\"an yliopisto%
-  \else%
-  University of Jyv\"askyl\"a%
-  \fi%
-}
+\def\gradu@paikka{Jyv\"askyl\"a}
+\def\gradu@yliopisto{Jyv\"askyl\"an yliopisto}
+\def\gradu@university{University of Jyv\"askyl\"a}
 \def\gradu@laitos{%
   \iffi%
   Tietotekniikan laitos%
@@ -130,7 +124,8 @@
   \fi%
 }
 \def\gradu@linja{}
-\def\gradu@tyyppi{\gradu@msg@progradu}
+\def\gradu@tyyppi{pro gradu -tutkielma}
+\def\gradu@type{A Master's Thesis}
 \def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
 \def\gradu@abstract{\gradu@muistitko{abstract}}
 \def\gradu@titletrans{\gradu@muistitko{translatedtitle}}
@@ -142,13 +137,20 @@
 \def\gradu@copyrightyear{\the\year}
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
-\renewcommand{\author}[1]{\gdef\gradu@author{#1}}
-\renewcommand{\date}[1]{\gdef\gradu@date{#1}}
+\renewcommand{\author}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtau{#2, #1}}
+\renewcommand{\date}[1]{%
+  \ClassWarning{gradu2}{\textbackslash date is deprecated!}%
+  \gdef\gradu@date{#1}%
+}
+\newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\gdef\year{#3}}
+\newcommand{\paikka}[1]{\gdef\gradu@paikka{#1}}
 \newcommand{\yliopisto}[1]{\gdef\gradu@yliopisto{#1}}
+\newcommand{\university}[1]{\gdef\gradu@university{#1}}
 \newcommand{\laitos}[1]{\gdef\gradu@laitos{#1}}
 \newcommand{\aine}[1]{\gdef\gradu@aine{#1}}
 \newcommand{\linja}[1]{\gdef\gradu@linja{(#1)}}
 \newcommand{\tyyppi}[1]{\gdef\gradu@tyyppi{#1}}
+\newcommand{\type}[1]{\gdef\gradu@type{#1}}
 \newcommand{\keywords}[1]{\gdef\gradu@keywords{\foreignlanguage{english}{#1}}}
 \newcommand{\avainsanat}[1]{\gdef\gradu@avainsanat{\foreignlanguage{finnish}{#1}}}
 \newcommand{\contactinformation}[1]{\gdef\gradu@yhteystiedot{#1}}
@@ -194,6 +196,12 @@
 }
 
 \renewcommand{\maketitle}{%
+\iffi
+    \def\gradu@tyo{\gradu@aine{} %
+    \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
+\else
+    \def\gradu@tyo{\gradu@type{} \gradu@aine{} \gradu@linja}%
+\fi
 \ifoldtitle%
   \begin{titlepage}%
     \vspace*{7truecm plus 1truecm minus 3truecm}%
@@ -208,7 +216,7 @@
       \gradu@tyyppi%
 \else%
      \parindent6truecm\parskip0pt%
-      \gradu@tyyppi\par%
+      \gradu@type\par%
       \gradu@aine\ \gradu@linja%
 \fi%
       \par%
@@ -216,8 +224,13 @@
       }%
     \vfill%
     \vspace{1truecm plus 1truecm minus .5truecm}%
+\iffi
     \center{\large\textbf{\gradu@yliopisto}}%
+\else
+    \center{\large\textbf{\gradu@university}}%
+\fi
     \center{\textbf{\gradu@laitos}}%
+    \center{\textbf{\gradu@paikka}}%
   \end{titlepage}%
   \newpage%
   \begin{titlepage}%
@@ -226,8 +239,6 @@
     \noindent\textbf{Yhteystiedot:} \gradu@yhteystiedot\par%
     \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Title in English:} \gradu@titletrans\par%
-    \def\gradu@tyo{\gradu@aine{} %
-    \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
     \noindent\textbf{Ty\"o:} \gradu@tyo\par%
     \noindent\textbf{Sivum\"a\"ar\"a:} \pageref{gradu@pages}\par%
     \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
@@ -239,7 +250,6 @@
     \noindent\textbf{Contact information:} \gradu@yhteystiedot\par%
     \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
-    \def\gradu@tyo{\gradu@tyyppi{} \gradu@aine{} \gradu@linja}%
     \noindent\textbf{Project:} \gradu@tyo\par%
     \noindent\textbf{Page count:} \pageref{gradu@pages}\par%
     \noindent\textbf{Abstract:} \gradu@abstract\par%
@@ -269,7 +279,7 @@
       \gradu@tyyppi%
 \else%
      \parindent6truecm\parskip0pt%
-      \gradu@tyyppi\par%
+      \gradu@type\par%
       \gradu@aine\ \gradu@linja%
 \fi%
       \par%
@@ -277,11 +287,53 @@
       }%
     \vfill%
     \vspace{1truecm plus 1truecm minus .5truecm}%
+\iffi
     \center{\large\textbf{\gradu@yliopisto}}%
+\else
+    \center{\large\textbf{\gradu@university}}%
+\fi
     \center{\textbf{\gradu@laitos}}%
+    \center{\textbf{\gradu@paikka}}%
   \end{titlepage}%
+  \def\gradu@finnishabstract{%
+    \begin{titlepage}%
+      \section*{Tiivistelm\"a}%
+      \gradu@rohtau\\%
+      {\let\\\relax\gradu@title / \gradu@author}\\%
+      \gradu@paikka: \gradu@yliopisto, \number\year \\%
+      \pageref{gradu@pages}~s.\\%
+      \gradu@tyyppi\par%
+      \bigskip%
+      \noindent\gradu@tiivistelma\par%
+      \bigskip%
+      \noindent\textbf{Avainsanat: } \gradu@avainsanat%
+    \end{titlepage}%
+  }%
+  \def\gradu@englishabstract{%
+    \begin{titlepage}%
+      \section*{Abstract}%
+      \gradu@rohtau\\%
+      {\let\\\relax\gradu@title / \gradu@author}\\%
+      \gradu@paikka: \gradu@university, \number\year \\%
+      \pageref{gradu@pages}~p.\\%
+      \gradu@type\par%
+      \bigskip%
+      \noindent\gradu@abstract\par%
+      \bigskip%
+      \noindent\textbf{Keywords: } \gradu@keywords%
+    \end{titlepage}%
+  }%
+\iffi
   \newpage%
-  \begin{titlepage}%
+  \gradu@finnishabstract%
+  \newpage
+  \gradu@englishabstract%
+\else
+  \newpage%
+  \gradu@englishabstract%
+  \newpage
+  \gradu@finnishabstract%
+\fi
 \fi%
   \global\let\title\gradu@toolate%
   \global\let\author\gradu@toolate%
