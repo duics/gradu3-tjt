@@ -1,3 +1,7 @@
+% Originally written by Antti-Juhani Kaijanaho on December 2001.
+% You may treat this file as if it were in the public domain.
+% Subsequently modified by Matthieu Weber.
+
 \def\filedate{2002/04/28}
 \def\fileversion{1.0}
 \def\fileinfo{JY MIT Gradut}
