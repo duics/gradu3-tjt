@@ -74,6 +74,7 @@
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
 
+\RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
 \RequirePackage{hyperref}
 \RequirePackage[\gradu@inputenc]{inputenc}
