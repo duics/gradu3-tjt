@@ -1,0 +1,140 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\newenvironment{cmds}
+  {\begin{description}\renewcommand{\makelabel}[1]{\texttt{\textbackslash##1}\hfill}}
+  {\end{description}}
+
+\newenvironment{opts}
+  {\begin{description}\renewcommand{\makelabel}[1]{\texttt{##1}\hfill}}
+  {\end{description}}
+
+\newenvironment{envs}
+  {\begin{description}\renewcommand{\makelabel}[1]{\texttt{##1}\hfill}}
+  {\end{description}}
+
+\newcommand{\cmd}[1]{\texttt{\textbackslash#1}}
+\newcommand{\opt}[1]{\texttt{#1}}
+\newcommand{\env}[1]{\texttt{#1}}
+
+\author{Matthieu Weber\\ \texttt{mweber@mit.jyu.fi}}
+\title{Gradu --- A Class for Writing Master's Thesis at the Faculty of
+Information Technology of the University of Jyväskylä}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This class is designed to facilitate the writing of a Master's Thesis work at
+the Department of Information Technology of the University of Jyväskylä.
+\end{abstract}
+
+\section{Invocation}
+
+Invoke the class with the usual \cmd{documentclass\{gradu2\}}.
+
+\subsection{Language Options}
+
+Languages options set hyphenation, titles translations and date formats to the
+selected language. The available languages are:
+
+\begin{opts}
+\item[finnish] switches to Finnish language (default)
+\item[english] switches to English language
+\end{opts}
+
+You can switch at any time from one of those languages to the other one with
+\cmd{selectlanguage\{}\textit{language}\texttt{\}}.
+
+\subsection{Input Character Set}
+
+Input character set options allow to specify with what character set the source file
+is written. Available character sets are:
+
+\begin{opts}
+\item[ascii] ASCII encoding (ISO 646)
+\item[latin1] ISO-8859-1 encoding (Western Europe languages) (default)
+\item[latin2] ISO-8859-2 encoding (Central Europe languages)
+\item[latin3] ISO-8859-3 encoding (Esperanto, Maltese)
+\item[latin5] ISO-8859-5 encoding (Cyrillic)
+\item[applemac] Macintosh encoding
+\item[ansinew] Windows 3.11 ANSI (extended ISO-8859-1) encoding
+\item[cp1252] synonym for \opt{ansinew}
+\item[cp1250] MS Windows 1252 (central and eastern Europe languages) code page
+\item[decmulti] DEC Multinational Character Set encoding
+\item[next] Next encoding
+\item[cp437] IBM 437 code page
+\item[cp437de] IBM 437 code page (German version)
+\item[cp850] IBM 850 code page
+\item[cp852] IBM 852 code page
+\item[cp865] IBM 865 code page
+\end{opts}
+
+Usual encodings, by platform, are:
+
+\begin{description}
+\item[Linux] \texttt{latin1}
+\item[MS Windows] \texttt{cp1252}
+\item[Macintosh] \texttt{applemac}
+\end{description}
+
+\section{Header Commands}
+
+The following commands can be used before the \cmd{begin\{document\}}. Some
+of those are optional (their default values are described along with the
+command) and the others are mandatory. If one of the mandatory commands is not
+used, a reminder will be printed inside the document.
+
+\begin{cmds}
+\item[title] document's title (mandatory)
+\item[author] document's author (mandatory)
+\item[date] document's publishing date (defaults to the current date)
+\item[linja] study line (optional)
+\item[tyyppi] type of work (defaults to ``pro gradu -tutkielma'' in Finnish or
+``A Master's Thesis'' in English)
+\item[keywords] document's keywords in English (mandatory)
+\item[avainsanat] document's keywords in Finnish (mandatory)
+\item[contactinformation] author's contact information (mandatory)
+\item[yhteystiedot] author's contact information (synonym of
+\cmd{contactinformation})
+\item[tiivistelma] abstract in Finnish (mandatory)
+\item[abstract] abstract in English (mandatory)
+\item[translatedtitle] title in the other language (mandatory)
+\item[copyrightowner] owner of the copyright (defaults to the author's name)
+\item[license] license under which the document is published (defaults to ``All
+rights reserved.'')
+\item[copyrightyear] copyright year (defaults to the current year)
+\end{cmds}
+
+\section{Sectioning Commands}
+
+The available sectioning commands are:
+\begin{cmds}
+\item[preface] Preface
+\item[termlist] List of terms
+\item[mainmatter] Marks the beginning of the main part of the document.
+Should appear before the first \cmd{chapter}.
+Inserts the table of contents, the list of tables and the list of figures.
+Switches on chapter numbering; switches the page numbering from
+lowercase roman to arabic, starting from 1 again.
+\item[chapter] Beginning of a chapter
+\item[section] Beginning of a section
+\item[subsection] Beginning of a subsection
+\end{cmds}
+
+Note that \cmd{subsubsection}, \cmd{paragraph} and \cmd{subparagraph} are
+forbidden.
+
+In addition to the previous commands, there are two useful environments:
+
+\begin{envs}
+\item[thebibliography] allows to specify a list of references. Should be put
+before the appendices.
+\item[appendix] inserts an ``Appendices'' line into the table of contents and
+the chapters inside the environments will be numbered with
+letters instead of numbers, beginning from ``A''.
+\end{envs}
+
+
+\end{document}
