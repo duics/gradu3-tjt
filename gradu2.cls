@@ -86,6 +86,27 @@
 \def\gradu@title{\gradu@muistitko{title}}
 \def\gradu@author{\gradu@muistitko{author}}
 \def\gradu@date{\today}
+\def\gradu@yliopisto{%
+  \iffi%
+  Jyv\"askyl\"an yliopisto%
+  \else%
+  University of Jyv\"askyl\"a%
+  \fi%
+}
+\def\gradu@laitos{%
+  \iffi%
+  Tietotekniikan laitos%
+  \else%
+  Department of Mathematical Information Technology%
+  \fi%
+}
+\def\gradu@aine{%
+  \iffi%
+  Tietotekniikan%
+  \else%
+  in Information Technology%
+  \fi%
+}
 \def\gradu@linja{}
 \def\gradu@tyyppi{\gradu@msg@progradu}
 \def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
@@ -101,8 +122,11 @@
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{\gdef\gradu@author{#1}}
 \renewcommand{\date}[1]{\gdef\gradu@date{#1}}
+\newcommand{\yliopisto}[1]{\gdef\gradu@yliopisto{#1}}
+\newcommand{\laitos}[1]{\gdef\gradu@laitos{#1}}
+\newcommand{\aine}[1]{\gdef\gradu@aine{#1}}
 \newcommand{\linja}[1]{\gdef\gradu@linja{(#1)}}
-\newcommand{\tyyppi}[1]{\gdef\gradu@tyyppi{(#1)}}
+\newcommand{\tyyppi}[1]{\gdef\gradu@tyyppi{#1}}
 \newcommand{\keywords}[1]{\gdef\gradu@keywords{\foreignlanguage{english}{#1}}}
 \newcommand{\avainsanat}[1]{\gdef\gradu@avainsanat{\foreignlanguage{finnish}{#1}}}
 \newcommand{\contactinformation}[1]{\gdef\gradu@yhteystiedot{#1}}
@@ -118,7 +142,7 @@
 \newcommand{\gradu@toolate}{%
   \ClassError{gradu2}{%
     \iffi%
-    Bibliografiatietoja ei voi antaa en‰‰ dokumentin alun j‰lkeen.%
+    Bibliografiatietoja ei voi antaa enaa dokumentin alun jalkeen.%
     \else%
     Bibliographical data cannot be given after the beginning of document.%
     \fi%
@@ -169,13 +193,8 @@
       }%
     \vfill%
     \vspace{1truecm plus 1truecm minus .5truecm}%
-\iffi%
-    \center{\large\textbf{Jyv\"askyl\"an yliopisto}}%
-    \center{\textbf{Tietotekniikan laitos}}%
-\else%
-    \center{\large\textbf{University of Jyv\"askyl\"a}}%
-    \center{\textbf{Department of Mathematical Information Technology}}%
-\fi%
+    \center{\large\textbf{\gradu@yliopisto}}%
+    \center{\textbf{\gradu@laitos}}%
   \end{titlepage}%
   \newpage%
   \begin{titlepage}%
