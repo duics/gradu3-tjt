@@ -12,6 +12,9 @@
 \newif\iffi
 \fitrue
 
+\newif\ifcopyright
+\copyrighttrue
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -31,6 +34,9 @@
 \DeclareOption{latin5}{\gdef\gradu@inputenc{latin5}}
 \DeclareOption{latin9}{\gdef\gradu@inputenc{latin9}}
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
+
+\DeclareOption{copyright}{\copyrighttrue}
+\DeclareOption{nocopyright}{\copyrightfalse}
 
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
@@ -224,10 +230,12 @@
     \noindent\textbf{Keywords:} \gradu@keywords\par%
     \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
 \fi%
+\ifcopyright%
     \bigskip%
     \noindent Copyright \copyright\ \gradu@copyrightyear\ \gradu@copyrightowner\par%
     \medskip%
     \noindent\gradu@license%
+\fi%
   \end{titlepage}%
   \global\let\title\gradu@toolate%
   \global\let\author\gradu@toolate%
