@@ -1,4 +1,4 @@
-\def\filedate{2001/11/12}
+\def\filedate{2002/04/28}
 \def\fileversion{1.0}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
@@ -25,6 +25,7 @@
 \DeclareOption{latin2}{\gdef\gradu@inputenc{latin2}}
 \DeclareOption{latin3}{\gdef\gradu@inputenc{latin3}}
 \DeclareOption{latin5}{\gdef\gradu@inputenc{latin5}}
+\DeclareOption{latin9}{\gdef\gradu@inputenc{latin9}}
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
 
 \DeclareOption{finnish}{\fitrue}
