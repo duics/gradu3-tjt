@@ -4,8 +4,8 @@
 
 \def\CvsRevision$#1: #2 ${#2}
 \def\CvsDate$#1: #2 #3 ${#2}
-\def\filedate{\CvsDate$Date: 2003/12/15 08:53:38 $}
-\def\fileversion{\CvsRevision$Revision: 1.46 $}
+\def\filedate{\CvsDate$Date: 2004/02/05 11:52:36 $}
+\def\fileversion{\CvsRevision$Revision: 1.47 $}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -394,7 +394,7 @@
   \end{titlepage}%
 \fi%
   \iffi%
-    \def\gradu@finishtitle{\gradu@title}%
+    \def\gradu@finnishtitle{\gradu@title}%
     \def\gradu@englishtitle{\gradu@titletrans}%
   \else%
     \def\gradu@finnishtitle{\gradu@titletrans}%
