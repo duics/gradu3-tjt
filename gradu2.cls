@@ -47,8 +47,8 @@
 \DeclareOption{numbib}{\numbibtrue}
 \DeclareOption{nonumbib}{\numbibfalse}
 
-\DeclareOption[oldtitle]{\oldtitletrue}
-\DeclareOption[newtitle]{\oldtitlefalse}
+\DeclareOption{oldtitle}{\oldtitletrue}
+\DeclareOption{newtitle}{\oldtitlefalse}
 
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
@@ -254,24 +254,6 @@
     \noindent\gradu@license%
 \fi%
   \end{titlepage}%
-  \global\let\title\gradu@toolate%
-  \global\let\author\gradu@toolate%
-  \global\let\date\gradu@toolate%  
-  \global\let\linja\gradu@toolate%  
-  \global\let\tyyppi\gradu@toolate%  
-  \global\let\keywords\gradu@toolate%  
-  \global\let\linja\gradu@toolate%  
-  \global\let\tyyppi\gradu@toolate%  
-  \global\let\keywords\gradu@toolate%  
-  \global\let\avainsanat\gradu@toolate%  
-  \global\let\contactinformation\gradu@toolate%  
-  \global\let\yhteystiedot\gradu@toolate%  
-  \global\let\tiivistelma\gradu@toolate%  
-  \global\let\abstract\gradu@toolate%  
-  \global\let\translatedtitle\gradu@toolate%  
-  \global\let\copyrightowner\gradu@toolate%  
-  \global\let\license\gradu@toolate%  
-  \global\let\copyrightyear\gradu@toolate%  
 \else%
   % ------------- NEW TITLEPAGE FORMAT -------------
   \begin{titlepage}%
@@ -301,6 +283,24 @@
   \newpage%
   \begin{titlepage}%
 \fi%
+  \global\let\title\gradu@toolate%
+  \global\let\author\gradu@toolate%
+  \global\let\date\gradu@toolate%  
+  \global\let\linja\gradu@toolate%  
+  \global\let\tyyppi\gradu@toolate%  
+  \global\let\keywords\gradu@toolate%  
+  \global\let\linja\gradu@toolate%  
+  \global\let\tyyppi\gradu@toolate%  
+  \global\let\keywords\gradu@toolate%  
+  \global\let\avainsanat\gradu@toolate%  
+  \global\let\contactinformation\gradu@toolate%  
+  \global\let\yhteystiedot\gradu@toolate%  
+  \global\let\tiivistelma\gradu@toolate%  
+  \global\let\abstract\gradu@toolate%  
+  \global\let\translatedtitle\gradu@toolate%  
+  \global\let\copyrightowner\gradu@toolate%  
+  \global\let\license\gradu@toolate%  
+  \global\let\copyrightyear\gradu@toolate%  
 }
 
 \newcommand{\preface}{\chapter*{\prefacename}
