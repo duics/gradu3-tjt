@@ -187,12 +187,12 @@
     \par{%
 \iffi%
      \parindent9truecm\parskip0pt%
-      Tietotekniikan \gradu@linja\par%
+      \gradu@aine \gradu@linja\par%
       \gradu@tyyppi%
 \else%
      \parindent6truecm\parskip0pt%
       \gradu@tyyppi\par%
-      in Information Technology \gradu@linja%
+      \gradu@aine \gradu@linja%
 \fi%
       \par%
       \gradu@date%
