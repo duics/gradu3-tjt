@@ -164,7 +164,7 @@
 }
 \def\gradu@linja{}
 \def\gradu@tyyppi{pro gradu -tutkielma}
-\def\gradu@type{A Master's Thesis}
+\def\gradu@type{Master's Thesis}
 \def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
 \def\gradu@abstract{\gradu@muistitko{abstract}}
 \def\gradu@titletrans{\gradu@muistitko{translatedtitle}}
