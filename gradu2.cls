@@ -2,8 +2,8 @@
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\filedate{2002/10/23}
-\def\fileversion{1.2}
+\def\filedate{2002/12/03}
+\def\fileversion{1.3}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -62,6 +62,8 @@
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
 
+\RequirePackage{everyshi}[1994/12/09]
+\RequirePackage{hyperref}
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm]{geometry}
@@ -99,11 +101,40 @@
 \maketitle
 }
 
+\newcounter{TotPages}
+\EveryShipout{\stepcounter{TotPages}}
+\def\TotPages@putlabel{%
+  \addtocounter{page}{-1}%
+  \if@filesw
+  \begingroup
+  \ifHy@pageanchor
+  \ifHy@hypertexnames
+  \ifHy@plainpages
+  \def\Hy@temp{\arabic{page}}%
+  \else
+  \let\textlatin\@firstofone
+  \edef\Hy@temp{\thepage}%
+  \fi
+  \else
+  \def\Hy@temp{\the\Hy@pagecounter}%
+  \fi
+  \fi
+  \immediate\write\@mainaux{%
+    \string\newlabel
+    {TotPages}{{\theTotPages}{\thepage}{}{%
+        \ifHy@pageanchor page.\Hy@temp\fi}{}}%
+  }%
+  \endgroup
+  \fi
+  \addtocounter{page}{1}%
+}%
+
 \AtEndDocument{%
 %\addtocounter{page}{-1}%
-\addtocounter{pages}{\thepage}
-\immediate\write\@mainaux{\string\newlabel\string{gradu@pages\string}%
-\string{\string{0\string}\string{\thepages\string}\string}}%
+%\addtocounter{pages}{\thepage}
+%\immediate\write\@mainaux{\string\newlabel\string{TotalPages\string}%
+%\string{\string{0\string}\string{\thepages\string}\string}}%
+\TotPages@putlabel
 }
 %\string\def\string\gradu@numpages\string{\thepage\string}}}
 
@@ -248,7 +279,7 @@
     \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Title in English:} \gradu@titletrans\par%
     \noindent\textbf{Ty\"o:} \gradu@tyo\par%
-    \noindent\textbf{Sivum\"a\"ar\"a:} \pageref{gradu@pages}\par%
+    \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
     \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
     \noindent\textbf{English abstract:} \gradu@abstract\par%
     \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
@@ -259,7 +290,7 @@
     \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
     \noindent\textbf{Project:} \gradu@tyo\par%
-    \noindent\textbf{Page count:} \pageref{gradu@pages}\par%
+    \noindent\textbf{Page count:} \ref{TotPages}\par%
     \noindent\textbf{Abstract:} \gradu@abstract\par%
     \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
     \noindent\textbf{Keywords:} \gradu@keywords\par%
@@ -329,7 +360,7 @@
       \gradu@rohtau\\%
       {\let\\\relax\gradu@finnishtitle / \gradu@author}\\%
       \gradu@paikka: \gradu@yliopisto, \number\year \\%
-      \pageref{gradu@pages}~s.\\%
+      \ref{TotPages}~s.\\%
       \gradu@tyyppi\par%
       \bigskip%
       \noindent\gradu@tiivistelma\par%
@@ -343,7 +374,7 @@
       \gradu@rohtau\\%
       {\let\\\relax\gradu@englishtitle / \gradu@author}\\%
       \gradu@paikka: \gradu@university, \number\year \\%
-      \pageref{gradu@pages}~p.\\%
+      \ref{TotPages}~p.\\%
       \gradu@type\par%
       \bigskip%
       \noindent\gradu@abstract\par%
@@ -392,7 +423,7 @@
 }
 
 \renewcommand\appendix{\par
-  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}}
+  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
   \setcounter{chapter}{0}%
   \setcounter{section}{0}%
   \gdef\@chapapp{\appendixname}%
