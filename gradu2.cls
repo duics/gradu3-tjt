@@ -25,6 +25,10 @@
 \shortthesisfalse
 \def\gradu@baseclass{\ifshortthesis article\else report\fi}
 
+\newif\ifaltsubsec
+\altsubsecfalse
+
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -55,6 +59,8 @@
 \DeclareOption{newtitle}{\oldtitlefalse}
 
 \DeclareOption{shortthesis}{\shortthesistrue}
+
+\DeclareOption{altsubsec}{\altsubsectrue}
 
 \let\gradu@lof\relax
 \let\gradu@lot\relax
@@ -484,8 +490,14 @@
   {2}%
   {\z@}%
   {-\baselineskip}%
-  {-2ex}%
-  {\normalfont\normalsize\bfseries}%
+  {\ifaltsubsec
+    -2ex
+   \else
+     2ex
+   \fi}% aligns the first line of the following paragraph with the title:
+         % bug or feature?
+  %{2ex}%
+  {\normalfont\bfseries\normalsize}%
 }
 
 \renewcommand\subsubsection{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
