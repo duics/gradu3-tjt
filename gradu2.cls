@@ -4,8 +4,8 @@
 
 \def\CvsRevision$#1: #2 ${#2}
 \def\CvsDate$#1: #2 #3 ${#2}
-\def\filedate{\CvsDate$Date: 2003/08/28 13:14:37 $}
-\def\fileversion{\CvsRevision$Revision: 1.43 $}
+\def\filedate{\CvsDate$Date: 2003/11/14 12:11:57 $}
+\def\fileversion{\CvsRevision$Revision: 1.44 $}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -19,6 +19,9 @@
 
 \newif\ifnumbib
 \numbibtrue
+
+\newif\ifnottoc
+\nottoctrue
 
 \newif\ifoldtitle
 \oldtitletrue
@@ -57,6 +60,9 @@
 \DeclareOption{numbib}{\numbibtrue}
 \DeclareOption{nonumbib}{\numbibfalse}
 
+\DeclareOption{toc}{\nottocfalse}
+\DeclareOption{nottoc}{\nottoctrue}
+
 \DeclareOption{oldtitle}{\oldtitletrue}
 \DeclareOption{newtitle}{\oldtitlefalse}
 
@@ -84,10 +90,18 @@
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
 \ifnumbib
+\ifnottoc
+\RequirePackage[numbib,nottoc]{tocbibind}
+\else %nottoc
 \RequirePackage[numbib]{tocbibind}
-\else
+\fi %nottoc
+\else %numbib
+\ifnottoc
+\RequirePackage[nottoc]{tocbibind}
+\else  %nottoc
 \RequirePackage{tocbibind}
-\fi
+\fi %nottoc
+\fi %numbib
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
