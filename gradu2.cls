@@ -67,6 +67,8 @@
 \newcommand{\copyrightyear}[1]{\gdef\gradu@copyrightyear{#1}}
 \newcommand{\tiivistelma}[1]{\gdef\gradu@tiivistelma{#1}}
 
+\newcommand{\fulltitle}{\gradu@title: \gradu@tyo}
+
 \renewcommand{\abstract}[1]{\gdef\gradu@abstract{#1}}
 
 %\@ifundefined{\csname gradu@numpages \endcsname}
@@ -109,7 +111,8 @@
     \noindent\textbf{Yhteystiedot:} \gradu@yhteystiedot\par%
     \noindent\textbf{Ty\"on nimi:} \gradu@title\par%
     \noindent\textbf{Title in English:} \gradu@titletrans\par%
-    \noindent\textbf{Ty\"o:} Tietotekniikan \gradu@linja{} \gradu@tyyppi\par%
+    \def\gradu@tyo{Tietotekniikan \gradu@linja{} \gradu@tyyppi}%
+    \noindent\textbf{Ty\"o:} \gradu@tyo\par%
     \noindent\textbf{Sivum\"a\"ar\"a:} \pageref{gradu@pages}\par%
     \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
     \noindent\textbf{English abstract:} \gradu@abstract\par%
@@ -120,7 +123,8 @@
     \noindent\textbf{Contact information:} \gradu@yhteystiedot\par%
     \noindent\textbf{Title:} \gradu@title\par%
     \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
-    \noindent\textbf{Project:} \gradu@tyyppi{} in Information Technology \gradu@linja\par%
+    \def\gradu@tyo{\gradu@tyyppi{} in Information Technology \gradu@linja}%
+    \noindent\textbf{Project:} \gradu@tyo\par%
     \noindent\textbf{Page count:} \pageref{gradu@pages}\par%
     \noindent\textbf{Abstract:} \gradu@abstract\par%
     \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
