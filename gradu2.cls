@@ -98,7 +98,7 @@
 \def\gradu@license{All rights reserved.}
 \def\gradu@copyrightyear{\the\year}
 
-\renewcommand{\title}[1]{\gdef\gradu@title{#1}}
+\renewcommand{\title}[1]{\gdef\gradu@title{\parbox[top][\height][c]{\textwidth}{\centering #1}}}
 \renewcommand{\author}[1]{\gdef\gradu@author{#1}}
 \renewcommand{\date}[1]{\gdef\gradu@date{#1}}
 \newcommand{\linja}[1]{\gdef\gradu@linja{(#1)}}
