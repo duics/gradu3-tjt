@@ -224,9 +224,9 @@
 \iffi%
     \noindent\textbf{Tekij\"a:} \gradu@author\par%
     \noindent\textbf{Yhteystiedot:} \gradu@yhteystiedot\par%
-    \noindent\textbf{Ty\"on nimi:} {\let\\\relax gradu@title\par}%
+    \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Title in English:} \gradu@titletrans\par%
-    \def\gradu@tyo{\gradu@aine\ %
+    \def\gradu@tyo{\gradu@aine{} %
     \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
     \noindent\textbf{Ty\"o:} \gradu@tyo\par%
     \noindent\textbf{Sivum\"a\"ar\"a:} \pageref{gradu@pages}\par%
