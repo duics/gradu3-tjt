@@ -2,8 +2,8 @@
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\filedate{2004/05/03}
-\def\fileversion{1.48}
+\def\filedate{2005/05/15}
+\def\fileversion{1.49}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -200,7 +200,7 @@
 \def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
 \def\gradu@copyrightowner{\gradu@author}
 \def\gradu@license{All rights reserved.}
-\def\gradu@copyrightyear{\the\year}
+\def\gradu@copyrightyear{\year}
 \def\gradu@acmccs{}
 \def\gradu@ysa{}
 
