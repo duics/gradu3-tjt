@@ -2,8 +2,8 @@
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\filedate{2005/05/15}
-\def\fileversion{1.49}
+\def\filedate{2005/07/20}
+\def\fileversion{1.50}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -200,7 +200,7 @@
 \def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
 \def\gradu@copyrightowner{\gradu@author}
 \def\gradu@license{All rights reserved.}
-\def\gradu@copyrightyear{\year}
+\def\gradu@copyrightyear{\number\year}
 \def\gradu@acmccs{}
 \def\gradu@ysa{}
 
@@ -215,7 +215,7 @@
   \ClassWarning{gradu2}{\textbackslash date is deprecated!}%
   \gdef\gradu@date{#1}%
 }
-\newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\gdef\year{#3}}
+\newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\year=#3}
 \newcommand{\paikka}[1]{\gdef\gradu@paikka{#1}}
 \newcommand{\yliopisto}[1]{\gdef\gradu@yliopisto{#1}}
 \newcommand{\university}[1]{\gdef\gradu@university{#1}}
