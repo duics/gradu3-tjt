@@ -51,6 +51,7 @@
 \DeclareOption{latin5}{\gdef\gradu@inputenc{latin5}}
 \DeclareOption{latin9}{\gdef\gradu@inputenc{latin9}}
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
+\DeclareOption{utf8}{\gdef\gradu@inputenc{utf8}}
 
 \DeclareOption{copyright}{\copyrighttrue}
 \DeclareOption{nocopyright}{\copyrightfalse}

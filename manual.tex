@@ -56,6 +56,7 @@ is written. Available character sets are:
 
 \begin{opts}
 \item[ascii] ASCII encoding (ISO 646)
+\item[utf8] UTF-8 Unicode encoding (ISO 10646)
 \item[latin1] ISO-8859-1 encoding (Western Europe languages) (default)
 \item[latin2] ISO-8859-2 encoding (Central Europe languages)
 \item[latin3] ISO-8859-3 encoding (Esperanto, Maltese)
@@ -77,9 +78,10 @@ is written. Available character sets are:
 Usual encodings, by platform, are:
 
 \begin{description}
-\item[Linux] \texttt{latin1} (or nowadays more often than not, \texttt{latin9})
+\item[Linux] \texttt{latin1} (or nowadays more often than not, \texttt{latin9} or  \texttt{utf8})
 \item[MS Windows] \texttt{cp1252}
-\item[Macintosh] \texttt{applemac}
+\item[Old Macintosh] \texttt{applemac}
+\item[OS X] \texttt{utf8}
 \end{description}
 
 \section{Copyrights}
