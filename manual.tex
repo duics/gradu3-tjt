@@ -1,6 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
+\usepackage{url}
 
 \newenvironment{cmds}
   {\begin{description}\renewcommand{\makelabel}[1]{\texttt{\textbackslash##1}\hfill}}
@@ -17,9 +18,13 @@
 \newcommand{\cmd}[1]{\texttt{\textbackslash#1}}
 \newcommand{\opt}[1]{\texttt{#1}}
 \newcommand{\env}[1]{\texttt{#1}}
+\newcommand{\pack}[1]{\textit{#1}}
+\newcommand{\argu}[1]{\textit{#1}}
+\newcommand{\cls}[1]{\textsc{#1}}
+\newcommand{\prog}[1]{\textbf{\textsf{#1}}}
 
 \author{Matthieu Weber\\ \texttt{mweber@mit.jyu.fi} \and Antti-Juhani Kaijanaho\\ \texttt{antkaij@mit.jyu.fi}}
-\title{Gradu --- A Class for Writing Master's Thesis at the Faculty of
+\title{\cls{Gradu} --- A Class for Writing Master's Thesis at the Faculty of
 Information Technology of the University of Jyväskylä}
 
 \begin{document}
@@ -31,6 +36,32 @@ Information Technology of the University of Jyväskylä}
   Technology of the University of Jyväskylä.  It may also be used
   elsewhere if it conforms to their requirements.
 \end{abstract}
+
+\section{Read this first}
+
+The class is provided currently on a ''beta test'' basis.  We urge you
+to consider it your honor-bound duty to \emph{let us know of any
+deficiencies} that you may find when using this class.  First,
+however, please verify that any strangeness you may witness is not
+mandated by the university publishing unit specifications!
+
+While this class has already been used to typeset several subsequently
+approved theses successfully, \emph{it is always your responsibility,
+as the author,} to ensure that the document meets the requirements
+set by the university and the faculty in question. This class aids in
+that, but it does not, and cannot, implement the all of the
+typesetting requirements.
+
+Please check the master repository at
+\url{http://antti-juhani.kaijanaho.info/darcs/grady.cls/} periodically --
+we make changes to the class from time to time. A log of changes is
+available at
+\url{http://antti-juhani.kaijanaho.info/darcs/darcsweb/darcsweb.cgi?r=gradu.cls;a=log}.%
+\footnote{Apparent changes made by ''Automatic Date Tagger'' contain no actual
+changes and may be safely ignored.}
+
+\textbf{ATTENTION: starting with version 2.0, \cls{gradu} does not load
+\pack{hyperref} automatically (nor does it load \pack{color} anymore).}
 
 \section{Invocation}
 
@@ -107,6 +138,7 @@ The class outputs copyright assertion by default.  This can be inhibited.
   (For Bachelor's theses etc.)
 \item[altsubsec] Alternate layout for subsections (the first line of the
 paragraph is on the same line as the title of the subsection)
+\item[palatino] Use Palatino fonts
 \end{opts}
 
 \section{Header Commands}
@@ -127,7 +159,7 @@ used, a reminder will be printed inside the document.
   sets document's publishing date (defaults to the current date)
 \item[yliopisto] the university to which this thesis will be
   submitted, in Finnish (defaults to ``Jyväskylän yliopisto'')
-\item[yliopisto] the university to which this thesis will be
+\item[university] the university to which this thesis will be
   submitted, in English (defaults to ``University of Jyväskylä'')
 \item[laitos] the department  to which this thesis will be submitted (defaults to ``Tietotekniikan laitos'' in Finnish and ``Department of Mathematical Information Technology'' in English)
 \item[aine] the formal subject (major or minor) whose thesis this is
