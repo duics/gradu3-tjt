@@ -48,6 +48,9 @@
 \newif\ifaltsubsec
 \altsubsecfalse
 
+\newif\ifpalatino
+\palatinofalse
+
 \newif\ifgradu@hyperref
 \gradu@hyperreffalse
 
@@ -97,6 +100,8 @@
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 
+\DeclareOption{palatino}{\palatinotrue}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
@@ -105,6 +110,14 @@
 \RequirePackage{everyshi}[1994/12/09]
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
+\ifpalatino
+\RequirePackage{mathpazo}
+\RequirePackage[scaled=.95]{helvet}
+\RequirePackage{courier}
+\renewcommand{\baselinestretch}{1.26} % 1.2 * 1.05
+\else
+\renewcommand{\baselinestretch}{1.2}
+\fi
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
 \ifnumbib
@@ -132,9 +145,6 @@
 \def\termlistname{Glossary}
 \def\appendicesname{Appendices}
 \fi
-
-\renewcommand{\baselinestretch}{1.2}
-%\linespread{1.3}
 
 \newcounter{pages}
 
