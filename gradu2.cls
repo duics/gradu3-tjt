@@ -2,12 +2,29 @@
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
 
-\def\filedate{2005/07/20}
-\def\fileversion{1.50}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                     PLEASE READ THE MANUAL!                           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\filedate{2006/04/27}
+\def\fileversion{2.0}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
 \typeout{gradu2 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
+
+%% Some packages need special handling if the output is PDF, this \if is just
+%% in case we need it
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+  \pdffalse
+\else
+  \ifnum\pdfoutput=1
+    \pdftrue
+  \else
+    \pdffalse
+  \fi
+\fi
 
 \newif\iffi
 \fitrue
@@ -31,6 +48,8 @@
 \newif\ifaltsubsec
 \altsubsecfalse
 
+\newif\ifgradu@hyperref
+\gradu@hyperreffalse
 
 %% Input encoding
 \def\gradu@inputenc{latin1}
@@ -77,13 +96,13 @@
 
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
 
 \RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
-\RequirePackage{hyperref}
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
@@ -125,48 +144,110 @@
 \def\selectdefaultlanguage{\selectlanguage{english}}
 \fi
 
+%% This requires extensive explanation.
+%%
+%% Defining the command that displays the total number of pages requires to know
+%% if hyperref is loaded or not, because it relies on \if-commands that do not
+%% exist unless hyperref is loaded.
+%%   But hyperref must be loaded by the user, not by gradu2, because hyperref
+%% overwrites definitions made in many packages. The user may use such
+%% packages, therefore hyperref must be loaded *after* these packages. In
+%% addition, hyperref must be loaded before packages based on the float package,
+%% because the latter is incompatible with hyperref.
+%% gradu2 therefore expects the user to potentially load hyperref, and if it is
+%% the case, it defines \TotPages@putlabel just before \begin{document}. This
+%% could not be done with \AtBeginDocument, because hyperref also uses
+%% \AtBeginDocument extensively, and gradu2' \AtBeginDocument{\def\@schapter...}
+%% would have been executed *before* hyperref is loaded (\begin{document} hooks
+%% are executed in the same order they are defined, and gradu2 would define its
+%% hook before hyperref defines its ones).  Defining a hook in a hook i.e.,
+%% \AtBeginDocument{\AtBeginDocument{\def\whatever}} does not work, gradu2
+%% therefore needs to define its own hook, independently from the normal
+%% \begin{document} hooks. The proper way of doing so would be to redefine
+%% \document, but for some obscure reason, this does not work. The working
+%% solution consists in redefining \begin and check if it is \begin{document}
+%% (and then execute gradu2' own hook before actually executing
+%% \begin{document}) or \begin{sometingelse} (then do nothing special).
+%%   gradu2' own hook is one \AtBeginDocument that puts its own commands after every others
+%% (defining \TotPages@putlabel, then calling \maketitle).
+
+%%%% Begin dirty hack
+\def\gradu@before@begin@document{
 \AtBeginDocument{%
-\pagenumbering{roman}
-\selectdefaultlanguage
-\maketitle
+  \@ifpackageloaded{hyperref}{
+  \gradu@hyperreftrue
+  \def\toclevel@schapter{0}%
+  \def\toclevel@appendix{0}%
+  \def\toclevel@algorithm{0}%
+
+	 \define@Hy@TotPages@putlabel
+	 }{%
+	 \gradu@hyperreffalse
+	 \define@TotPages@putlabel
+	 }%
+   \pagenumbering{roman}
+   \selectdefaultlanguage
+   \maketitle
+}}
+
+\RequirePackage{ifthen}
+\let\gradu@begin=\begin
+\renewcommand*{\begin}[1]{%
+\ifthenelse{\equal{#1}{document}}{%
+\gradu@before@begin@document
+}{}%
+\gradu@begin{#1}%
 }
+%%%% End dirty hack
 
 \newcounter{TotPages}
 \EveryShipout{\stepcounter{TotPages}}
+
+%% The definition of \TotPages@putlabel must be delayed, since hyperref is not
+%% yet loaded at this point, all the \ifHy@xxx are undefined but latex
+%% still complains about the corresponding \fi
+\def\define@Hy@TotPages@putlabel{
 \def\TotPages@putlabel{%
   \addtocounter{page}{-1}%
   \if@filesw
-  \begingroup
-  \ifHy@pageanchor
-  \ifHy@hypertexnames
-  \ifHy@plainpages
-  \def\Hy@temp{\arabic{page}}%
-  \else
-  \let\textlatin\@firstofone
-  \edef\Hy@temp{\thepage}%
-  \fi
-  \else
-  \def\Hy@temp{\the\Hy@pagecounter}%
-  \fi
-  \fi
-  \immediate\write\@mainaux{%
-    \string\newlabel
-    {TotPages}{{\theTotPages}{\thepage}{}{%
-        \ifHy@pageanchor page.\Hy@temp\fi}{}}%
-  }%
-  \endgroup
+    \begingroup
+      \ifHy@pageanchor
+        \ifHy@hypertexnames
+          \ifHy@plainpages
+             \def\Hy@temp{\arabic{page}}%
+          \else
+             \let\textlatin\@firstofone
+             \edef\Hy@temp{\thepage}%
+          \fi
+        \else
+          \def\Hy@temp{\the\Hy@pagecounter}%
+        \fi
+      \fi
+      \immediate\write\@mainaux{%
+          \string\newlabel{TotPages}{{\theTotPages}{\thepage}{}{%
+          \ifHy@pageanchor page.\Hy@temp\fi
+        }{}}%
+      }%
+    \endgroup
   \fi
   \addtocounter{page}{1}%
-}%
+}}
+\def\define@TotPages@putlabel{
+\def\TotPages@putlabel{%
+  \addtocounter{page}{-1}%
+  \if@filesw
+    \begingroup
+      \immediate\write\@mainaux{%
+          \string\newlabel{TotPages}{{\theTotPages}{\thepage}}%
+      }%
+    \endgroup
+  \fi
+  \addtocounter{page}{1}%
+}}%
 
 \AtEndDocument{%
-%\addtocounter{page}{-1}%
-%\addtocounter{pages}{\thepage}
-%\immediate\write\@mainaux{\string\newlabel\string{TotalPages\string}%
-%\string{\string{0\string}\string{\thepages\string}\string}}%
-\TotPages@putlabel
+\clearpage\TotPages@putlabel
 }
-%\string\def\string\gradu@numpages\string{\thepage\string}}}
 
 \def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
 
