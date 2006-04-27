@@ -1,4 +1,13 @@
+%\documentclass[english,latin1,numbib,palatino]{gradu2}
 \documentclass[english,latin1,numbib]{gradu2}
+
+\ifpdf
+  \usepackage[pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
+	%\hypersetup{colorlinks,citecolor=blue}
+\else
+	\RequirePackage[hypertex]{hyperref}
+\fi
+%\usepackage{lmodern}
 
 \title{XML Forms}
 \setauthor{Matthieu}{Weber}
@@ -197,7 +206,6 @@ aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa
 aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 
 aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 
 aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 
-\color{blue}More blah blah
 
 \chapter{Second Chapter}
 Foobar
