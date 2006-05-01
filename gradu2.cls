@@ -381,18 +381,18 @@
     \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
     \vspace{4truecm}%
     \par{%
+    \parindent9truecm\parskip0pt%
+    \parbox{6.5cm}{\raggedright 
 \iffi%
-     \parindent9truecm\parskip0pt%
       \gradu@aine\ \gradu@linja\par%
       \gradu@tyyppi%
 \else%
-     \parindent9truecm\parskip0pt%
       \gradu@type\par%
       \gradu@aine\ \gradu@linja%
 \fi%
       \par%
       \gradu@date%
-      }%
+      }}%
     \vfill%
     \vspace{1truecm plus 1truecm minus .5truecm}%
 \iffi
