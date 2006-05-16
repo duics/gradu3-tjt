@@ -22,6 +22,7 @@
 \newcommand{\argu}[1]{\textit{#1}}
 \newcommand{\cls}[1]{\textsc{#1}}
 \newcommand{\prog}[1]{\textbf{\textsf{#1}}}
+\newcommand{\file}[1]{\texttt{#1}}
 
 \author{Matthieu Weber\\ \texttt{mweber@mit.jyu.fi} \and Antti-Juhani Kaijanaho\\ \texttt{antkaij@mit.jyu.fi}}
 \title{\cls{Gradu} --- A Class for Writing Master's Thesis at the Faculty of
@@ -139,6 +140,10 @@ The class outputs copyright assertion by default.  This can be inhibited.
 \item[altsubsec] Alternate layout for subsections (the first line of the
 paragraph is on the same line as the title of the subsection)
 \item[palatino] Use Palatino fonts
+\item[logo] Use the logo of the university of Jyväskylä on the front page. The
+additional files \file{logo\_jyu.eps} and \file{logo\_jyu.pdf} are required
+for generating Postscript and PDF, respectively. If the files are not found, a
+warning message is generated and no logo is displayed.
 \end{opts}
 
 \section{Header Commands}

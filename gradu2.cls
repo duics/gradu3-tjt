@@ -54,6 +54,9 @@
 \newif\ifgradu@hyperref
 \gradu@hyperreffalse
 
+\newif\iflogo
+\logofalse
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -102,9 +105,23 @@
 
 \DeclareOption{palatino}{\palatinotrue}
 
+\DeclareOption{logo}{\logotrue}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
+
+\iflogo
+\ifpdf
+\IfFileExists{logo_jyu.pdf}
+  {\typeout{Using logo file logo_jyu.pdf}}
+	{\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.pdf, logo is disabled}}
+\else
+\IfFileExists{logo_jyu.eps}
+  {\typeout{Using logo file logo_jyu.eps}}
+	{\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.eps, logo is disabled}}
+\fi
+\fi
 
 %\RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
@@ -133,6 +150,9 @@
 \RequirePackage{tocbibind}
 \fi %nottoc
 \fi %numbib
+\iflogo
+\RequirePackage{graphicx}
+\fi
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
@@ -365,7 +385,6 @@
   \setcounter{chapter}{0}
 \fi
 }
-
 \renewcommand{\maketitle}{%
 \iffi
     \def\gradu@tyo{\gradu@aine{} %
@@ -394,6 +413,23 @@
       \gradu@date%
       }}%
     \vfill%
+\iflogo
+    %\center{\hspace{3pt}\includegraphics[height=3.25truecm]{logo_jyu}}%
+		% for use with \large and \normalsize instead of \normalsize and \small
+		% \gradu@yliopisto and \gradu@laitos
+    \center{\hspace{3pt}\includegraphics[height=2.05truecm]{logo_jyu}}%
+\par\vspace{-.6cm}
+\begingroup
+\ifpalatino\else\fontfamily{ppl}\selectfont\fi
+\iffi
+    \center{\normalsize\MakeUppercase{\gradu@yliopisto}}%
+\else
+    \center{\normalsize\MakeUppercase{\gradu@university}}%
+\fi
+    \par\vspace{-.5cm}
+    \center{\small\MakeUppercase{\gradu@laitos}}%
+\endgroup
+\else
     \vspace{1truecm plus 1truecm minus .5truecm}%
 \iffi
     \center{\large\textbf{\gradu@yliopisto}}%
@@ -401,6 +437,7 @@
     \center{\large\textbf{\gradu@university}}%
 \fi
     \center{\textbf{\gradu@laitos}}%
+\fi
     \center{\textbf{\gradu@paikka}}%
   \end{titlepage}%
   \newpage%
