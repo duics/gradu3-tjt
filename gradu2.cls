@@ -7,7 +7,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \def\filedate{2006/04/27}
-\def\fileversion{2.1}
+\def\fileversion{2.2}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -115,11 +115,11 @@
 \ifpdf
 \IfFileExists{logo_jyu.pdf}
   {\typeout{Using logo file logo_jyu.pdf}}
-	{\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.pdf, logo is disabled}}
+  {\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.pdf, logo is disabled}}
 \else
 \IfFileExists{logo_jyu.eps}
   {\typeout{Using logo file logo_jyu.eps}}
-	{\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.eps, logo is disabled}}
+  {\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.eps, logo is disabled}}
 \fi
 \fi
 
@@ -150,9 +150,6 @@
 \RequirePackage{tocbibind}
 \fi %nottoc
 \fi %numbib
-\iflogo
-\RequirePackage{graphicx}
-\fi
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
@@ -210,13 +207,24 @@
   \def\toclevel@appendix{0}%
   \def\toclevel@algorithm{0}%
 
-	 \define@Hy@TotPages@putlabel
-	 }{%
-	 \gradu@hyperreffalse
-	 \define@TotPages@putlabel
-	 }%
+   \define@Hy@TotPages@putlabel
+   }{%
+   \gradu@hyperreffalse
+   \define@TotPages@putlabel
+   }%
    \pagenumbering{roman}
    \selectdefaultlanguage
+   \iflogo
+   \@ifpackageloaded{graphicx}{}{%
+    \ClassWarning{gradu2}{The logo option requires the graphicx package to be
+    loaded, loading it now.}
+    \ifpdf
+    \RequirePackage[pdftex]{graphicx}
+    \else
+    \RequirePackage[dvips]{graphicx}
+    \fi
+    \fi
+   }
    \maketitle
 }}
 
@@ -415,8 +423,8 @@
     \vfill%
 \iflogo
     %\center{\hspace{3pt}\includegraphics[height=3.25truecm]{logo_jyu}}%
-		% for use with \large and \normalsize instead of \normalsize and \small
-		% \gradu@yliopisto and \gradu@laitos
+    % for use with \large and \normalsize instead of \normalsize and \small
+    % \gradu@yliopisto and \gradu@laitos
     \center{\hspace{3pt}\includegraphics[height=2.05truecm]{logo_jyu}}%
 \par\vspace{-.6cm}
 \begingroup
