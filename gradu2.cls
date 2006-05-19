@@ -223,8 +223,8 @@
     \else
     \RequirePackage[dvips]{graphicx}
     \fi
-    \fi
    }
+   \fi
    \maketitle
 }}
 
