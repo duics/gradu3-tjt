@@ -675,8 +675,8 @@
 \let\gradu@thebibliography\thebibliography
 \def\thebibliography#1{%
   \iffi%
-  \def\refname{Viitteet}%
-  \def\bibname{Viitteet}%
+  \def\refname{L\"ahteet}%
+  \def\bibname{L\"ahteet}%
   \else%
   \def\refname{References}%
   \def\bibname{References}%
