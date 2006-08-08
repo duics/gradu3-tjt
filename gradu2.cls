@@ -57,6 +57,9 @@
 \newif\iflogo
 \logofalse
 
+\newif\ifaltlinespread
+\altlinespreadfalse
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -107,6 +110,8 @@
 
 \DeclareOption{logo}{\logotrue}
 
+\DeclareOption{altlinespread}{\altlinespreadtrue}
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
@@ -131,9 +136,17 @@
 \RequirePackage{mathpazo}
 \RequirePackage[scaled=.95]{helvet}
 \RequirePackage{courier}
+\ifaltlinespread
+\renewcommand{\baselinestretch}{1.575} % 1.5 * 1.05
+\else
 \renewcommand{\baselinestretch}{1.26} % 1.2 * 1.05
+\fi
+\else
+\ifaltlinespread
+\renewcommand{\baselinestretch}{1.5}
 \else
 \renewcommand{\baselinestretch}{1.2}
+\fi
 \fi
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
