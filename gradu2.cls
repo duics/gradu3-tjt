@@ -6,8 +6,8 @@
 %%                     PLEASE READ THE MANUAL!                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\filedate{2006/04/27}
-\def\fileversion{2.2}
+\def\filedate{2006/11/03}
+\def\fileversion{2.3}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -330,20 +330,90 @@
 \def\gradu@titletrans{\gradu@muistitko{translatedtitle}}
 \def\gradu@avainsanat{\gradu@muistitko{avainsanat}}
 \def\gradu@keywords{\gradu@muistitko{keywords}}
-\def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
-\def\gradu@copyrightowner{\gradu@author}
+%\def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
+\def\gradu@copyrightowner{\gradu@makeauthorsl}
 \def\gradu@license{All rights reserved.}
 \def\gradu@copyrightyear{\number\year}
 \def\gradu@acmccs{}
 \def\gradu@ysa{}
 
+\def\gradu@authors{}
+\let\gradu@authorstart\relax
+\let\gradu@authorsep\relax
+\let\gradu@authorend\relax
+
+\def\gradu@authorsl{}
+\let\gradu@authorlstart\relax
+\let\gradu@authorlsep\relax
+\let\gradu@authorlend\relax
+
+\def\gradu@srohtua{}
+\let\gradu@rohtuastart\relax
+\let\gradu@rohtuasep\relax
+\let\gradu@rohtuaend\relax
+
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{%
  \ClassWarning{gradu2}{\noexpand\author is deprecated!}%
- \gdef\gradu@author{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
- \gdef\gradu@rohtau{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
+ \gdef\gradu@authors{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
+ \gdef\gradu@srohtua{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
 }
-\newcommand{\setauthor}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtau{#2, #1}}
+%\newcommand{\setauthor}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtua{#2, #1}}
+\newcounter{gradu@authorcount}
+\newcommand{\setauthor}[2]{
+  \@cons\gradu@authors{\gradu@authorstart#1\gradu@authorsep#2\gradu@authorend}
+  \@cons\gradu@authorsl{\gradu@authorlstart#1\gradu@authorlsep#2\gradu@authorlend}
+  \@cons\gradu@srohtua{\gradu@rohtuastart#2\gradu@rohtuasep#1\gradu@rohtuaend}
+	\addtocounter{gradu@authorcount}{1}%
+}
+
+\newcounter{gradu@author@count}
+\newcounter{gradu@authorcount@}
+\def\gradu@makeauthors{%
+  \setcounter{gradu@author@count}{\value{gradu@authorcount}}
+	\setcounter{gradu@authorcount@}{0}%
+  \gdef\gradu@authorstart{
+		\addtocounter{gradu@author@count}{-1}%
+	  \ifthenelse{\value{gradu@authorcount@} = 0}{\begin{tabular}{c}}{}
+		\addtocounter{gradu@authorcount@}{1}%
+	}
+	\gdef\gradu@authorsep{\space}%
+	\gdef\gradu@authorend{%
+	  \ifthenelse{\value{gradu@author@count} = 0}{\end{tabular}}{\\[0.2em]}%
+	}%
+	\gradu@authors
+}
+
+\newcounter{gradu@authorl@count}
+\newcounter{gradu@authorlcount@}
+\def\gradu@makeauthorsl{%
+  \setcounter{gradu@authorl@count}{\value{gradu@authorcount}}%
+	\setcounter{gradu@authorlcount@}{0}%
+  \gdef\gradu@authorlstart{%
+		\addtocounter{gradu@authorl@count}{-1}%
+	  \ifthenelse{\value{gradu@authorlcount@} > 0}{%
+		  \ifthenelse{\value{gradu@authorl@count} = 0}%
+			  {\iffi\space ja\space \else\space and\space \fi}{,\space}%
+		}{}%
+		\addtocounter{gradu@authorlcount@}{1}%
+	}%
+	\gdef\gradu@authorlsep{\space}%
+	\gdef\gradu@authorlend{\relax}%
+	\gradu@authorsl
+}
+
+\newcounter{gradu@rohtua@count}
+\def\gradu@makesrohtua{
+  \setcounter{gradu@rohtua@count}{\value{gradu@authorcount}}%
+  \gdef\gradu@rohtuastart{\relax}
+	\gdef\gradu@rohtuasep{,\space}%
+	\gdef\gradu@rohtuaend{%
+		\addtocounter{gradu@rohtua@count}{-1}%
+	  \ifthenelse{\value{gradu@rohtua@count}=0}{\relax}{;\space}
+	}%
+	\gradu@srohtua
+}
+
 \renewcommand{\date}[1]{%
   \ClassWarning{gradu2}{\noexpand\date is deprecated!}%
   \gdef\gradu@date{#1}%
@@ -359,8 +429,28 @@
 \newcommand{\type}[1]{\gdef\gradu@type{#1}}
 \newcommand{\keywords}[1]{\gdef\gradu@keywords{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
 \newcommand{\avainsanat}[1]{\gdef\gradu@avainsanat{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
-\newcommand{\contactinformation}[1]{\gdef\gradu@yhteystiedot{#1}}
-\newcommand{\yhteystiedot}[1]{\gdef\gradu@yhteystiedot{#1}}
+\newcommand{\contactinformation}[1]{\yhteystiedot{#1}}
+%\newcommand{\yhteystiedot}[1]{\gdef\gradu@yhteystiedot{#1}}
+
+\newcounter{gradu@yhteystiedotcount}
+\def\gradu@yhteystiedot{}
+\let\gradu@yhteystiedotstart\relax
+\let\gradu@yhteystiedotend\relax
+
+\newcommand{\yhteystiedot}[1]{%
+  \@cons\gradu@yhteystiedot{\gradu@yhteystiedotstart#1\gradu@yhteystiedotend}
+	\addtocounter{gradu@yhteystiedotcount}{1}
+}
+\newcounter{gradu@yhteystiedot@count}
+\def\gradu@makeyhteystiedot{%
+  \setcounter{gradu@yhteystiedot@count}{\value{gradu@yhteystiedotcount}}%
+	\gdef\gradu@yhteystiedotend{%
+		\addtocounter{gradu@yhteystiedot@count}{-1}%
+	  \ifthenelse{\value{gradu@yhteystiedot@count} = 0}{}{,\space}%
+	}%
+	\gradu@yhteystiedot
+}
+
 \long\def\tiivistelma#1{\gdef\gradu@tiivistelma{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
 \long\def\abstract#1{\gdef\gradu@abstract{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
 \newcommand{\translatedtitle}[1]{\gdef\gradu@titletrans{#1}}
@@ -416,7 +506,7 @@
 \ifoldtitle%
   \begin{titlepage}%
     \vspace*{7truecm plus 1truecm minus 3truecm}%
-    \centerline{\textbf{\gradu@author}}%
+    \centerline{\textbf{\gradu@makeauthors}}%
     \vspace{2truecm}%
     \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
     \vspace{4truecm}%
@@ -464,8 +554,8 @@
   \newpage%
   \begin{titlepage}%
 \iffi%
-    \noindent\textbf{Tekij\"a:} \gradu@author\par%
-    \noindent\textbf{Yhteystiedot:} \gradu@yhteystiedot\par%
+    \noindent\textbf{Tekij\"a\ifthenelse{\value{gradu@authorcount}>1}{t}{}:} \gradu@makeauthorsl\par%
+    \noindent\textbf{Yhteystiedot:} \gradu@makeyhteystiedot\par%
     \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Title in English:} \gradu@titletrans\par%
     \noindent\textbf{Ty\"o:} \gradu@tyo\par%
@@ -477,8 +567,8 @@
     \noindent\gradu@acmccs%
     \noindent\textbf{Keywords:} \gradu@keywords\par%
 \else%
-    \noindent\textbf{Author:} \gradu@author\par%
-    \noindent\textbf{Contact information:} \gradu@yhteystiedot\par%
+    \noindent\textbf{Author\ifthenelse{\value{gradu@authorcount}>1}{s}{}:} \gradu@makeauthorsl\par%
+    \noindent\textbf{Contact information:} \gradu@makeyhteystiedot\par%
     \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
     \noindent\textbf{Project:} \gradu@tyo\par%
@@ -501,7 +591,7 @@
   % ------------- NEW TITLEPAGE FORMAT -------------
   \begin{titlepage}%
     \vspace*{5truecm plus 2truecm minus 3truecm}%
-    \centerline{\textbf{\gradu@author}}%
+    \centerline{\textbf{\gradu@makeauthorsl}}%
     \vspace{2truecm}%
     \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
     \vspace{4truecm}%
@@ -552,8 +642,8 @@
     \begin{titlepage}%
       %\selectlanguage{finnish}%
       \section*{Tiivistelm\"a}%
-      \gradu@rohtau\\%
-      {\def\\{ }\gradu@finnishtitle{} / \gradu@author}\\%
+      \gradu@makesrohtua\\%
+      {\def\\{ }\gradu@finnishtitle{} / \fitrue\gradu@makeauthorsl\fifalse}\\%
       \gradu@paikka: \gradu@yliopisto, \number\year \\%
       \ref{TotPages}~s.\\%
       \gradu@tyyppi\par%
@@ -568,8 +658,8 @@
   \def\gradu@englishabstract{%
     \begin{titlepage}%
       \section*{Abstract}%
-      \gradu@rohtau\\%
-      {\def\\{ }\gradu@englishtitle{} / \gradu@author}\\%
+      \gradu@makesrohtua\\%
+      {\def\\{ }\gradu@englishtitle{} / \fifalse\gradu@makeauthorsl\fitrue}\\%
       \gradu@paikka: \gradu@university, \number\year \\%
       \ref{TotPages}~p.\\%
       \gradu@type\par%
