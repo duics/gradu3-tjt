@@ -60,6 +60,9 @@
 \newif\ifaltlinespread
 \altlinespreadfalse
 
+\newif\ifsurnamefirst
+\surnamefirstfalse
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -96,6 +99,8 @@
 \DeclareOption{shortthesis}{\shortthesistrue}
 
 \DeclareOption{altsubsec}{\altsubsectrue}
+
+\DeclareOption{surnamefirst}{\surnamefirsttrue}
 
 \let\gradu@lof\relax
 \let\gradu@lot\relax
@@ -361,8 +366,13 @@
 %\newcommand{\setauthor}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtua{#2, #1}}
 \newcounter{gradu@authorcount}
 \newcommand{\setauthor}[2]{
+\ifsurnamefirst
+  \@cons\gradu@authors{\gradu@authorstart#2\gradu@authorsep#1\gradu@authorend}
+  \@cons\gradu@authorsl{\gradu@authorlstart#2\gradu@authorlsep#1\gradu@authorlend}
+\else
   \@cons\gradu@authors{\gradu@authorstart#1\gradu@authorsep#2\gradu@authorend}
   \@cons\gradu@authorsl{\gradu@authorlstart#1\gradu@authorlsep#2\gradu@authorlend}
+\fi
   \@cons\gradu@srohtua{\gradu@rohtuastart#2\gradu@rohtuasep#1\gradu@rohtuaend}
 	\addtocounter{gradu@authorcount}{1}%
 }
