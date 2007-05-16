@@ -496,6 +496,9 @@
 %\fi
 
 \newcommand{\mainmatter}{
+  \ifshortthesis
+	\clearpage
+	\fi
   \tableofcontents
   \gradu@lof
   \gradu@lot
@@ -712,6 +715,15 @@
   \global\let\copyrightyear\gradu@toolate%  
 }
 
+\ifshortthesis
+\newcommand{\preface}{\section*{\prefacename}
+\addcontentsline{toc}{section}{\prefacename}
+}
+
+\newcommand{\termlist}{\section*{\termlistname}
+\addcontentsline{toc}{section}{\termlistname}
+}
+\else
 \newcommand{\preface}{\chapter*{\prefacename}
 \addcontentsline{toc}{chapter}{\prefacename}
 }
@@ -719,10 +731,15 @@
 \newcommand{\termlist}{\chapter*{\termlistname}
 \addcontentsline{toc}{chapter}{\termlistname}
 }
+\fi
 
 \renewcommand\appendix{\par
-  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
-  \setcounter{chapter}{0}%
+  \ifshortthesis
+    \addtocontents{toc}{\protect\contentsline{section}{\appendicesname}{}{}}
+	\else
+    \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
+    \setcounter{chapter}{0}%
+	\fi
   \setcounter{section}{0}%
   \gdef\@chapapp{\appendixname}%
   \gdef\thechapter{\@Alph\c@chapter}}
