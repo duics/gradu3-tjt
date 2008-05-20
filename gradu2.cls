@@ -15,14 +15,14 @@
 
 %% Some packages need special handling if the output is PDF, this \if is just
 %% in case we need it
-\newif\ifpdf
+\newif\ifgradu@pdf
 \ifx\pdfoutput\undefined
-  \pdffalse
+  \gradu@pdffalse
 \else
   \ifnum\pdfoutput=1
-    \pdftrue
+    \gradu@pdftrue
   \else
-    \pdffalse
+    \gradu@pdffalse
   \fi
 \fi
 
@@ -122,7 +122,7 @@
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
 
 \iflogo
-\ifpdf
+\ifgradu@pdf
 \IfFileExists{logo_jyu.pdf}
   {\typeout{Using logo file logo_jyu.pdf}}
   {\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.pdf, logo is disabled}}
@@ -236,7 +236,7 @@
    \@ifpackageloaded{graphicx}{}{%
     \ClassWarning{gradu2}{The logo option requires the graphicx package to be
     loaded, loading it now.}
-    \ifpdf
+    \ifgradu@pdf
     \RequirePackage[pdftex]{graphicx}
     \else
     \RequirePackage[dvips]{graphicx}

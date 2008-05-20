@@ -1,12 +1,14 @@
 %\documentclass[english,latin1,numbib,palatino]{gradu2}
 \documentclass[english,latin1,numbib]{gradu2}
 
-\ifpdf
+\makeatletter
+\ifgradu@pdf
   \usepackage[pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
 	%\hypersetup{colorlinks,citecolor=blue}
 \else
 	\RequirePackage[hypertex]{hyperref}
 \fi
+\makeatother
 %\usepackage{lmodern}
 
 \title{XML Forms}
