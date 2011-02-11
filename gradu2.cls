@@ -6,8 +6,8 @@
 %%                     PLEASE READ THE MANUAL!                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\filedate{2006/11/03}
-\def\fileversion{2.3}
+\def\filedate{2011/02/11}
+\def\fileversion{2.4}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
@@ -101,6 +101,11 @@
 \DeclareOption{altsubsec}{\altsubsectrue}
 
 \DeclareOption{surnamefirst}{\surnamefirsttrue}
+
+\DeclareOption{kandi}{\shortthesistrue%
+  \gdef\gradu@tyyppi{kandidaatintutkielma}%
+  \gdef\gradu@type{Bachelor's Thesis}%
+}
 
 \let\gradu@lof\relax
 \let\gradu@lot\relax

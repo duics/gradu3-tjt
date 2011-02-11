@@ -1,0 +1,95 @@
+\documentclass[finnish,utf8,nonumbib,palatino,kandi]{gradu2}
+
+\makeatletter
+\ifgradu@pdf
+  \usepackage[pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
+	%\hypersetup{colorlinks,citecolor=blue}
+\else
+	\RequirePackage[hypertex]{hyperref}
+\fi
+\makeatother
+
+\title{P ja NP ovat samat}
+\setauthor{Antti-Juhani}{Kaijanaho}
+\yhteystiedot{antti-juhani@kaijanaho.fi}
+\translatedtitle{P is NP}
+\abstract{This is my english abstract}
+\tiivistelma{Tämä on suomenkielinen tiivistelmä}
+\keywords{P, NP, complexity theory}
+\avainsanat{P, NP, kompleksisuusteoria}
+
+\begin{document}
+\preface
+Esipuhe, jos sellaisen haluaa
+
+\termlist
+P: polynomisessa ajassa ratkeavien ongelmien joukko \\
+NP: niiden ongelmien joukko, joiden ratkaisu on tarkistettavissa polynomisessa ajassa
+
+\mainmatter
+
+\section{Johdanto}
+
+Johdannon alussa on hyvä esittää tutkielman keskeinen väite
+(engl.~\emph{thesis statement}) yhdessä virkkeessä.
+
+Muutoin johdannossa voi kertoa tutkielman aiheen taustoja -- miksi
+aihe on kiinnostava (toisaalta yleisesti ja toisaalta tekijän itsensä
+näkökulmasta.  Johdannon ei yleensä ole syytä olla sivua pidempi.
+
+Huomaathan, että tässä esimerkissä esitetyt ohjeet saattavat poiketa
+ohjaajasi kannasta.  Noudata ensisijaisesti ohjaajasi ohjeita.
+
+Johdannon lopuksi on tapana kertoa, miten tutkielma jäsentyy lukuihin.
+Pelkkää suorasanaista sisällysluetteloa kannattaa kuitenkin välttää.
+
+\section{Kirjallisuuskatsaus}
+
+Tutkielmaan sisältyy yleensä jonkinlainen kirjallisuuskatsaus.  Ideana
+on tarkastella tutkimuskirjallisuuteen nojaten, mitä tutkielman
+aihepiiristä on aiemmin kirjoitettu ja mitä tästä voidaan päätellä.
+Esimerkiksi
+Taivalsaari~\cite{taivalsaari93:_critic_view_inher_reusab_objec_progr}
+esitti uuden olio-ohjelmoinnin mallin, Kevon, jossa tavanomaisesta
+poiketen ei ole lainkaan luokkia (Kevo ei kuitenkaan ollut ensimmäinen
+tällainen).
+
+Tavoitteena tällaisessa kirjallisuuskatsauksessa tulisi olla osoittaa
+jokin laadukas tutkimus, jota kandityössä pyritään matkimaan.
+Mahdollista on myös yrittää osoittaa, ettei tällaista tutkimusta ole
+aiemmin tehty (mutta tällöinkin kandityön työläyden pitämiseksi
+aisoissa olisi kuitenkin hyvä löytää läheltä liippaavia töitä, joista
+voi ottaa kevyesti mallia).
+
+\section{Menetelmät}
+
+Seuraavaksi tutkielmassa tarkastellaan kirjallisuuteen tukeutuen
+menetelmiä, joita tutkielmassa käytetään.  Tällä tarkoitetaan paitsi
+tutkimusmenetelmiä myös tutkimuksen kohteena olevia teknologioita.
+
+\section{Tulokset}
+
+Seuraavaksi tutkielmassa esitellään saadut tutkimustulokset, lyhyesti
+ja ytimekkäästi (mutta selkeästi).
+
+\section{Tarkastelu}
+
+Sitten tutkielman tekijä peilaa tuloksia kirjallisuutta ja esittää
+tulkintoja.
+
+\section{Johtopäätökset}
+
+Lopuksi lyhyessä johtopäätösosassa kerrotaan tutkimuksen pihvi.
+
+
+\bibliographystyle{finplain} % tai joku muu, sovi ohjaajasi kanssa
+\bibliography{esim}
+
+\appendix
+
+\section{Ensimmäinen liite}
+
+\section{Toinen liite}
+
+
+\end{document}
