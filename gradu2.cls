@@ -579,7 +579,7 @@
     \noindent\textbf{Ty\"o:} \gradu@tyo\par%
     \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
     \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
-    \noindent\textbf{English abstract:} \gradu@abstract\par%
+    \noindent\textbf{Abstract:} \gradu@abstract\par%
     \noindent\gradu@ysa%
     \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
     \noindent\gradu@acmccs%
