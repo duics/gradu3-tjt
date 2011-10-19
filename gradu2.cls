@@ -6,8 +6,8 @@
 %%                     PLEASE READ THE MANUAL!                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\filedate{2011/06/17}
-\def\fileversion{2.5}
+\def\filedate{2011/10/19}
+\def\fileversion{2.6}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
