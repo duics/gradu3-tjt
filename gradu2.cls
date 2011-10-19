@@ -63,6 +63,59 @@
 \newif\ifsurnamefirst
 \surnamefirstfalse
 
+\def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
+
+\def\gradu@title{\gradu@muistitko{title}}
+\def\gradu@author{\gradu@muistitko{author}}
+\def\gradu@date{\today}
+\def\gradu@paikka{Jyv\"askyl\"a}
+\def\gradu@yliopisto{Jyv\"askyl\"an yliopisto}
+\def\gradu@university{University of Jyv\"askyl\"a}
+\def\gradu@laitos{%
+  \iffi%
+  Tietotekniikan laitos%
+  \else%
+  Department of Mathematical Information Technology%
+  \fi%
+}
+\def\gradu@aine{%
+  \iffi%
+  Tietotekniikan%
+  \else%
+  in Information Technology%
+  \fi%
+}
+\def\gradu@linja{}
+\def\gradu@tyyppi{pro gradu -tutkielma}
+\def\gradu@type{Master's Thesis}
+\def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
+\def\gradu@abstract{\gradu@muistitko{abstract}}
+\def\gradu@titletrans{\gradu@muistitko{translatedtitle}}
+\def\gradu@avainsanat{\gradu@muistitko{avainsanat}}
+\def\gradu@keywords{\gradu@muistitko{keywords}}
+%\def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
+\def\gradu@copyrightowner{\gradu@makeauthorsl}
+\def\gradu@license{All rights reserved.}
+\def\gradu@copyrightyear{\number\year}
+\def\gradu@acmccs{}
+\def\gradu@ysa{}
+
+\def\gradu@authors{}
+\let\gradu@authorstart\relax
+\let\gradu@authorsep\relax
+\let\gradu@authorend\relax
+
+\def\gradu@authorsl{}
+\let\gradu@authorlstart\relax
+\let\gradu@authorlsep\relax
+\let\gradu@authorlend\relax
+
+\def\gradu@srohtua{}
+\let\gradu@rohtuastart\relax
+\let\gradu@rohtuasep\relax
+\let\gradu@rohtuaend\relax
+
+
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -310,57 +363,6 @@
 \clearpage\TotPages@putlabel
 }
 
-\def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
-
-\def\gradu@title{\gradu@muistitko{title}}
-\def\gradu@author{\gradu@muistitko{author}}
-\def\gradu@date{\today}
-\def\gradu@paikka{Jyv\"askyl\"a}
-\def\gradu@yliopisto{Jyv\"askyl\"an yliopisto}
-\def\gradu@university{University of Jyv\"askyl\"a}
-\def\gradu@laitos{%
-  \iffi%
-  Tietotekniikan laitos%
-  \else%
-  Department of Mathematical Information Technology%
-  \fi%
-}
-\def\gradu@aine{%
-  \iffi%
-  Tietotekniikan%
-  \else%
-  in Information Technology%
-  \fi%
-}
-\def\gradu@linja{}
-\def\gradu@tyyppi{pro gradu -tutkielma}
-\def\gradu@type{Master's Thesis}
-\def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
-\def\gradu@abstract{\gradu@muistitko{abstract}}
-\def\gradu@titletrans{\gradu@muistitko{translatedtitle}}
-\def\gradu@avainsanat{\gradu@muistitko{avainsanat}}
-\def\gradu@keywords{\gradu@muistitko{keywords}}
-%\def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
-\def\gradu@copyrightowner{\gradu@makeauthorsl}
-\def\gradu@license{All rights reserved.}
-\def\gradu@copyrightyear{\number\year}
-\def\gradu@acmccs{}
-\def\gradu@ysa{}
-
-\def\gradu@authors{}
-\let\gradu@authorstart\relax
-\let\gradu@authorsep\relax
-\let\gradu@authorend\relax
-
-\def\gradu@authorsl{}
-\let\gradu@authorlstart\relax
-\let\gradu@authorlsep\relax
-\let\gradu@authorlend\relax
-
-\def\gradu@srohtua{}
-\let\gradu@rohtuastart\relax
-\let\gradu@rohtuasep\relax
-\let\gradu@rohtuaend\relax
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{%
