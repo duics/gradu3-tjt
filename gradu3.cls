@@ -37,9 +37,6 @@
 \shortthesisfalse
 \def\gradu@baseclass{\ifshortthesis article\else report\fi}
 
-\newif\ifaltsubsec
-\altsubsecfalse
-
 \newif\ifpalatino
 \palatinofalse
 
@@ -113,8 +110,6 @@
 \DeclareOption{nottoc}{\nottoctrue}
 
 \DeclareOption{shortthesis}{\shortthesistrue}
-
-\DeclareOption{altsubsec}{\altsubsectrue}
 
 \DeclareOption{kandi}{\shortthesistrue%
   \gdef\gradu@tyyppi{kandidaatintutkielma}%
@@ -590,13 +585,7 @@
   {2}%
   {\z@}%
   {-\baselineskip}%
-  {\ifaltsubsec
-    -2ex
-   \else
-     2ex
-   \fi}% aligns the first line of the following paragraph with the title:
-         % bug or feature?
-  %{2ex}%
+  {2ex}
   {\normalfont\bfseries\normalsize}%
 }
 
