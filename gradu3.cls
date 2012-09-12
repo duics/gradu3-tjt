@@ -318,7 +318,7 @@
 }
 \renewcommand{\maketitle}{%
 \begingroup
-\newcounter{authorcount}
+\newcounter{gradu@authorcount}
 \iffi
     \def\gradu@tyo{\gradu@aine{} %
     \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
@@ -328,8 +328,8 @@
 \begin{titlepage}%
   \vspace*{7truecm plus 1truecm minus 3truecm}%
   \centerline{\textbf{%
-      \setcounter{authorcount}{0}%
-      \def\and{\\[0.2em]\addtocounter{authorcount}{1}}%
+      \setcounter{gradu@authorcount}{0}%
+      \def\and{\\[0.2em]\addtocounter{gradu@authorcount}{1}}%
       \gradu@authors
     }}%
   \vspace{2truecm}%
@@ -358,16 +358,16 @@
 \begin{titlepage}%
   \noindent%
   \iffi%
-  \textbf{Tekij\"a\ifthenelse{\value{authorcount}>1}{t}{}:} %
+  \textbf{Tekij\"a\ifthenelse{\value{gradu@authorcount}>1}{t}{}:} %
   \else%
-  \noindent\textbf{Author\ifthenelse{\value{authorcount}>1}{s}{}:} %
+  \noindent\textbf{Author\ifthenelse{\value{gradu@authorcount}>1}{s}{}:} %
   \fi%
   {%
-    \newcounter{count}%
-    \setcounter{count}{\value{authorcount}}%
+    \newcounter{gradu@author@count}%
+    \setcounter{gradu@author@count}{\value{gradu@authorcount}}%
     \def\and{\unskip%
-      \addtocounter{count}{-1}%
-      \ifthenelse{\value{count} = 0}{%
+      \addtocounter{gradu@author@count}{-1}%
+      \ifthenelse{\value{gradu@author@count} = 0}{%
         \iffi\space ja \else, and \fi%
       }{%
         , %
