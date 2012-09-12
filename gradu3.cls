@@ -30,9 +30,6 @@
 \newif\iffi
 \fitrue
 
-\newif\ifnumbib
-\numbibtrue
-
 \newif\ifnottoc
 \nottoctrue
 
@@ -132,9 +129,6 @@
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
 \DeclareOption{utf8}{\gdef\gradu@inputenc{utf8}}
 
-\DeclareOption{numbib}{\numbibtrue}
-\DeclareOption{nonumbib}{\numbibfalse}
-
 \DeclareOption{toc}{\nottocfalse}
 \DeclareOption{nottoc}{\nottoctrue}
 
@@ -205,19 +199,11 @@
 \fi
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
-\ifnumbib
-\ifnottoc
-\RequirePackage[numbib,nottoc]{tocbibind}
-\else %nottoc
-\RequirePackage[numbib]{tocbibind}
-\fi %nottoc
-\else %numbib
 \ifnottoc
 \RequirePackage[nottoc]{tocbibind}
 \else  %nottoc
 \RequirePackage{tocbibind}
 \fi %nottoc
-\fi %numbib
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
