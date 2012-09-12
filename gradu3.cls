@@ -40,9 +40,6 @@
 \newif\ifgradu@hyperref
 \gradu@hyperreffalse
 
-\newif\iflogo
-\logofalse
-
 \newif\ifaltlinespread
 \altlinespreadfalse
 
@@ -122,25 +119,11 @@
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 
-\DeclareOption{logo}{\logotrue}
-
 \DeclareOption{altlinespread}{\altlinespreadtrue}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
-
-\iflogo
-\ifgradu@pdf
-\IfFileExists{logo_jyu.pdf}
-  {\typeout{Using logo file logo_jyu.pdf}}
-  {\logofalse\ClassWarning{gradu3}{Could not find logo_jyu.pdf, logo is disabled}}
-\else
-\IfFileExists{logo_jyu.eps}
-  {\typeout{Using logo file logo_jyu.eps}}
-  {\logofalse\ClassWarning{gradu3}{Could not find logo_jyu.eps, logo is disabled}}
-\fi
-\fi
 
 %\RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
@@ -222,17 +205,6 @@
    }%
    \pagenumbering{roman}
    \selectdefaultlanguage
-   \iflogo
-   \@ifpackageloaded{graphicx}{}{%
-    \ClassWarning{gradu3}{The logo option requires the graphicx package to be
-    loaded, loading it now.}
-    \ifgradu@pdf
-    \RequirePackage[pdftex]{graphicx}
-    \else
-    \RequirePackage[dvips]{graphicx}
-    \fi
-   }
-   \fi
    \maketitle
 }}
 
@@ -414,23 +386,6 @@
       \gradu@date%
     }}%
   \vfill%
-  \iflogo
-  % \center{\hspace{3pt}\includegraphics[height=3.25truecm]{logo_jyu}}%
-  % for use with \large and \normalsize instead of \normalsize and \small
-  % \gradu@yliopisto and \gradu@laitos
-  \center{\hspace{3pt}\includegraphics[height=2.05truecm]{logo_jyu}}%
-  \par\vspace{-.6cm}
-  \begingroup
-  \fontfamily{ppl}\selectfont\
-  \iffi
-  \center{\normalsize\MakeUppercase{\gradu@yliopisto}}%
-  \else
-  \center{\normalsize\MakeUppercase{\gradu@university}}%
-  \fi
-  \par\vspace{-.5cm}
-  \center{\small\MakeUppercase{\gradu@laitos}}%
-  \endgroup
-  \else
   \vspace{1truecm plus 1truecm minus .5truecm}%
   \iffi
   \center{\large\textbf{\gradu@yliopisto}}%
@@ -438,7 +393,6 @@
   \center{\large\textbf{\gradu@university}}%
   \fi
   \center{\textbf{\gradu@laitos}}%
-  \fi
   \center{\textbf{\gradu@paikka}}%
 \end{titlepage}%
 \newpage%
