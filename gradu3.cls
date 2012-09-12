@@ -67,7 +67,7 @@
 \def\gradu@authors{}
 
 %% Input encoding
-\def\gradu@inputenc{latin1}
+\def\gradu@inputenc{utf8}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
 \DeclareOption{applemac}{\gdef\gradu@inputenc{applemac}}
 \DeclareOption{ascii}{\gdef\gradu@inputenc{ascii}}

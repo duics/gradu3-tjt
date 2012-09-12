@@ -107,14 +107,8 @@ is written. Available character sets are:
 \item[cp865] IBM 865 code page
 \end{opts}
 
-Usual encodings, by platform, are:
-
-\begin{description}
-\item[Linux] \texttt{latin1} (or nowadays more often than not, \texttt{latin9} or  \texttt{utf8})
-\item[MS Windows] \texttt{cp1252}
-\item[Old Macintosh] \texttt{applemac}
-\item[OS X] \texttt{utf8}
-\end{description}
+Nowadays, \opt{utf8} is almost always a safe choice, and it is the
+default in \cls{gradu3}.
 
 Note that these options are given to the \cmd{documentclass} command.
 You should not invoke \cmd{usepackage\{inputenc\}} yourself!
