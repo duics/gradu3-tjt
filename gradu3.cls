@@ -34,9 +34,6 @@
 \shortthesisfalse
 \def\gradu@baseclass{\ifshortthesis article\else report\fi}
 
-\newif\ifgradu@hyperref
-\gradu@hyperreffalse
-
 \newif\ifaltlinespread
 \altlinespreadfalse
 
@@ -182,14 +179,12 @@
 \def\gradu@before@begin@document{
 \AtBeginDocument{%
   \@ifpackageloaded{hyperref}{
-  \gradu@hyperreftrue
   \def\toclevel@schapter{0}%
   \def\toclevel@appendix{0}%
   \def\toclevel@algorithm{0}%
 
    \define@Hy@TotPages@putlabel
    }{%
-   \gradu@hyperreffalse
    \define@TotPages@putlabel
    }%
    \pagenumbering{roman}
