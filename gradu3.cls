@@ -52,9 +52,6 @@
 \newif\ifaltlinespread
 \altlinespreadfalse
 
-\newif\ifsurnamefirst
-\surnamefirstfalse
-
 \def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
 
 \def\gradu@title{\gradu@muistitko{title}}
@@ -121,8 +118,6 @@
 \DeclareOption{shortthesis}{\shortthesistrue}
 
 \DeclareOption{altsubsec}{\altsubsectrue}
-
-\DeclareOption{surnamefirst}{\surnamefirsttrue}
 
 \DeclareOption{kandi}{\shortthesistrue%
   \gdef\gradu@tyyppi{kandidaatintutkielma}%
@@ -332,12 +327,8 @@
 }
 \newcounter{gradu@authorcount}
 \newcommand{\setauthor}[2]{
-\ifsurnamefirst
-  \@cons\gradu@authors{\gradu@authorstart#2\gradu@authorsep#1\gradu@authorend}
-\else
   \@cons\gradu@authors{\gradu@authorstart#1\gradu@authorsep#2\gradu@authorend}
-\fi
-	\addtocounter{gradu@authorcount}{1}%
+  \addtocounter{gradu@authorcount}{1}%
 }
 
 \newcounter{gradu@author@count}
