@@ -1,4 +1,4 @@
-example.dvi: example.tex gradu2.cls
+example.dvi: example.tex gradu3.cls
 	latex example
 	latex example
 

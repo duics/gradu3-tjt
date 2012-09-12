@@ -6,12 +6,12 @@
 %%                     PLEASE READ THE MANUAL!                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\filedate{2011/10/19}
-\def\fileversion{2.6}
+\def\filedate{2012/09/12}
+\def\fileversion{3.0pre1}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gradu2}[\filedate\space\fileversion\space\fileinfo]
-\typeout{gradu2 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
+\ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
+\typeout{gradu3 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
 
 %% Some packages need special handling if the output is PDF, this \if is just
 %% in case we need it
@@ -183,11 +183,11 @@
 \ifgradu@pdf
 \IfFileExists{logo_jyu.pdf}
   {\typeout{Using logo file logo_jyu.pdf}}
-  {\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.pdf, logo is disabled}}
+  {\logofalse\ClassWarning{gradu3}{Could not find logo_jyu.pdf, logo is disabled}}
 \else
 \IfFileExists{logo_jyu.eps}
   {\typeout{Using logo file logo_jyu.eps}}
-  {\logofalse\ClassWarning{gradu2}{Could not find logo_jyu.eps, logo is disabled}}
+  {\logofalse\ClassWarning{gradu3}{Could not find logo_jyu.eps, logo is disabled}}
 \fi
 \fi
 
@@ -252,26 +252,26 @@
 %% Defining the command that displays the total number of pages requires to know
 %% if hyperref is loaded or not, because it relies on \if-commands that do not
 %% exist unless hyperref is loaded.
-%%   But hyperref must be loaded by the user, not by gradu2, because hyperref
+%%   But hyperref must be loaded by the user, not by gradu3, because hyperref
 %% overwrites definitions made in many packages. The user may use such
 %% packages, therefore hyperref must be loaded *after* these packages. In
 %% addition, hyperref must be loaded before packages based on the float package,
 %% because the latter is incompatible with hyperref.
-%% gradu2 therefore expects the user to potentially load hyperref, and if it is
+%% gradu3 therefore expects the user to potentially load hyperref, and if it is
 %% the case, it defines \TotPages@putlabel just before \begin{document}. This
 %% could not be done with \AtBeginDocument, because hyperref also uses
-%% \AtBeginDocument extensively, and gradu2' \AtBeginDocument{\def\@schapter...}
+%% \AtBeginDocument extensively, and gradu3' \AtBeginDocument{\def\@schapter...}
 %% would have been executed *before* hyperref is loaded (\begin{document} hooks
-%% are executed in the same order they are defined, and gradu2 would define its
+%% are executed in the same order they are defined, and gradu3 would define its
 %% hook before hyperref defines its ones).  Defining a hook in a hook i.e.,
-%% \AtBeginDocument{\AtBeginDocument{\def\whatever}} does not work, gradu2
+%% \AtBeginDocument{\AtBeginDocument{\def\whatever}} does not work, gradu3
 %% therefore needs to define its own hook, independently from the normal
 %% \begin{document} hooks. The proper way of doing so would be to redefine
 %% \document, but for some obscure reason, this does not work. The working
 %% solution consists in redefining \begin and check if it is \begin{document}
-%% (and then execute gradu2' own hook before actually executing
+%% (and then execute gradu3' own hook before actually executing
 %% \begin{document}) or \begin{sometingelse} (then do nothing special).
-%%   gradu2' own hook is one \AtBeginDocument that puts its own commands after every others
+%%   gradu3' own hook is one \AtBeginDocument that puts its own commands after every others
 %% (defining \TotPages@putlabel, then calling \maketitle).
 
 %%%% Begin dirty hack
@@ -292,7 +292,7 @@
    \selectdefaultlanguage
    \iflogo
    \@ifpackageloaded{graphicx}{}{%
-    \ClassWarning{gradu2}{The logo option requires the graphicx package to be
+    \ClassWarning{gradu3}{The logo option requires the graphicx package to be
     loaded, loading it now.}
     \ifgradu@pdf
     \RequirePackage[pdftex]{graphicx}
@@ -366,7 +366,7 @@
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{%
- \ClassWarning{gradu2}{\noexpand\author is deprecated!}%
+ \ClassWarning{gradu3}{\noexpand\author is deprecated!}%
  \gdef\gradu@authors{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
  \gdef\gradu@srohtua{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
 }
@@ -432,7 +432,7 @@
 }
 
 \renewcommand{\date}[1]{%
-  \ClassWarning{gradu2}{\noexpand\date is deprecated!}%
+  \ClassWarning{gradu3}{\noexpand\date is deprecated!}%
   \gdef\gradu@date{#1}%
 }
 \newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\year=#3}
@@ -481,7 +481,7 @@
 
 
 \newcommand{\gradu@toolate}{%
-  \ClassError{gradu2}{%
+  \ClassError{gradu3}{%
     \iffi%
     Bibliografiatietoja ei voi antaa enaa dokumentin alun jalkeen.%
     \else%
@@ -794,9 +794,9 @@
   {\normalfont\bfseries\normalsize}%
 }
 
-\renewcommand\subsubsection{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
-\renewcommand\paragraph{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
-\renewcommand\subparagraph{\ClassError{gradu2}{Don't use sectioning below subsection}{}}
+\renewcommand\subsubsection{\ClassError{gradu3}{Don't use sectioning below subsection}{}}
+\renewcommand\paragraph{\ClassError{gradu3}{Don't use sectioning below subsection}{}}
+\renewcommand\subparagraph{\ClassError{gradu3}{Don't use sectioning below subsection}{}}
 
 \setcounter{secnumdepth}{2}
 
