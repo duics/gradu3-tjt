@@ -110,6 +110,9 @@
 \RequirePackage[scaled=.92]{helvet}
 \RequirePackage{courier}
 
+\setlength\parindent{0pt}
+\setlength\parskip{10pt}
+
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
 \def\gradu@msg@komentoa{-komentoa?}
