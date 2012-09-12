@@ -238,6 +238,14 @@
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{\gdef\gradu@authors{#1}}
+\newcounter{gradu@ohjaajacount}
+\def\gradu@ohjaajat{}
+\let\gradu@ohjaajatstart\relax
+\let\gradu@ohjaajatend\relax
+\newcommand{\ohjaaja}[1]{%
+  \@cons\gradu@ohjaajat{\gradu@ohjaajatstart#1\gradu@ohjaajatend}%
+  \addtocounter{gradu@ohjaajacount}{1}%
+}
 
 \renewcommand{\date}[1]{%
   \ClassWarning{gradu3}{\noexpand\date is deprecated!}%
@@ -378,6 +386,36 @@
   }\par%
   \iffi%
   \noindent\textbf{Yhteystiedot:} \gradu@makeyhteystiedot\par%
+  \else%
+  \noindent\textbf{Contact information:} \gradu@makeyhteystiedot\par%
+  \fi
+  \noindent{%
+    \textbf{%
+      \iffi%
+      Ohjaaja\ifthenelse{\value{gradu@ohjaajacount}>1}{t}{}:%
+      \else%
+      Supervisor\ifthenelse{\value{gradu@ohjaajacount}>1}{s}{}:%
+      \fi%
+    }\space%
+    \ifthenelse{\value{gradu@ohjaajacount} = 0}{%
+      \gradu@muistitko{ohjaaja}%
+    }{}%
+    \newcounter{gradu@ohjaaja@count}%
+    \setcounter{gradu@ohjaaja@count}{\value{gradu@ohjaajacount}}%
+    \def\gradu@ohjaajatstart{%
+      \addtocounter{gradu@ohjaaja@count}{-1}%
+      \def\gradu@ohjaajatstart{%
+        \addtocounter{gradu@ohjaaja@count}{-1}%
+        \ifthenelse{\value{gradu@ohjaaja@count} = 0}{%
+          \iffi\space ja\space\else, and\space\fi%
+        }{%
+          ,\space
+        }%
+      }%
+    }%
+    \gradu@ohjaajat%
+  }\par%
+  \iffi
   \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Title in English:} \gradu@titletrans\par%
   \noindent\textbf{Ty\"o:} \gradu@tyo\par%
@@ -389,7 +427,6 @@
   \noindent\gradu@acmccs%
   \noindent\textbf{Keywords:} \gradu@keywords\par%
   \else%
-  \noindent\textbf{Contact information:} \gradu@makeyhteystiedot\par%
   \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
   \noindent\textbf{Project:} \gradu@tyo\par%

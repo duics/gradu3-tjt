@@ -132,6 +132,8 @@ used, a reminder will be printed inside the document.
 \item[title] document's title (mandatory)
 \item[author] documents's author (mandatory).  If there is more than
   one author, separate their names with \cmd{and}.
+\item[ohjaaja] thesis supervisor (mandatory).  This command can be
+  repeated to specify more than one supervisor.
 \item[date] document's publishing date (defaults to the current date)
   \textbf{deprecated, use \textbackslash setdate instead}
 \item[setdate] takes three arguments: day, month, year (all numeric);
@@ -215,5 +217,6 @@ in the same \cmd{author} command -- that is, do not repeat the command
 -- separating autors with the \cmd{and} command.  This also makes the
 (now removed) option \opt{surnamefirst} obsolete, as the class no longer cares what part of the name contains the surname.
 
+The following commands are new in \cls{gradu3}: \cmd{ohjaaja}.
 
 \end{document}
