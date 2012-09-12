@@ -59,7 +59,6 @@
 \def\gradu@titletrans{\gradu@muistitko{translatedtitle}}
 \def\gradu@avainsanat{\gradu@muistitko{avainsanat}}
 \def\gradu@keywords{\gradu@muistitko{keywords}}
-%\def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
 \def\gradu@acmccs{}
 \def\gradu@ysa{}
 
@@ -268,6 +267,7 @@
 }
 \newcounter{gradu@yhteystiedot@count}
 \def\gradu@makeyhteystiedot{%
+  \ifthenelse{\value{gradu@yhteystiedotcount} = 0}{\gradu@muistitko{yhteystiedot}}{}%
   \setcounter{gradu@yhteystiedot@count}{\value{gradu@yhteystiedotcount}}%
 	\gdef\gradu@yhteystiedotend{%
 		\addtocounter{gradu@yhteystiedot@count}{-1}%
