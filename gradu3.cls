@@ -87,9 +87,6 @@
 \def\gradu@ysa{}
 
 \def\gradu@authors{}
-\let\gradu@authorstart\relax
-\let\gradu@authorsep\relax
-\let\gradu@authorend\relax
 
 %% Input encoding
 \def\gradu@inputenc{latin1}
@@ -321,52 +318,7 @@
 
 
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
-\renewcommand{\author}[1]{%
- \ClassWarning{gradu3}{\noexpand\author is deprecated!}%
- \gdef\gradu@authors{#1 }
-}
-\newcounter{gradu@authorcount}
-\newcommand{\setauthor}[2]{
-  \@cons\gradu@authors{\gradu@authorstart#1\gradu@authorsep#2\gradu@authorend}
-  \addtocounter{gradu@authorcount}{1}%
-}
-
-\newcounter{gradu@author@count}
-\newcounter{gradu@authorcount@}
-\def\gradu@makeauthors{%
-  \setcounter{gradu@author@count}{\value{gradu@authorcount}}
-	\setcounter{gradu@authorcount@}{0}%
-  \gdef\gradu@authorstart{
-		\addtocounter{gradu@author@count}{-1}%
-	  \ifthenelse{\value{gradu@authorcount@} = 0}{\begin{tabular}{c}}{}
-		\addtocounter{gradu@authorcount@}{1}%
-	}
-	\gdef\gradu@authorsep{\space}%
-	\gdef\gradu@authorend{%
-	  \ifthenelse{\value{gradu@author@count} = 0}{\end{tabular}}{\\[0.2em]}%
-	}%
-	\gradu@authors
-}
-
-\newcounter{gradu@authorl@count}
-\newcounter{gradu@authorlcount@}
-\def\gradu@makeauthorsl{%
-  \begingroup
-  \setcounter{gradu@authorl@count}{\value{gradu@authorcount}}%
-  \setcounter{gradu@authorlcount@}{0}%
-  \def\gradu@authorstart{%
-    \addtocounter{gradu@authorl@count}{-1}%
-    \ifthenelse{\value{gradu@authorlcount@} > 0}{%
-      \ifthenelse{\value{gradu@authorl@count} = 0}%
-      {\iffi\space ja\space \else\space and\space \fi}{,\space}%
-    }{}%
-    \addtocounter{gradu@authorlcount@}{1}%
-  }%
-  \def\gradu@authorsep{\space}%
-  \def\gradu@authorend{\relax}%
-  \gradu@authors
-  \endgroup%
-}
+\renewcommand{\author}[1]{\gdef\gradu@authors{#1}}
 
 \renewcommand{\date}[1]{%
   \ClassWarning{gradu3}{\noexpand\date is deprecated!}%
@@ -451,6 +403,8 @@
 \fi
 }
 \renewcommand{\maketitle}{%
+\begingroup
+\newcounter{authorcount}
 \iffi
     \def\gradu@tyo{\gradu@aine{} %
     \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
@@ -459,7 +413,11 @@
 \fi
 \begin{titlepage}%
   \vspace*{7truecm plus 1truecm minus 3truecm}%
-  \centerline{\textbf{\gradu@makeauthors}}%
+  \centerline{\textbf{%
+      \setcounter{authorcount}{0}%
+      \def\and{\\[0.2em]\addtocounter{authorcount}{1}}%
+      \gradu@authors
+    }}%
   \vspace{2truecm}%
   \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
   \vspace{4truecm}%
@@ -506,8 +464,27 @@
 \end{titlepage}%
 \newpage%
 \begin{titlepage}%
+  \noindent%
   \iffi%
-  \noindent\textbf{Tekij\"a\ifthenelse{\value{gradu@authorcount}>1}{t}{}:} \gradu@makeauthorsl\par%
+  \textbf{Tekij\"a\ifthenelse{\value{authorcount}>1}{t}{}:} %
+  \else%
+  \noindent\textbf{Author\ifthenelse{\value{authorcount}>1}{s}{}:} %
+  \fi%
+  {%
+    \newcounter{count}%
+    \setcounter{count}{\value{authorcount}}%
+    \def\and{\unskip%
+      \addtocounter{count}{-1}%
+      \ifthenelse{\value{count} = 0}{%
+        \iffi\space ja \else, and \fi%
+      }{%
+        , %
+      }%
+    }%
+    \def\\{\space}%
+    \gradu@authors%
+  }\par%
+  \iffi%
   \noindent\textbf{Yhteystiedot:} \gradu@makeyhteystiedot\par%
   \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Title in English:} \gradu@titletrans\par%
@@ -520,7 +497,6 @@
   \noindent\gradu@acmccs%
   \noindent\textbf{Keywords:} \gradu@keywords\par%
   \else%
-  \noindent\textbf{Author\ifthenelse{\value{gradu@authorcount}>1}{s}{}:} \gradu@makeauthorsl\par%
   \noindent\textbf{Contact information:} \gradu@makeyhteystiedot\par%
   \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
@@ -534,6 +510,7 @@
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
   \fi%
 \end{titlepage}%
+\endgroup
   \global\let\title\gradu@toolate%
   \global\let\author\gradu@toolate%
   \global\let\date\gradu@toolate%  
