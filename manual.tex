@@ -61,9 +61,6 @@ to help you faster than we can.
 We may make changes to the class from time to time.  New releases will
 be announced on that mailing list.
 
-\textbf{ATTENTION: starting with version 2.0, \cls{gradu} does not load
-\pack{hyperref} automatically (nor does it load \pack{color} anymore).}
-
 \section{Invocation}
 
 Invoke the class with the usual \cmd{documentclass\{gradu3\}}.  The
@@ -123,16 +120,6 @@ Note that these options are given to the \cmd{documentclass} command.
 You should not invoke \cmd{usepackage\{inputenc\}} yourself!
 
 
-\section{Copyrights}
-
-The class outputs copyright assertion by default.  This can be inhibited.
-
-\begin{opts}
-\item[copyright] Output copyright assertion and license information on
-  the second title page (default).
-\item[nocopyright] Do not output copyright assertion and license
-  information.
-\end{opts}
 
 \section{Other options}
 
@@ -194,10 +181,6 @@ specified multiple times for multiple authors.
 \item[tiivistelma] abstract in Finnish (mandatory)
 \item[abstract] abstract in English (mandatory)
 \item[translatedtitle] title in the other language (mandatory)
-\item[copyrightowner] owner of the copyright (defaults to the author's name)
-\item[license] license under which the document is published (defaults to ``All
-rights reserved.'')
-\item[copyrightyear] copyright year (defaults to the current year)
 \end{cmds}
 
 \section{Sectioning Commands}
@@ -233,5 +216,13 @@ letters instead of numbers, beginning from ``A''.
   after this environment; do not leave empty lines there.
 \end{envs}
 
+\appendix
+\section{Command differences between gradu2 and gradu3}
+
+\begin{itemize}
+\item Options \opt{copyright} and \opt{nocopyright} and commands
+  \cmd{copyrightowner}, \cmd{copyrightyear} and \cmd{license} have
+  been removed.  No copyright information is output by default.
+\end{itemize}
 
 \end{document}

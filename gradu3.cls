@@ -30,9 +30,6 @@
 \newif\iffi
 \fitrue
 
-\newif\ifcopyright
-\copyrighttrue
-
 \newif\ifnumbib
 \numbibtrue
 
@@ -95,9 +92,6 @@
 \def\gradu@avainsanat{\gradu@muistitko{avainsanat}}
 \def\gradu@keywords{\gradu@muistitko{keywords}}
 %\def\gradu@yhteystiedot{\gradu@muistitko{yhteystiedot}}
-\def\gradu@copyrightowner{\gradu@makeauthorsl}
-\def\gradu@license{All rights reserved.}
-\def\gradu@copyrightyear{\number\year}
 \def\gradu@acmccs{}
 \def\gradu@ysa{}
 
@@ -137,9 +131,6 @@
 \DeclareOption{latin9}{\gdef\gradu@inputenc{latin9}}
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
 \DeclareOption{utf8}{\gdef\gradu@inputenc{utf8}}
-
-\DeclareOption{copyright}{\copyrighttrue}
-\DeclareOption{nocopyright}{\copyrightfalse}
 
 \DeclareOption{numbib}{\numbibtrue}
 \DeclareOption{nonumbib}{\numbibfalse}
@@ -472,9 +463,6 @@
 \long\def\tiivistelma#1{\gdef\gradu@tiivistelma{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
 \long\def\abstract#1{\gdef\gradu@abstract{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
 \newcommand{\translatedtitle}[1]{\gdef\gradu@titletrans{#1}}
-\newcommand{\copyrightowner}[1]{\gdef\gradu@copyrightowner{#1}}
-\newcommand{\license}[1]{\gdef\gradu@license{#1}}
-\newcommand{\copyrightyear}[1]{\gdef\gradu@copyrightyear{#1}}
 \newcommand{\acmccs}[1]{\gdef\gradu@acmccs{\textbf{ACM Categories and Subject Descriptors:} \begin{foreignlanguage}{english}#1\end{foreignlanguage}\par}}
 \newcommand{\ysa}[1]{\gdef\gradu@ysa{\textbf{Asiasanat (YSA):} \begin{foreignlanguage}{finnish}#1\end{foreignlanguage}\par}}
 
@@ -601,12 +589,6 @@
     \noindent\gradu@ysa%
     \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
 \fi%
-\ifcopyright%
-    \bigskip%
-    \noindent Copyright \copyright\ \gradu@copyrightyear\ \gradu@copyrightowner\par%
-    \medskip%
-    \noindent\gradu@license%
-\fi%
   \end{titlepage}%
 \else%
   % ------------- NEW TITLEPAGE FORMAT -------------
@@ -639,19 +621,6 @@
     \center{\textbf{\gradu@laitos}}%
     \center{\textbf{\gradu@paikka}}%
   \end{titlepage}%
-\ifcopyright%
-  \begin{titlepage}%
-    \mbox{}\vfill%
-    \centering%
-    \noindent Copyright \copyright\ \gradu@copyrightyear\ \gradu@copyrightowner\par%
-    \medskip%
-    \noindent\gradu@license%
-    \par\vskip 3 cm plus 1 cm minus 1 cm\par%
-    \noindent \gradu@yliopisto\\%
-    \gradu@paikka~\number\year
-    %\par\vfill%
-  \end{titlepage}%
-\fi%
   \iffi%
     \def\gradu@finnishtitle{\gradu@title}%
     \def\gradu@englishtitle{\gradu@titletrans}%
@@ -718,9 +687,6 @@
   \global\let\tiivistelma\gradu@toolate%  
   \global\let\abstract\gradu@toolate%  
   \global\let\translatedtitle\gradu@toolate%  
-  \global\let\copyrightowner\gradu@toolate%  
-  \global\let\license\gradu@toolate%  
-  \global\let\copyrightyear\gradu@toolate%  
 }
 
 \ifshortthesis
