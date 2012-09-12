@@ -30,9 +30,6 @@
 \newif\iffi
 \fitrue
 
-\newif\ifnottoc
-\nottoctrue
-
 \newif\ifshortthesis
 \shortthesisfalse
 \def\gradu@baseclass{\ifshortthesis article\else report\fi}
@@ -100,9 +97,6 @@
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
 \DeclareOption{utf8}{\gdef\gradu@inputenc{utf8}}
 
-\DeclareOption{toc}{\nottocfalse}
-\DeclareOption{nottoc}{\nottoctrue}
-
 \DeclareOption{shortthesis}{\shortthesistrue}
 
 \DeclareOption{kandi}{\shortthesistrue%
@@ -136,11 +130,6 @@
 \fi
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
-\ifnottoc
-\RequirePackage[nottoc]{tocbibind}
-\else  %nottoc
-\RequirePackage{tocbibind}
-\fi %nottoc
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
