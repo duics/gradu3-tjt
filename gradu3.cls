@@ -94,11 +94,6 @@
 \let\gradu@authorsep\relax
 \let\gradu@authorend\relax
 
-\def\gradu@authorsl{}
-\let\gradu@authorlstart\relax
-\let\gradu@authorlsep\relax
-\let\gradu@authorlend\relax
-
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -339,10 +334,8 @@
 \newcommand{\setauthor}[2]{
 \ifsurnamefirst
   \@cons\gradu@authors{\gradu@authorstart#2\gradu@authorsep#1\gradu@authorend}
-  \@cons\gradu@authorsl{\gradu@authorlstart#2\gradu@authorlsep#1\gradu@authorlend}
 \else
   \@cons\gradu@authors{\gradu@authorstart#1\gradu@authorsep#2\gradu@authorend}
-  \@cons\gradu@authorsl{\gradu@authorlstart#1\gradu@authorlsep#2\gradu@authorlend}
 \fi
 	\addtocounter{gradu@authorcount}{1}%
 }
@@ -367,19 +360,21 @@
 \newcounter{gradu@authorl@count}
 \newcounter{gradu@authorlcount@}
 \def\gradu@makeauthorsl{%
+  \begingroup
   \setcounter{gradu@authorl@count}{\value{gradu@authorcount}}%
-	\setcounter{gradu@authorlcount@}{0}%
-  \gdef\gradu@authorlstart{%
-		\addtocounter{gradu@authorl@count}{-1}%
-	  \ifthenelse{\value{gradu@authorlcount@} > 0}{%
-		  \ifthenelse{\value{gradu@authorl@count} = 0}%
-			  {\iffi\space ja\space \else\space and\space \fi}{,\space}%
-		}{}%
-		\addtocounter{gradu@authorlcount@}{1}%
-	}%
-	\gdef\gradu@authorlsep{\space}%
-	\gdef\gradu@authorlend{\relax}%
-	\gradu@authorsl
+  \setcounter{gradu@authorlcount@}{0}%
+  \def\gradu@authorstart{%
+    \addtocounter{gradu@authorl@count}{-1}%
+    \ifthenelse{\value{gradu@authorlcount@} > 0}{%
+      \ifthenelse{\value{gradu@authorl@count} = 0}%
+      {\iffi\space ja\space \else\space and\space \fi}{,\space}%
+    }{}%
+    \addtocounter{gradu@authorlcount@}{1}%
+  }%
+  \def\gradu@authorsep{\space}%
+  \def\gradu@authorend{\relax}%
+  \gradu@authors
+  \endgroup%
 }
 
 \renewcommand{\date}[1]{%
