@@ -33,9 +33,6 @@
 \newif\ifnottoc
 \nottoctrue
 
-\newif\ifoldtitle
-\oldtitletrue
-
 \newif\ifshortthesis
 \shortthesisfalse
 \def\gradu@baseclass{\ifshortthesis article\else report\fi}
@@ -131,9 +128,6 @@
 
 \DeclareOption{toc}{\nottocfalse}
 \DeclareOption{nottoc}{\nottoctrue}
-
-\DeclareOption{oldtitle}{\oldtitletrue}
-\DeclareOption{newtitle}{\oldtitlefalse}
 
 \DeclareOption{shortthesis}{\shortthesistrue}
 
@@ -345,8 +339,8 @@
 \renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{%
  \ClassWarning{gradu3}{\noexpand\author is deprecated!}%
- \gdef\gradu@authors{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
- \gdef\gradu@srohtua{#1 \ifoldtitle\else(Use \noexpand\setauthor!)\fi}
+ \gdef\gradu@authors{#1 }
+ \gdef\gradu@srohtua{#1 }
 }
 %\newcommand{\setauthor}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtua{#2, #1}}
 \newcounter{gradu@authorcount}
@@ -498,166 +492,83 @@
 \else
     \def\gradu@tyo{\gradu@type{} \gradu@aine{} \gradu@linja}%
 \fi
-\ifoldtitle%
-  \begin{titlepage}%
-    \vspace*{7truecm plus 1truecm minus 3truecm}%
-    \centerline{\textbf{\gradu@makeauthors}}%
-    \vspace{2truecm}%
-    \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
-    \vspace{4truecm}%
-    \par{%
+\begin{titlepage}%
+  \vspace*{7truecm plus 1truecm minus 3truecm}%
+  \centerline{\textbf{\gradu@makeauthors}}%
+  \vspace{2truecm}%
+  \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
+  \vspace{4truecm}%
+  \par{%
     \parindent9truecm\parskip0pt%
     \parbox{6.5cm}{\raggedright 
-\iffi%
+      \iffi%
       \gradu@aine\ \gradu@linja\par%
       \gradu@tyyppi%
-\else%
+      \else%
       \gradu@type\par%
       \gradu@aine\ \gradu@linja%
-\fi%
+      \fi%
       \par%
       \gradu@date%
-      }}%
-    \vfill%
-\iflogo
-    %\center{\hspace{3pt}\includegraphics[height=3.25truecm]{logo_jyu}}%
-    % for use with \large and \normalsize instead of \normalsize and \small
-    % \gradu@yliopisto and \gradu@laitos
-    \center{\hspace{3pt}\includegraphics[height=2.05truecm]{logo_jyu}}%
-\par\vspace{-.6cm}
-\begingroup
-\ifpalatino\else\fontfamily{ppl}\selectfont\fi
-\iffi
-    \center{\normalsize\MakeUppercase{\gradu@yliopisto}}%
-\else
-    \center{\normalsize\MakeUppercase{\gradu@university}}%
-\fi
-    \par\vspace{-.5cm}
-    \center{\small\MakeUppercase{\gradu@laitos}}%
-\endgroup
-\else
-    \vspace{1truecm plus 1truecm minus .5truecm}%
-\iffi
-    \center{\large\textbf{\gradu@yliopisto}}%
-\else
-    \center{\large\textbf{\gradu@university}}%
-\fi
-    \center{\textbf{\gradu@laitos}}%
-\fi
-    \center{\textbf{\gradu@paikka}}%
-  \end{titlepage}%
-  \newpage%
-  \begin{titlepage}%
-\iffi%
-    \noindent\textbf{Tekij\"a\ifthenelse{\value{gradu@authorcount}>1}{t}{}:} \gradu@makeauthorsl\par%
-    \noindent\textbf{Yhteystiedot:} \gradu@makeyhteystiedot\par%
-    \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
-    \noindent\textbf{Title in English:} \gradu@titletrans\par%
-    \noindent\textbf{Ty\"o:} \gradu@tyo\par%
-    \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
-    \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
-    \noindent\textbf{Abstract:} \gradu@abstract\par%
-    \noindent\gradu@ysa%
-    \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-    \noindent\gradu@acmccs%
-    \noindent\textbf{Keywords:} \gradu@keywords\par%
-\else%
-    \noindent\textbf{Author\ifthenelse{\value{gradu@authorcount}>1}{s}{}:} \gradu@makeauthorsl\par%
-    \noindent\textbf{Contact information:} \gradu@makeyhteystiedot\par%
-    \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
-    \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
-    \noindent\textbf{Project:} \gradu@tyo\par%
-    \noindent\textbf{Page count:} \ref{TotPages}\par%
-    \noindent\textbf{Abstract:} \gradu@abstract\par%
-    \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
-    \noindent\gradu@acmccs%
-    \noindent\textbf{Keywords:} \gradu@keywords\par%
-    \noindent\gradu@ysa%
-    \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-\fi%
-  \end{titlepage}%
-\else%
-  % ------------- NEW TITLEPAGE FORMAT -------------
-  \begin{titlepage}%
-    \vspace*{5truecm plus 2truecm minus 3truecm}%
-    \centerline{\textbf{\gradu@makeauthorsl}}%
-    \vspace{2truecm}%
-    \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
-    \vspace{4truecm}%
-    \par{%
-\iffi%
-     \parindent9truecm\parskip0pt%
-      \gradu@aine\ \gradu@linja\par%
-      \gradu@tyyppi%
-\else%
-     \parindent6truecm\parskip0pt%
-      \gradu@type\par%
-      \gradu@aine\ \gradu@linja%
-\fi%
-      \par%
-      \gradu@date%
-      }%
-    \vfill%
-    \vspace{1truecm plus 1truecm minus .5truecm}%
-\iffi
-    \center{\large\textbf{\gradu@yliopisto}}%
-\else
-    \center{\large\textbf{\gradu@university}}%
-\fi
-    \center{\textbf{\gradu@laitos}}%
-    \center{\textbf{\gradu@paikka}}%
-  \end{titlepage}%
+    }}%
+  \vfill%
+  \iflogo
+  % \center{\hspace{3pt}\includegraphics[height=3.25truecm]{logo_jyu}}%
+  % for use with \large and \normalsize instead of \normalsize and \small
+  % \gradu@yliopisto and \gradu@laitos
+  \center{\hspace{3pt}\includegraphics[height=2.05truecm]{logo_jyu}}%
+  \par\vspace{-.6cm}
+  \begingroup
+  \ifpalatino\else\fontfamily{ppl}\selectfont\fi
+  \iffi
+  \center{\normalsize\MakeUppercase{\gradu@yliopisto}}%
+  \else
+  \center{\normalsize\MakeUppercase{\gradu@university}}%
+  \fi
+  \par\vspace{-.5cm}
+  \center{\small\MakeUppercase{\gradu@laitos}}%
+  \endgroup
+  \else
+  \vspace{1truecm plus 1truecm minus .5truecm}%
+  \iffi
+  \center{\large\textbf{\gradu@yliopisto}}%
+  \else
+  \center{\large\textbf{\gradu@university}}%
+  \fi
+  \center{\textbf{\gradu@laitos}}%
+  \fi
+  \center{\textbf{\gradu@paikka}}%
+\end{titlepage}%
+\newpage%
+\begin{titlepage}%
   \iffi%
-    \def\gradu@finnishtitle{\gradu@title}%
-    \def\gradu@englishtitle{\gradu@titletrans}%
+  \noindent\textbf{Tekij\"a\ifthenelse{\value{gradu@authorcount}>1}{t}{}:} \gradu@makeauthorsl\par%
+  \noindent\textbf{Yhteystiedot:} \gradu@makeyhteystiedot\par%
+  \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
+  \noindent\textbf{Title in English:} \gradu@titletrans\par%
+  \noindent\textbf{Ty\"o:} \gradu@tyo\par%
+  \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
+  \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
+  \noindent\textbf{Abstract:} \gradu@abstract\par%
+  \noindent\gradu@ysa%
+  \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+  \noindent\gradu@acmccs%
+  \noindent\textbf{Keywords:} \gradu@keywords\par%
   \else%
-    \def\gradu@finnishtitle{\gradu@titletrans}%
-    \def\gradu@englishtitle{\gradu@title}%
+  \noindent\textbf{Author\ifthenelse{\value{gradu@authorcount}>1}{s}{}:} \gradu@makeauthorsl\par%
+  \noindent\textbf{Contact information:} \gradu@makeyhteystiedot\par%
+  \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
+  \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
+  \noindent\textbf{Project:} \gradu@tyo\par%
+  \noindent\textbf{Page count:} \ref{TotPages}\par%
+  \noindent\textbf{Abstract:} \gradu@abstract\par%
+  \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
+  \noindent\gradu@acmccs%
+  \noindent\textbf{Keywords:} \gradu@keywords\par%
+  \noindent\gradu@ysa%
+  \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
   \fi%
-  \def\gradu@finnishabstract{%
-    \begin{titlepage}%
-      %\selectlanguage{finnish}%
-      \section*{Tiivistelm\"a}%
-      \gradu@makesrohtua\\%
-      {\def\\{ }\gradu@finnishtitle{} / \fitrue\gradu@makeauthorsl\fifalse}\\%
-      \gradu@paikka: \gradu@yliopisto, \number\year \\%
-      \ref{TotPages}~s.\\%
-      \gradu@tyyppi\par%
-      \bigskip%
-      \noindent\gradu@tiivistelma\par%
-      \bigskip%
-      \noindent\gradu@ysa%
-      \noindent\textbf{Avainsanat: } \gradu@avainsanat%
-      %\selectdefaultlanguage%
-    \end{titlepage}%
-  }%
-  \def\gradu@englishabstract{%
-    \begin{titlepage}%
-      \section*{Abstract}%
-      \gradu@makesrohtua\\%
-      {\def\\{ }\gradu@englishtitle{} / \fifalse\gradu@makeauthorsl\fitrue}\\%
-      \gradu@paikka: \gradu@university, \number\year \\%
-      \ref{TotPages}~p.\\%
-      \gradu@type\par%
-      \bigskip%
-      \noindent\gradu@abstract\par%
-      \bigskip%
-      \noindent\gradu@acmccs%
-      \noindent\textbf{Keywords: } \gradu@keywords%
-    \end{titlepage}%
-  }%
-\iffi
-  \newpage%
-  \gradu@finnishabstract%
-  \newpage
-  \gradu@englishabstract%
-\else
-  \newpage%
-  \gradu@englishabstract%
-  \newpage
-  \gradu@finnishabstract%
-\fi
-\fi%
+\end{titlepage}%
   \global\let\title\gradu@toolate%
   \global\let\author\gradu@toolate%
   \global\let\date\gradu@toolate%  
