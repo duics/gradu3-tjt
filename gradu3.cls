@@ -290,7 +290,6 @@
 \newcommand{\acmccs}[1]{\gdef\gradu@acmccs{\textbf{ACM Categories and Subject Descriptors:} \begin{foreignlanguage}{english}#1\end{foreignlanguage}\par}}
 \newcommand{\ysa}[1]{\gdef\gradu@ysa{\textbf{Asiasanat (YSA):} \begin{foreignlanguage}{finnish}#1\end{foreignlanguage}\par}}
 
-\newcommand{\fulltitle}{\gradu@title: \gradu@tyo}
 
 
 \newcommand{\gradu@toolate}{%
@@ -324,15 +323,15 @@
   \pagenumbering{arabic}
   \setcounter{chapter}{0}
 }
+\def\gradu@HeadToUpper#1{%
+  \edef\fooA{#1}%
+  \def\fooB##1{##1}%
+  \def\fooC##1##2\relax{\uppercase{\fooB{##1}}##2}%
+  \expandafter\fooC\fooA\relax%
+}
 \renewcommand{\maketitle}{%
 \begingroup
 \newcounter{gradu@authorcount}
-\iffi
-    \def\gradu@tyo{\gradu@aine{} %
-    \gradu@linja{}\if\gradu@linja\else\ \fi\gradu@tyyppi}%
-\else
-    \def\gradu@tyo{\gradu@type{} \gradu@aine{} \gradu@linja}%
-\fi
 \begin{titlepage}%
   \vspace*{7truecm plus 1truecm minus 3truecm}%
   \centerline{\textbf{%
@@ -418,7 +417,9 @@
   \iffi
   \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Title in English:} \gradu@titletrans\par%
-  \noindent\textbf{Ty\"o:} \gradu@tyo\par%
+  \noindent\textbf{Ty\"o:} {%
+    \gradu@HeadToUpper\gradu@tyyppi%
+  }\par%
   \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
   \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
@@ -429,7 +430,7 @@
   \else%
   \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
-  \noindent\textbf{Project:} \gradu@tyo\par%
+  \noindent\textbf{Project:} \gradu@type\par%
   \noindent\textbf{Page count:} \ref{TotPages}\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
   \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
