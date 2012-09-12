@@ -35,7 +35,6 @@
 \def\gradu@title{\gradu@muistitko{title}}
 \def\gradu@author{\gradu@muistitko{author}}
 \def\gradu@date{\today}
-\def\gradu@paikka{Jyv\"askyl\"a}
 \def\gradu@yliopisto{Jyv\"askyl\"an yliopisto}
 \def\gradu@university{University of Jyv\"askyl\"a}
 \def\gradu@laitos{%
@@ -243,7 +242,6 @@
   \gdef\gradu@date{#1}%
 }
 \newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\year=#3}
-\newcommand{\paikka}[1]{\gdef\gradu@paikka{#1}}
 \newcommand{\yliopisto}[1]{\gdef\gradu@yliopisto{#1}}
 \newcommand{\university}[1]{\gdef\gradu@university{#1}}
 \newcommand{\laitos}[1]{\gdef\gradu@laitos{#1}}
@@ -334,19 +332,16 @@
   \vspace{2truecm}%
   \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
   \vspace{4truecm}%
-  \par{%
-    \parindent9truecm\parskip0pt%
-    \parbox{6.5cm}{\raggedright 
-      \iffi%
-      \gradu@aine\ \gradu@linja\par%
-      \gradu@tyyppi%
-      \else%
-      \gradu@type\par%
-      \gradu@aine\ \gradu@linja%
-      \fi%
-      \par%
-      \gradu@date%
-    }}%
+  \par%
+  \raggedleft%
+  \iffi%
+  \gradu@aine{} \gradu@tyyppi%
+  \else%
+  \gradu@type{} \gradu@aine%
+  \fi%
+  \par%
+  \raggedleft
+  \gradu@date%
   \vfill%
   \vspace{1truecm plus 1truecm minus .5truecm}%
   \iffi
@@ -355,7 +350,6 @@
   \center{\large\textbf{\gradu@university}}%
   \fi
   \center{\textbf{\gradu@laitos}}%
-  \center{\textbf{\gradu@paikka}}%
 \end{titlepage}%
 \newpage%
 \begin{titlepage}%
