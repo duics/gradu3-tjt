@@ -107,6 +107,9 @@
 \renewcommand{\baselinestretch}{1.2} % this makes for a 1.45 line spacing
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
+\RequirePackage{mathptmx}
+\RequirePackage[scaled=.92]{helvet}
+\RequirePackage{courier}
 
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
