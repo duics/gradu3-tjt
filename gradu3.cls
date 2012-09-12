@@ -37,9 +37,6 @@
 \shortthesisfalse
 \def\gradu@baseclass{\ifshortthesis article\else report\fi}
 
-\newif\ifpalatino
-\palatinofalse
-
 \newif\ifgradu@hyperref
 \gradu@hyperreffalse
 
@@ -125,8 +122,6 @@
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 
-\DeclareOption{palatino}{\palatinotrue}
-
 \DeclareOption{logo}{\logotrue}
 
 \DeclareOption{altlinespread}{\altlinespreadtrue}
@@ -151,21 +146,10 @@
 \RequirePackage{everyshi}[1994/12/09]
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
-\ifpalatino
-\RequirePackage{mathpazo}
-\RequirePackage[scaled=.95]{helvet}
-\RequirePackage{courier}
-\ifaltlinespread
-\renewcommand{\baselinestretch}{1.575} % 1.5 * 1.05
-\else
-\renewcommand{\baselinestretch}{1.26} % 1.2 * 1.05
-\fi
-\else
 \ifaltlinespread
 \renewcommand{\baselinestretch}{1.5}
 \else
 \renewcommand{\baselinestretch}{1.2}
-\fi
 \fi
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
@@ -437,7 +421,7 @@
   \center{\hspace{3pt}\includegraphics[height=2.05truecm]{logo_jyu}}%
   \par\vspace{-.6cm}
   \begingroup
-  \ifpalatino\else\fontfamily{ppl}\selectfont\fi
+  \fontfamily{ppl}\selectfont\
   \iffi
   \center{\normalsize\MakeUppercase{\gradu@yliopisto}}%
   \else
