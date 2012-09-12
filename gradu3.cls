@@ -34,9 +34,6 @@
 \shortthesisfalse
 \def\gradu@baseclass{\ifshortthesis article\else report\fi}
 
-\newif\ifaltlinespread
-\altlinespreadfalse
-
 \def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
 
 \def\gradu@title{\gradu@muistitko{title}}
@@ -110,8 +107,6 @@
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 
-\DeclareOption{altlinespread}{\altlinespreadtrue}
-
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{\gradu@baseclass}
@@ -120,11 +115,7 @@
 \RequirePackage{everyshi}[1994/12/09]
 \RequirePackage[\gradu@inputenc]{inputenc}
 \RequirePackage[T1]{fontenc}
-\ifaltlinespread
-\renewcommand{\baselinestretch}{1.5}
-\else
-\renewcommand{\baselinestretch}{1.2}
-\fi
+\renewcommand{\baselinestretch}{1.2} % this makes for a 1.45 line spacing
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
 
