@@ -92,11 +92,6 @@
   \gdef\gradu@type{Bachelor's Thesis}%
 }
 
-\let\gradu@lof\relax
-\let\gradu@lot\relax
-\DeclareOption{lof}{\gdef\gradu@lof{\listoffigures}}
-\DeclareOption{lot}{\gdef\gradu@lot{\listoftables}}
-
 
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
@@ -309,9 +304,9 @@
 %\fi
 
 \newcommand{\mainmatter}{
+  \listoffigures
+  \listoftables
   \tableofcontents
-  \gradu@lof
-  \gradu@lot
   \setcounter{pages}{\value{page}}
   \clearpage
   \pagenumbering{arabic}
