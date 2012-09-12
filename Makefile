@@ -1,9 +1,13 @@
-example.dvi: example.tex gradu3.cls
-	latex example
-	latex example
+all: esim.pdf example.pdf kandi.pdf manual.pdf
 
-manual.ps: manual.dvi
-	dvips -o manual.ps manual
+esim.pdf : esim.tex gradu3.cls
+example.pdf : example.tex gradu3.cls
+kandi.pdf : kandi.tex gradu3.cls
 
-manual.dvi: manual.tex
-	latex manual
+%.pdf: %.tex
+	pdflatex $*
+	pdflatex $*
+
+clean :
+	rm -f *.aux *.bbl *.blg *.dvi *.out *.out *.toc
+	rm -f esim.pdf example.pdf kandi.pdf manual.pdf
