@@ -25,7 +25,7 @@
 \newcommand{\file}[1]{\texttt{#1}}
 
 \author{Matthieu Weber\\ \texttt{mweber@mit.jyu.fi} \and Antti-Juhani Kaijanaho\\ \texttt{antkaij@mit.jyu.fi}}
-\title{\cls{Gradu} --- A Class for Writing Master's Thesis at the Faculty of
+\title{\cls{Gradu3} --- A Class for Writing Master's Thesis at the Faculty of
 Information Technology of the University of Jyväskylä}
 
 \begin{document}
@@ -198,32 +198,27 @@ letters instead of numbers, beginning from ``A''.
 \end{envs}
 
 \appendix
-\section{Command differences between gradu2 and gradu3}
+\section{Usage changes from \cls{gradu2} to \cls{gradu3}}
 
-\begin{itemize}
-\item Options \opt{copyright} and \opt{nocopyright} and commands
-  \cmd{copyrightowner}, \cmd{copyrightyear} and \cmd{license} have
-  been removed.  No copyright information is output by default.
-\item Options \opt{numbib} and \opt{nonumbib} have been removed.  The
-  class now behaves like the old \opt{nonumbib} option.
-\item Options \opt{oldtitle} and \opt{newtitle} have been removed.
-  The class only supports the title format previously known as
-  ``oldtitle''.
-\item Option \opt{surnamefirst} has been removed as unnecessary.  The
-  author can specify their name in whatever format they desire.
-\item Command \opt{setauthor} has been removed.  The standard
-  \LaTeXe{} command \cmd{author} should be used in its stead.
-\item Option \opt{altsubsec} has been removed and its functionality is
-  not supported.
-\item Option \opt{palatino} has been removed and its functionality is
-  not supported.
-\item Option \opt{logo} has been removed and its functionality is not
-  supported.
-\item Options \opt{toc} and \opt{nottoc} have been removed.
-\item Option \opt{altlinespread} has been removed and its
-  functionality is not supported.
-\item Option \opt{shortthesis} has been removed and its functionality
-  is not supported.
-\end{itemize}
+The old \cls{gradu2} class had a lot of options to cater for differing
+tastes in the face of very underspecified departmental requirements.
+Since \cls{gradu3} is based on new stricter requirements, there is no
+longer need for so many options\footnote{Remember, the more options a
+  class has, the easier it is to break.}.
+
+Therefore, the following options supported by \cls{gradu2} are no
+longer recognized: \opt{altlinespread}, \opt{altsubsec},
+\opt{copyright}, \opt{logo}, \opt{newtitle}, \opt{nocopyright},
+\opt{nonumbib}, \opt{nottoc}, \opt{numbib}, \opt{oldtitle},
+\opt{palatino}, \opt{shortthesis}, \opt{surnamefirst}, and \opt{toc}.
+Similarly, the commands \cmd{copyrightowner}, \cmd{copyrightyear},
+\cmd{license}, and \cmd{setauthor} have been removed.
+
+In \cls{gradu3}, use the standard \LaTeX{} command \cmd{author} to
+specify the thesis author.  If there are multiple authors, give them
+in the same \cmd{author} command -- that is, do not repeat the command
+-- separating autors with the \cmd{and} command.  This also makes the
+(now removed) option \opt{surnamefirst} obsolete, as the class no longer cares what part of the name contains the surname.
+
 
 \end{document}
