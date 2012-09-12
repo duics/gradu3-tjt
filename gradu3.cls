@@ -30,10 +30,6 @@
 \newif\iffi
 \fitrue
 
-\newif\ifshortthesis
-\shortthesisfalse
-\def\gradu@baseclass{\ifshortthesis article\else report\fi}
-
 \def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
 
 \def\gradu@title{\gradu@muistitko{title}}
@@ -91,9 +87,7 @@
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
 \DeclareOption{utf8}{\gdef\gradu@inputenc{utf8}}
 
-\DeclareOption{shortthesis}{\shortthesistrue}
-
-\DeclareOption{kandi}{\shortthesistrue%
+\DeclareOption{kandi}{%
   \gdef\gradu@tyyppi{kandidaatintutkielma}%
   \gdef\gradu@type{Bachelor's Thesis}%
 }
@@ -107,9 +101,9 @@
 \DeclareOption{finnish}{\fitrue}
 \DeclareOption{english}{\fifalse}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{\gradu@baseclass}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions
-\LoadClass[a4paper,12pt]{\gradu@baseclass}
+\LoadClass[a4paper,12pt]{report}
 
 %\RequirePackage{color}
 \RequirePackage{everyshi}[1994/12/09]
@@ -315,18 +309,13 @@
 %\fi
 
 \newcommand{\mainmatter}{
-  \ifshortthesis
-	\clearpage
-	\fi
   \tableofcontents
   \gradu@lof
   \gradu@lot
   \setcounter{pages}{\value{page}}
   \clearpage
   \pagenumbering{arabic}
-\ifshortthesis\else
   \setcounter{chapter}{0}
-\fi
 }
 \renewcommand{\maketitle}{%
 \begingroup
@@ -436,15 +425,6 @@
   \global\let\translatedtitle\gradu@toolate%  
 }
 
-\ifshortthesis
-\newcommand{\preface}{\section*{\prefacename}
-\addcontentsline{toc}{section}{\prefacename}
-}
-
-\newcommand{\termlist}{\section*{\termlistname}
-\addcontentsline{toc}{section}{\termlistname}
-}
-\else
 \newcommand{\preface}{\chapter*{\prefacename}
 \addcontentsline{toc}{chapter}{\prefacename}
 }
@@ -452,15 +432,10 @@
 \newcommand{\termlist}{\chapter*{\termlistname}
 \addcontentsline{toc}{chapter}{\termlistname}
 }
-\fi
 
 \renewcommand\appendix{\par
-  \ifshortthesis
-    \addtocontents{toc}{\protect\contentsline{section}{\appendicesname}{}{}}
-	\else
     \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
     \setcounter{chapter}{0}%
-	\fi
   \setcounter{section}{0}%
   \gdef\@chapapp{\appendixname}%
   \gdef\thechapter{\@Alph\c@chapter}}
