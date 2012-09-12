@@ -99,12 +99,6 @@
 \let\gradu@authorlsep\relax
 \let\gradu@authorlend\relax
 
-\def\gradu@srohtua{}
-\let\gradu@rohtuastart\relax
-\let\gradu@rohtuasep\relax
-\let\gradu@rohtuaend\relax
-
-
 %% Input encoding
 \def\gradu@inputenc{latin1}
 \DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
@@ -340,9 +334,7 @@
 \renewcommand{\author}[1]{%
  \ClassWarning{gradu3}{\noexpand\author is deprecated!}%
  \gdef\gradu@authors{#1 }
- \gdef\gradu@srohtua{#1 }
 }
-%\newcommand{\setauthor}[2]{\gdef\gradu@author{#1 #2}\gdef\gradu@rohtua{#2, #1}}
 \newcounter{gradu@authorcount}
 \newcommand{\setauthor}[2]{
 \ifsurnamefirst
@@ -352,7 +344,6 @@
   \@cons\gradu@authors{\gradu@authorstart#1\gradu@authorsep#2\gradu@authorend}
   \@cons\gradu@authorsl{\gradu@authorlstart#1\gradu@authorlsep#2\gradu@authorlend}
 \fi
-  \@cons\gradu@srohtua{\gradu@rohtuastart#2\gradu@rohtuasep#1\gradu@rohtuaend}
 	\addtocounter{gradu@authorcount}{1}%
 }
 
@@ -389,18 +380,6 @@
 	\gdef\gradu@authorlsep{\space}%
 	\gdef\gradu@authorlend{\relax}%
 	\gradu@authorsl
-}
-
-\newcounter{gradu@rohtua@count}
-\def\gradu@makesrohtua{
-  \setcounter{gradu@rohtua@count}{\value{gradu@authorcount}}%
-  \gdef\gradu@rohtuastart{\relax}
-	\gdef\gradu@rohtuasep{,\space}%
-	\gdef\gradu@rohtuaend{%
-		\addtocounter{gradu@rohtua@count}{-1}%
-	  \ifthenelse{\value{gradu@rohtua@count}=0}{\relax}{;\space}
-	}%
-	\gradu@srohtua
 }
 
 \renewcommand{\date}[1]{%
