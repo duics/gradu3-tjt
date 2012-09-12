@@ -9,5 +9,5 @@ kandi.pdf : kandi.tex gradu3.cls
 	pdflatex $*
 
 clean :
-	rm -f *.aux *.bbl *.blg *.dvi *.out *.out *.toc
+	rm -f *.aux *.bbl *.blg *.dvi *.out *.out *.toc *.log
 	rm -f esim.pdf example.pdf kandi.pdf manual.pdf
