@@ -1,14 +1,7 @@
 \documentclass[english,latin1]{gradu3}
 
-\makeatletter
-\ifgradu@pdf
-  \usepackage[pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
-	%\hypersetup{colorlinks,citecolor=blue}
-\else
-	\RequirePackage[hypertex]{hyperref}
-\fi
-\makeatother
-%\usepackage{lmodern}
+% ATTENTION!  This must be the last \usepackage in this document!
+\usepackage[bookmarksopen,bookmarksnumbered]{hyperref}
 
 \title{XML Forms}
 \author{Matthieu Weber}

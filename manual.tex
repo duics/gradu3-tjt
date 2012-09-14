@@ -209,7 +209,9 @@ longer recognized: \opt{altlinespread}, \opt{altsubsec},
 \opt{oldtitle}, \opt{palatino}, \opt{shortthesis}, \opt{surnamefirst},
 and \opt{toc}.  Similarly, the commands \cmd{copyrightowner},
 \cmd{copyrightyear}, \cmd{fulltitle}, \cmd{license}, \cmd{paikka}, and
-\cmd{setauthor} have been removed.
+\cmd{setauthor} have been removed.  Further, the conditional
+\cmd{ifgradu@pdf} has been removed (users should let \pack{hyperref}
+figure out the correct driver by itself).
 
 In \cls{gradu3}, use the standard \LaTeX{} command \cmd{author} to
 specify the thesis author.  If there are multiple authors, give them

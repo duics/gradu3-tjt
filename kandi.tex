@@ -1,13 +1,7 @@
 \documentclass[finnish,utf8,kandi]{gradu3}
 
-\makeatletter
-\ifgradu@pdf
-  \usepackage[pdftex,bookmarksopen,bookmarksnumbered]{hyperref}
-	%\hypersetup{colorlinks,citecolor=blue}
-\else
-	\RequirePackage[hypertex]{hyperref}
-\fi
-\makeatother
+% HUOM! Tämän tulee olla viimeinen \usepackage koko dokumentissa!
+\usepackage[bookmarksopen,bookmarksnumbered]{hyperref}
 
 \title{P ja NP ovat samat}
 \author{Antti-Juhani Kaijanaho}

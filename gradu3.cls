@@ -7,25 +7,12 @@
 %%                     PLEASE READ THE MANUAL!                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\filedate{2012/09/12}
-\def\fileversion{3.0pre1}
+\def\filedate{2012/09/14}
+\def\fileversion{3.0pre2}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
 \typeout{gradu3 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
-
-%% Some packages need special handling if the output is PDF, this \if is just
-%% in case we need it
-\newif\ifgradu@pdf
-\ifx\pdfoutput\undefined
-  \gradu@pdffalse
-\else
-  \ifnum\pdfoutput=1
-    \gradu@pdftrue
-  \else
-    \gradu@pdffalse
-  \fi
-\fi
 
 \newif\iffi
 \fitrue
