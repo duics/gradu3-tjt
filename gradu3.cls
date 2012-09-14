@@ -14,40 +14,66 @@
 \ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
 \typeout{gradu3 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
 
+\RequirePackage{ifthen}
+
 \newif\iffi
 \fitrue
 
-\def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
+%%% METADATA COMMANDS
 
-\def\gradu@title{\gradu@muistitko{title}}
-\def\gradu@author{\gradu@muistitko{author}}
-\def\gradu@date{\today}
-\def\gradu@yliopisto{Jyv\"askyl\"an yliopisto}
-\def\gradu@university{University of Jyv\"askyl\"a}
-\def\gradu@laitos{%
+\def\gradu@metadatacommands{}
+\let\gradu@metadatacommand@item\relax
+\def\gradu@DeclareMetadataCommand#1#2{%
+  \@cons\gradu@metadatacommands{%
+    \gradu@metadatacommand@item{#1}%
+  }
+  \expandafter\def\csname#1\endcsname##1{%
+    \expandafter\gdef\csname gradu@#1\endcsname{##1}%
+  }%
+  \ifthenelse{\equal{#2}{}}{%
+    \iffi%
+    \expandafter\def\csname gradu@#1\endcsname{%
+      \textit{Muistitko k\"aytt\"a\"a \texttt{\textbackslash #1}-komentoa?}%
+    }%
+    \else%
+    \expandafter\def\csname gradu@#1\endcsname{%
+      \textit{Did you remember to use the \texttt{\textbackslash #1} command?}%
+    }
+    \fi%
+  }{%
+    \expandafter\def\csname gradu@#1\endcsname{#2}
+  }%
+}
+\gradu@DeclareMetadataCommand{title}{}
+\gradu@DeclareMetadataCommand{translatedtitle}{}
+\gradu@DeclareMetadataCommand{yliopisto}{Jyv\"askyl\"an yliopisto}
+\gradu@DeclareMetadataCommand{university}{University of Jyv\"askyl\"a}
+\gradu@DeclareMetadataCommand{laitos}{%
   \iffi%
   Tietotekniikan laitos%
   \else%
   Department of Mathematical Information Technology%
   \fi%
-}
-\def\gradu@aine{%
+}  
+\gradu@DeclareMetadataCommand{aine}{%
   \iffi%
   Tietotekniikan%
   \else%
   in Information Technology%
   \fi%
 }
-\def\gradu@linja{}
-\def\gradu@tyyppi{pro gradu -tutkielma}
-\def\gradu@type{Master's Thesis}
-\def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
-\def\gradu@abstract{\gradu@muistitko{abstract}}
-\def\gradu@titletrans{\gradu@muistitko{translatedtitle}}
-\def\gradu@avainsanat{\gradu@muistitko{avainsanat}}
-\def\gradu@keywords{\gradu@muistitko{keywords}}
-\def\gradu@acmccs{}
-\def\gradu@ysa{}
+\gradu@DeclareMetadataCommand{linja}{\relax}
+\gradu@DeclareMetadataCommand{tyyppi}{pro gradu -tutkielma}
+\gradu@DeclareMetadataCommand{type}{Master's Thesis}
+%\gradu@DeclareMetadataCommand{tiivistelma} -- needs \long
+%\gradu@DeclareMetadataCommand{abstract} -- needs \long
+\gradu@DeclareMetadataCommand{avainsanat}{}
+\gradu@DeclareMetadataCommand{keywords}{}
+
+\def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
+
+\def\gradu@author{\gradu@muistitko{author}}
+\def\gradu@date{\today}
 
 \def\gradu@authors{}
 
@@ -163,7 +189,6 @@
    \maketitle
 }}
 
-\RequirePackage{ifthen}
 \let\gradu@begin=\begin
 \renewcommand*{\begin}[1]{%
 \ifthenelse{\equal{#1}{document}}{%
@@ -223,7 +248,6 @@
 }
 
 
-\renewcommand{\title}[1]{\gdef\gradu@title{#1}}
 \renewcommand{\author}[1]{\gdef\gradu@authors{#1}}
 \newcounter{gradu@ohjaajacount}
 \def\gradu@ohjaajat{}
@@ -239,15 +263,6 @@
   \gdef\gradu@date{#1}%
 }
 \newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\year=#3}
-\newcommand{\yliopisto}[1]{\gdef\gradu@yliopisto{#1}}
-\newcommand{\university}[1]{\gdef\gradu@university{#1}}
-\newcommand{\laitos}[1]{\gdef\gradu@laitos{#1}}
-\newcommand{\aine}[1]{\gdef\gradu@aine{#1}}
-\newcommand{\linja}[1]{\gdef\gradu@linja{(#1)}}
-\newcommand{\tyyppi}[1]{\gdef\gradu@tyyppi{#1}}
-\newcommand{\type}[1]{\gdef\gradu@type{#1}}
-\newcommand{\keywords}[1]{\gdef\gradu@keywords{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
-\newcommand{\avainsanat}[1]{\gdef\gradu@avainsanat{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
 \newcommand{\contactinformation}[1]{\yhteystiedot{#1}}
 %\newcommand{\yhteystiedot}[1]{\gdef\gradu@yhteystiedot{#1}}
 
@@ -271,11 +286,10 @@
 	\gradu@yhteystiedot
 }
 
+\def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
 \long\def\tiivistelma#1{\gdef\gradu@tiivistelma{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
+\def\gradu@abstract{\gradu@muistitko{abstract}}
 \long\def\abstract#1{\gdef\gradu@abstract{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
-\newcommand{\translatedtitle}[1]{\gdef\gradu@titletrans{#1}}
-\newcommand{\acmccs}[1]{\gdef\gradu@acmccs{\textbf{ACM Categories and Subject Descriptors:} \begin{foreignlanguage}{english}#1\end{foreignlanguage}\par}}
-\newcommand{\ysa}[1]{\gdef\gradu@ysa{\textbf{Asiasanat (YSA):} \begin{foreignlanguage}{finnish}#1\end{foreignlanguage}\par}}
 
 
 
@@ -403,46 +417,37 @@
   }\par%
   \iffi
   \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
-  \noindent\textbf{Title in English:} \gradu@titletrans\par%
+  \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
   \noindent\textbf{Ty\"o:} {%
     \gradu@HeadToUpper\gradu@tyyppi%
   }\par%
   \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
   \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
-  \noindent\gradu@ysa%
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-  \noindent\gradu@acmccs%
-  \noindent\textbf{Keywords:} \gradu@keywords\par%
+  \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
   \else%
   \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
-  \noindent\textbf{Ty\"on nimi:} \gradu@titletrans\par%
+  \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
   \noindent\textbf{Project:} \gradu@type\par%
   \noindent\textbf{Page count:} \ref{TotPages}\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
   \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
-  \noindent\gradu@acmccs%
   \noindent\textbf{Keywords:} \gradu@keywords\par%
-  \noindent\gradu@ysa%
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
   \fi%
 \end{titlepage}%
+  \def\gradu@metadatacommand@item##1{%
+    \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
+  }%
+  \gradu@metadatacommands%
 \endgroup
-  \global\let\title\gradu@toolate%
   \global\let\author\gradu@toolate%
   \global\let\date\gradu@toolate%  
-  \global\let\linja\gradu@toolate%  
-  \global\let\tyyppi\gradu@toolate%  
-  \global\let\keywords\gradu@toolate%  
-  \global\let\linja\gradu@toolate%  
-  \global\let\tyyppi\gradu@toolate%  
-  \global\let\keywords\gradu@toolate%  
-  \global\let\avainsanat\gradu@toolate%  
   \global\let\contactinformation\gradu@toolate%  
   \global\let\yhteystiedot\gradu@toolate%  
   \global\let\tiivistelma\gradu@toolate%  
   \global\let\abstract\gradu@toolate%  
-  \global\let\translatedtitle\gradu@toolate%  
 }
 
 \newcommand{\preface}{\chapter*{\prefacename}
