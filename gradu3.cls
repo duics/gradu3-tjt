@@ -330,6 +330,7 @@
   \begingroup%
   \def\gradu@f##1{\centerline{\textbf{##1}}}%
   \gradu@map\gradu@f\gradu@author\par%
+  \endgroup
   \vspace{2truecm}%
   \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
   \vspace{4truecm}%
