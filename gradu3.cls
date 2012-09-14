@@ -98,6 +98,7 @@
 %\gradu@DeclareMetadataCommand{abstract} -- needs \long
 \gradu@DeclareMetadataCommand{avainsanat}{}
 \gradu@DeclareMetadataCommand{keywords}{}
+\gradu@DeclareMetadataListCommand{author}
 \gradu@DeclareMetadataListCommand{ohjaaja}
 \gradu@DeclareMetadataListCommand{yhteystiedot}
 
@@ -272,9 +273,6 @@
 }
 
 
-\def\gradu@authors{}
-\renewcommand{\author}[1]{\gdef\gradu@authors{#1}}
-
 \def\gradu@date{\today}
 \renewcommand{\date}[1]{%
   \ClassWarning{gradu3}{\noexpand\date is deprecated!}%
@@ -327,14 +325,11 @@
 }
 \renewcommand{\maketitle}{%
 \begingroup
-\newcounter{gradu@authorcount}
 \begin{titlepage}%
   \vspace*{7truecm plus 1truecm minus 3truecm}%
-  \centerline{\textbf{%
-      \setcounter{gradu@authorcount}{0}%
-      \def\and{\\[0.2em]\addtocounter{gradu@authorcount}{1}}%
-      \gradu@authors
-    }}%
+  \begingroup%
+  \def\gradu@f##1{\centerline{\textbf{##1}}}%
+  \gradu@map\gradu@f\gradu@author\par%
   \vspace{2truecm}%
   \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
   \vspace{4truecm}%
@@ -361,24 +356,12 @@
 \begin{titlepage}%
   \noindent%
   \iffi%
-  \textbf{Tekij\"a\ifthenelse{\value{gradu@authorcount}>1}{t}{}:} %
+  \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
+  \gradu@author@render{,\space}{\space ja\space}\par%
   \else%
-  \noindent\textbf{Author\ifthenelse{\value{gradu@authorcount}>1}{s}{}:} %
+  \noindent\textbf{Author\ifthenelse{\value{gradu@author@count}>1}{s}{}:} %
+  \gradu@author@render{,\space}{,\space and\space}\par%
   \fi%
-  {%
-    \newcounter{gradu@author@count}%
-    \setcounter{gradu@author@count}{\value{gradu@authorcount}}%
-    \def\and{\unskip%
-      \addtocounter{gradu@author@count}{-1}%
-      \ifthenelse{\value{gradu@author@count} = 0}{%
-        \iffi\space ja \else, and \fi%
-      }{%
-        , %
-      }%
-    }%
-    \def\\{\space}%
-    \gradu@authors%
-  }\par%
   \iffi%
   \noindent\textbf{Yhteystiedot:} %
   \gradu@yhteystiedot@render{,\space}{\space ja\space}\par%
