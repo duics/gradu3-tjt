@@ -19,29 +19,58 @@
 \newif\iffi
 \fitrue
 
+\let\gradu@listitem\relax
+\def\gradu@appendlist#1#2{\xdef#1{#1\noexpand\gradu@listitem{#2}}}
+\def\gradu@map#1#2{\begingroup\let\gradu@listitem#1#2\endgroup}
+
 %%% METADATA COMMANDS
 
+\def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
+
 \def\gradu@metadatacommands{}
-\let\gradu@metadatacommand@item\relax
 \def\gradu@DeclareMetadataCommand#1#2{%
-  \@cons\gradu@metadatacommands{%
-    \gradu@metadatacommand@item{#1}%
-  }
+  \gradu@appendlist\gradu@metadatacommands{#1}%
   \expandafter\def\csname#1\endcsname##1{%
     \expandafter\gdef\csname gradu@#1\endcsname{##1}%
   }%
   \ifthenelse{\equal{#2}{}}{%
-    \iffi%
     \expandafter\def\csname gradu@#1\endcsname{%
-      \textit{Muistitko k\"aytt\"a\"a \texttt{\textbackslash #1}-komentoa?}%
+      \gradu@muistitko{#1}
     }%
-    \else%
-    \expandafter\def\csname gradu@#1\endcsname{%
-      \textit{Did you remember to use the \texttt{\textbackslash #1} command?}%
-    }
-    \fi%
   }{%
     \expandafter\def\csname gradu@#1\endcsname{#2}
+  }%
+}
+\newcounter{gradu@listrender@count}
+\def\gradu@DeclareMetadataListCommand#1{%
+  \newcounter{gradu@#1@count}
+  \gradu@appendlist\gradu@metadatacommands{#1}%
+  \expandafter\def\csname#1\endcsname##1{%
+    \expandafter\gradu@appendlist\csname gradu@#1\endcsname{##1}%
+    \addtocounter{gradu@#1@count}{1}%
+  }%
+  \expandafter\def\csname gradu@#1\endcsname{}%
+  \expandafter\def\csname gradu@#1@render\endcsname##1##2{%
+    \ifthenelse{\value{gradu@#1@count} = 0}{%
+      \gradu@muistitko{#1}%
+    }{%
+      \setcounter{gradu@listrender@count}{\value{gradu@#1@count}}%
+      \begingroup%
+      \def\gradu@f####1{%
+        \addtocounter{gradu@listrender@count}{-1}%
+        ####1%
+        \ifthenelse{\value{gradu@listrender@count} = 0}{%
+        }{%
+          \ifthenelse{\value{gradu@listrender@count} = 1}{%
+            ##2%
+          }{%
+            ##1%
+          }%
+        }%
+      }%
+      \expandafter\gradu@map\expandafter\gradu@f\csname gradu@#1\endcsname%
+      \endgroup%
+    }%
   }%
 }
 \gradu@DeclareMetadataCommand{title}{}
@@ -69,13 +98,8 @@
 %\gradu@DeclareMetadataCommand{abstract} -- needs \long
 \gradu@DeclareMetadataCommand{avainsanat}{}
 \gradu@DeclareMetadataCommand{keywords}{}
-
-\def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
-
-\def\gradu@author{\gradu@muistitko{author}}
-\def\gradu@date{\today}
-
-\def\gradu@authors{}
+\gradu@DeclareMetadataListCommand{ohjaaja}
+\gradu@DeclareMetadataListCommand{yhteystiedot}
 
 %% Input encoding
 \def\gradu@inputenc{utf8}
@@ -248,50 +272,21 @@
 }
 
 
+\def\gradu@authors{}
 \renewcommand{\author}[1]{\gdef\gradu@authors{#1}}
-\newcounter{gradu@ohjaajacount}
-\def\gradu@ohjaajat{}
-\let\gradu@ohjaajatstart\relax
-\let\gradu@ohjaajatend\relax
-\newcommand{\ohjaaja}[1]{%
-  \@cons\gradu@ohjaajat{\gradu@ohjaajatstart#1\gradu@ohjaajatend}%
-  \addtocounter{gradu@ohjaajacount}{1}%
-}
 
+\def\gradu@date{\today}
 \renewcommand{\date}[1]{%
   \ClassWarning{gradu3}{\noexpand\date is deprecated!}%
   \gdef\gradu@date{#1}%
 }
 \newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\year=#3}
 \newcommand{\contactinformation}[1]{\yhteystiedot{#1}}
-%\newcommand{\yhteystiedot}[1]{\gdef\gradu@yhteystiedot{#1}}
-
-\newcounter{gradu@yhteystiedotcount}
-\def\gradu@yhteystiedot{}
-\let\gradu@yhteystiedotstart\relax
-\let\gradu@yhteystiedotend\relax
-
-\newcommand{\yhteystiedot}[1]{%
-  \@cons\gradu@yhteystiedot{\gradu@yhteystiedotstart#1\gradu@yhteystiedotend}
-	\addtocounter{gradu@yhteystiedotcount}{1}
-}
-\newcounter{gradu@yhteystiedot@count}
-\def\gradu@makeyhteystiedot{%
-  \ifthenelse{\value{gradu@yhteystiedotcount} = 0}{\gradu@muistitko{yhteystiedot}}{}%
-  \setcounter{gradu@yhteystiedot@count}{\value{gradu@yhteystiedotcount}}%
-	\gdef\gradu@yhteystiedotend{%
-		\addtocounter{gradu@yhteystiedot@count}{-1}%
-	  \ifthenelse{\value{gradu@yhteystiedot@count} = 0}{}{,\space}%
-	}%
-	\gradu@yhteystiedot
-}
 
 \def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
 \long\def\tiivistelma#1{\gdef\gradu@tiivistelma{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
 \def\gradu@abstract{\gradu@muistitko{abstract}}
 \long\def\abstract#1{\gdef\gradu@abstract{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
-
-
 
 \newcommand{\gradu@toolate}{%
   \ClassError{gradu3}{%
@@ -385,35 +380,25 @@
     \gradu@authors%
   }\par%
   \iffi%
-  \noindent\textbf{Yhteystiedot:} \gradu@makeyhteystiedot\par%
+  \noindent\textbf{Yhteystiedot:} %
+  \gradu@yhteystiedot@render{,\space}{\space ja\space}\par%
   \else%
-  \noindent\textbf{Contact information:} \gradu@makeyhteystiedot\par%
+  \noindent\textbf{Contact information:}
+  \gradu@yhteystiedot@render{,\space}{,\space and\space}\par%
   \fi
   \noindent{%
     \textbf{%
       \iffi%
-      Ohjaaja\ifthenelse{\value{gradu@ohjaajacount}>1}{t}{}:%
+      Ohjaaja\ifthenelse{\value{gradu@ohjaaja@count}>1}{t}{}:%
       \else%
-      Supervisor\ifthenelse{\value{gradu@ohjaajacount}>1}{s}{}:%
+      Supervisor\ifthenelse{\value{gradu@ohjaaja@count}>1}{s}{}:%
       \fi%
     }\space%
-    \ifthenelse{\value{gradu@ohjaajacount} = 0}{%
-      \gradu@muistitko{ohjaaja}%
-    }{}%
-    \newcounter{gradu@ohjaaja@count}%
-    \setcounter{gradu@ohjaaja@count}{\value{gradu@ohjaajacount}}%
-    \def\gradu@ohjaajatstart{%
-      \addtocounter{gradu@ohjaaja@count}{-1}%
-      \def\gradu@ohjaajatstart{%
-        \addtocounter{gradu@ohjaaja@count}{-1}%
-        \ifthenelse{\value{gradu@ohjaaja@count} = 0}{%
-          \iffi\space ja\space\else, and\space\fi%
-        }{%
-          ,\space
-        }%
-      }%
-    }%
-    \gradu@ohjaajat%
+    \iffi%
+    \gradu@ohjaaja@render{,\space}{\space ja\space}\par%
+    \else%
+    \gradu@ohjaaja@render{,\space}{,\space and\space}\par%
+    \fi
   }\par%
   \iffi
   \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
@@ -437,15 +422,13 @@
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
   \fi%
 \end{titlepage}%
-  \def\gradu@metadatacommand@item##1{%
+  \def\gradu@f##1{%
     \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
   }%
-  \gradu@metadatacommands%
+  \gradu@map\gradu@f\gradu@metadatacommands%
 \endgroup
   \global\let\author\gradu@toolate%
   \global\let\date\gradu@toolate%  
-  \global\let\contactinformation\gradu@toolate%  
-  \global\let\yhteystiedot\gradu@toolate%  
   \global\let\tiivistelma\gradu@toolate%  
   \global\let\abstract\gradu@toolate%  
 }
