@@ -162,116 +162,27 @@
 \def\appendicesname{Appendices}
 \fi
 
-\newcounter{pages}
+\newcounter{gradu@pagecount@main}
+\newcounter{gradu@pagecount@app}
+\def\gradu@pagecount@curr{gradu@pagecount@main}
+\EveryShipout{%
+  \addtocounter{\gradu@pagecount@curr}{1}%
+}
+\AtEndDocument{%
+  \clearpage%
+  \immediate\write\@auxout%
+  {\string\gdef\string\gradu@MainPageCount{\thegradu@pagecount@main}}%
+  \immediate\write\@auxout%
+  {\string\gdef\string\gradu@AppPageCount{\thegradu@pagecount@app}}%
+}
+\def\gradu@AppPageCount{\textbf{?}}
+\def\gradu@MainPageCount{\textbf{?}}
 
 \iffi
 \def\selectdefaultlanguage{\selectlanguage{finnish}}
 \else
 \def\selectdefaultlanguage{\selectlanguage{english}}
 \fi
-
-%% This requires extensive explanation.
-%%
-%% Defining the command that displays the total number of pages requires to know
-%% if hyperref is loaded or not, because it relies on \if-commands that do not
-%% exist unless hyperref is loaded.
-%%   But hyperref must be loaded by the user, not by gradu3, because hyperref
-%% overwrites definitions made in many packages. The user may use such
-%% packages, therefore hyperref must be loaded *after* these packages. In
-%% addition, hyperref must be loaded before packages based on the float package,
-%% because the latter is incompatible with hyperref.
-%% gradu3 therefore expects the user to potentially load hyperref, and if it is
-%% the case, it defines \TotPages@putlabel just before \begin{document}. This
-%% could not be done with \AtBeginDocument, because hyperref also uses
-%% \AtBeginDocument extensively, and gradu3' \AtBeginDocument{\def\@schapter...}
-%% would have been executed *before* hyperref is loaded (\begin{document} hooks
-%% are executed in the same order they are defined, and gradu3 would define its
-%% hook before hyperref defines its ones).  Defining a hook in a hook i.e.,
-%% \AtBeginDocument{\AtBeginDocument{\def\whatever}} does not work, gradu3
-%% therefore needs to define its own hook, independently from the normal
-%% \begin{document} hooks. The proper way of doing so would be to redefine
-%% \document, but for some obscure reason, this does not work. The working
-%% solution consists in redefining \begin and check if it is \begin{document}
-%% (and then execute gradu3' own hook before actually executing
-%% \begin{document}) or \begin{sometingelse} (then do nothing special).
-%%   gradu3' own hook is one \AtBeginDocument that puts its own commands after every others
-%% (defining \TotPages@putlabel, then calling \maketitle).
-
-%%%% Begin dirty hack
-\def\gradu@before@begin@document{
-\AtBeginDocument{%
-  \@ifpackageloaded{hyperref}{
-  \def\toclevel@schapter{0}%
-  \def\toclevel@appendix{0}%
-  \def\toclevel@algorithm{0}%
-
-   \define@Hy@TotPages@putlabel
-   }{%
-   \define@TotPages@putlabel
-   }%
-   \pagenumbering{roman}
-   \selectdefaultlanguage
-   \maketitle
-}}
-
-\let\gradu@begin=\begin
-\renewcommand*{\begin}[1]{%
-\ifthenelse{\equal{#1}{document}}{%
-\gradu@before@begin@document
-}{}%
-\gradu@begin{#1}%
-}
-%%%% End dirty hack
-
-\newcounter{TotPages}
-\EveryShipout{\stepcounter{TotPages}}
-
-%% The definition of \TotPages@putlabel must be delayed, since hyperref is not
-%% yet loaded at this point, all the \ifHy@xxx are undefined but latex
-%% still complains about the corresponding \fi
-\def\define@Hy@TotPages@putlabel{
-\def\TotPages@putlabel{%
-  \addtocounter{page}{-1}%
-  \if@filesw
-    \begingroup
-      \ifHy@pageanchor
-        \ifHy@hypertexnames
-          \ifHy@plainpages
-             \def\Hy@temp{\arabic{page}}%
-          \else
-             \let\textlatin\@firstofone
-             \edef\Hy@temp{\thepage}%
-          \fi
-        \else
-          \def\Hy@temp{\the\Hy@pagecounter}%
-        \fi
-      \fi
-      \immediate\write\@mainaux{%
-          \string\newlabel{TotPages}{{\theTotPages}{\thepage}{}{%
-          \ifHy@pageanchor page.\Hy@temp\fi
-        }{}}%
-      }%
-    \endgroup
-  \fi
-  \addtocounter{page}{1}%
-}}
-\def\define@TotPages@putlabel{
-\def\TotPages@putlabel{%
-  \addtocounter{page}{-1}%
-  \if@filesw
-    \begingroup
-      \immediate\write\@mainaux{%
-          \string\newlabel{TotPages}{{\theTotPages}{\thepage}}%
-      }%
-    \endgroup
-  \fi
-  \addtocounter{page}{1}%
-}}%
-
-\AtEndDocument{%
-\clearpage\TotPages@putlabel
-}
-
 
 \def\gradu@date{\today}
 \renewcommand{\date}[1]{%
@@ -304,15 +215,10 @@
   }%
 }
 
-%\@ifundefined{\csname gradu@numpages \endcsname}
-%  \def\gradu@numpages{\textbf{?}}
-%\fi
-
 \newcommand{\mainmatter}{
   \listoffigures
   \listoftables
   \tableofcontents
-  \setcounter{pages}{\value{page}}
   \clearpage
   \pagenumbering{arabic}
   \setcounter{chapter}{0}
@@ -390,7 +296,7 @@
   \noindent\textbf{Ty\"o:} {%
     \gradu@HeadToUpper\gradu@tyyppi%
   }\par%
-  \noindent\textbf{Sivum\"a\"ar\"a:} \ref{TotPages}\par%
+  \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
   \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
@@ -399,7 +305,7 @@
   \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
   \noindent\textbf{Project:} \gradu@type\par%
-  \noindent\textbf{Page count:} \ref{TotPages}\par%
+  \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
   \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Keywords:} \gradu@keywords\par%
@@ -425,9 +331,10 @@
 \addcontentsline{toc}{chapter}{\termlistname}
 }
 
-\renewcommand\appendix{\par
-    \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
-    \setcounter{chapter}{0}%
+\renewcommand\appendix{\par\clearpage%
+  \gdef\gradu@pagecount@curr{gradu@pagecount@app}
+  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
+  \setcounter{chapter}{0}%
   \setcounter{section}{0}%
   \gdef\@chapapp{\appendixname}%
   \gdef\thechapter{\@Alph\c@chapter}}
