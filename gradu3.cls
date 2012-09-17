@@ -353,7 +353,7 @@
 
 \renewcommand\appendix{\par\clearpage%
   \gdef\gradu@pagecount@curr{gradu@pagecount@app}
-  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{}{}}
+  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{\thepage}{}}
   \setcounter{chapter}{0}%
   \setcounter{section}{0}%
   \gdef\@chapapp{\appendixname}%
@@ -422,3 +422,28 @@
   \fi%
   \gradu@thebibliography{#1}%
 }
+
+%%%%%%%%%%%%%%%%%%%%%%
+% TABLE OF CONTENTS
+
+\renewcommand{\tableofcontents}{%
+  \chapter*{\contentsname}%
+  \begingroup%
+  \setlength\parskip{0pt}%
+  \vspace{-10pt}%
+  \@starttoc{toc}%
+  \endgroup%
+}
+
+\setcounter{tocdepth}{3}
+\renewcommand{\@dotsep}{1}
+\renewcommand{\@pnumwidth}{2ex}
+\def\l@chapter#1{%
+  \vspace{10pt}%
+  \@dottedtocline{2}{0cm}{1cm}{\uppercase{#1}}%
+}
+\renewcommand{\l@section}   {\@dottedtocline{2}{1cm}{1cm}}
+\renewcommand{\l@subsection}{\@dottedtocline{3}{2cm}{1cm}}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%
