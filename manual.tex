@@ -113,20 +113,19 @@ default in \cls{gradu3}.
 Note that these options are given to the \cmd{documentclass} command.
 You should not invoke \cmd{usepackage\{inputenc\}} yourself!
 
-
-
 \section{Other options}
 
 \begin{opts}
 \item[kandi] This is a Bachelor's thesis.
 \end{opts}
 
-\section{Header Commands}
+\section{Title and Metadata Commands}
 
-The following commands can be used before the \cmd{begin\{document\}}. Some
-of those are optional (their default values are described along with the
-command) and the others are mandatory. If one of the mandatory commands is not
-used, a reminder will be printed inside the document.
+Use the \cmd{maketitle} command after \cmd{begin\{document\}} but
+before any of the actual text of the thesis.  The following commands
+can (and in the case of mandatory commands, must) be used before the
+\cmd{maketitle} command to specify the content of the title and
+metadata pages.
 
 \begin{cmds}
 \item[title] document's title (mandatory)
@@ -220,6 +219,10 @@ multiple authors should be specified by giving each their own
 \cmd{author} command; \cmd{and} may not be used.  This also makes the
 (now removed) option \opt{surnamefirst} obsolete, as the class no
 longer cares what part of the name contains the surname.
+
+The \cmd{maketitle} command is now mandatory after
+\cmd{begin\{document\}}, just like in standard \LaTeX{} but unlike in
+\cls{gradu2}.
 
 The following commands are new in \cls{gradu3}: \cmd{ohjaaja}.
 
