@@ -183,6 +183,7 @@
 \else
 \def\selectdefaultlanguage{\selectlanguage{english}}
 \fi
+\AtBeginDocument{\selectdefaultlanguage}
 
 \def\gradu@date{\today}
 \renewcommand{\date}[1]{%
