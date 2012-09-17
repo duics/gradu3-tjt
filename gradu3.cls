@@ -299,8 +299,8 @@
   \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@linja\par%
   \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
   \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
-  \noindent\textbf{Abstract:} \gradu@abstract\par%
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+  \noindent\textbf{Abstract:} \gradu@abstract\par%
   \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
   \else%
   \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
@@ -309,8 +309,8 @@
   \noindent\textbf{Study line:} \gradu@linja\par%
   \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
-  \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Keywords:} \gradu@keywords\par%
+  \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
   \fi%
 \end{titlepage}%
