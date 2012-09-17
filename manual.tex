@@ -164,7 +164,6 @@ specified multiple times for multiple authors.
 The available sectioning commands are:
 \begin{cmds}
 \item[preface] Preface
-\item[termlist] List of terms
 \item[mainmatter] Marks the beginning of the main part of the document.
 Should appear before the first \cmd{chapter}.
 Inserts the table of contents, the list of tables and the list of figures.
@@ -178,9 +177,12 @@ lowercase roman to arabic, starting from 1 again.
 Note that \cmd{subsubsection}, \cmd{paragraph} and \cmd{subparagraph} are
 forbidden.
 
-In addition to the previous commands, there are three useful environments:
+In addition to the previous commands, there are several useful
+environments:
 
 \begin{envs}
+\item[thetermlist] is a list environment used to generate a term list;
+  it generates a chapter heading before the list.
 \item[thebibliography] allows to specify a list of references. Should be put
 before the appendices.
 \item[appendix] inserts an ``Appendices'' line into the table of contents and
@@ -208,10 +210,10 @@ longer recognized: \opt{altlinespread}, \opt{altsubsec},
 \opt{oldtitle}, \opt{palatino}, \opt{shortthesis}, \opt{surnamefirst},
 and \opt{toc}.  Similarly, the commands \cmd{acmccs},
 \cmd{copyrightowner}, \cmd{copyrightyear}, \cmd{fulltitle},
-\cmd{license}, \cmd{paikka}, \cmd{setauthor}, and \cmd{ysa} have been
-removed.  Further, the conditional \cmd{ifgradu@pdf} has been removed
-(users should let \pack{hyperref} figure out the correct driver by
-itself).
+\cmd{license}, \cmd{paikka}, \cmd{setauthor}, \cmd{termlist} and
+\cmd{ysa} have been removed.  Further, the conditional
+\cmd{ifgradu@pdf} has been removed (users should let \pack{hyperref}
+figure out the correct driver by itself).
 
 In \cls{gradu3}, use the standard \LaTeX{} command \cmd{author} to
 specify the thesis author.  Unlike in standard \LaTeX, however,
@@ -225,5 +227,7 @@ The \cmd{maketitle} command is now mandatory after
 \cls{gradu2}.
 
 The following commands are new in \cls{gradu3}: \cmd{ohjaaja}.
+
+The following environments are new in \cls{gradu3}: \env{thetermlist}.
 
 \end{document}

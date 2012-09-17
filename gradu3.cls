@@ -153,7 +153,7 @@
 \iffi
 \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
 \def\gradu@msg@komentoa{-komentoa?}
-\def\termlistname{Sanasto}
+\def\termlistname{Termiluettelo}
 \def\appendicesname{Liitteet}
 \else
 \def\gradu@msg@muistitko{Did you remember to use the}
@@ -331,8 +331,24 @@
 \addcontentsline{toc}{chapter}{\prefacename}
 }
 
-\newcommand{\termlist}{\chapter*{\termlistname}
-\addcontentsline{toc}{chapter}{\termlistname}
+\newenvironment{thetermlist}{% begin
+  \chapter*{\termlistname}%
+  \begin{list}{% default label
+      \texttt{\string\item[\textrm{\textit{%
+            \iffi%
+            Tämä jäi tyhjäksi!%
+            \else%
+            You left this blank!%
+            \fi%
+            }}]}%
+    }{%declarations
+      \renewcommand{\makelabel}[1]{##1\hfill}%
+      \setlength{\labelwidth}{4.8cm}%
+      \setlength{\labelsep}{0.2cm}%
+      \setlength{\leftmargin}{5cm}%
+    }
+}{% end
+  \end{list}
 }
 
 \renewcommand\appendix{\par\clearpage%
