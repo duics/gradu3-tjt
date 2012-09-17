@@ -215,6 +215,7 @@
   }%
 }
 
+\pagenumbering{roman}
 \newcommand{\mainmatter}{
   \listoffigures
   \listoftables
@@ -231,6 +232,7 @@
 }
 \renewcommand{\maketitle}{%
 \begingroup
+%%%% TITLE PAGE
 \begin{titlepage}%
   \vspace*{7truecm plus 1truecm minus 3truecm}%
   \begingroup%
@@ -260,7 +262,7 @@
   \center{\textbf{\gradu@laitos}}%
 \end{titlepage}%
 \newpage%
-\begin{titlepage}%
+%%% METADATA PAGE
   \noindent%
   \iffi%
   \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
@@ -313,7 +315,7 @@
   \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
   \fi%
-\end{titlepage}%
+%%% POSTPROCESSING
   \def\gradu@f##1{%
     \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
   }%
