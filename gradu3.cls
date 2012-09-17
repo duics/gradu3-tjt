@@ -16,9 +16,6 @@
 
 \RequirePackage{ifthen}
 
-\newif\iffi
-\fitrue
-
 \let\gradu@listitem\relax
 \def\gradu@appendlist#1#2{\xdef#1{#1\noexpand\gradu@listitem{#2}}}
 \def\gradu@map#1#2{\begingroup\let\gradu@listitem#1#2\endgroup}
@@ -33,7 +30,7 @@
   \expandafter\def\csname#1\endcsname##1{%
     \expandafter\gdef\csname gradu@#1\endcsname{##1}%
   }%
-  \ifthenelse{\equal{#2}{}}{%
+  \ifthenelse{\equal{\noexpand #2}{}}{%
     \expandafter\def\csname gradu@#1\endcsname{%
       \gradu@muistitko{#1}
     }%
@@ -77,20 +74,8 @@
 \gradu@DeclareMetadataCommand{translatedtitle}{}
 \gradu@DeclareMetadataCommand{yliopisto}{Jyv\"askyl\"an yliopisto}
 \gradu@DeclareMetadataCommand{university}{University of Jyv\"askyl\"a}
-\gradu@DeclareMetadataCommand{laitos}{%
-  \iffi%
-  Tietotekniikan laitos%
-  \else%
-  Department of Mathematical Information Technology%
-  \fi%
-}  
-\gradu@DeclareMetadataCommand{aine}{%
-  \iffi%
-  Tietotekniikan%
-  \else%
-  in Information Technology%
-  \fi%
-}
+\gradu@DeclareMetadataCommand{laitos}{\gradu@default@laitos}
+\gradu@DeclareMetadataCommand{aine}{\gradu@default@aine}
 \gradu@DeclareMetadataCommand{linja}{}
 \gradu@DeclareMetadataCommand{tyyppi}{pro gradu -tutkielma}
 \gradu@DeclareMetadataCommand{type}{Master's Thesis}
@@ -129,8 +114,8 @@
 }
 
 
-\DeclareOption{finnish}{\fitrue}
-\DeclareOption{english}{\fifalse}
+\DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
+\DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions
@@ -150,17 +135,22 @@
 \setlength\parindent{0pt}
 \setlength\parskip{10pt}
 
-\iffi
-\def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}
-\def\gradu@msg@komentoa{-komentoa?}
-\def\termlistname{Termiluettelo}
-\def\appendicesname{Liitteet}
-\else
-\def\gradu@msg@muistitko{Did you remember to use the}
-\def\gradu@msg@komentoa{ command?}
-\def\termlistname{Glossary}
-\def\appendicesname{Appendices}
-\fi
+\addto\captionsfinnish{%
+  \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}%
+  \def\gradu@msg@komentoa{-komentoa?}%
+  \def\termlistname{Termiluettelo}%
+  \def\appendicesname{Liitteet}%
+  \def\gradu@default@laitos{Tietotekniikan laitos}%
+  \def\gradu@default@aine{Tietotekniikan}%
+}
+\addto\captionsenglish{
+  \def\gradu@msg@muistitko{Did you remember to use the}
+  \def\gradu@msg@komentoa{ command?}
+  \def\termlistname{Glossary}
+  \def\appendicesname{Appendices}
+  \def\graduDefaultLaitos{Department of Mathematical Information Technology}
+  \def\gradu@default@aine{in Information Technology}%
+}
 
 \newcounter{gradu@pagecount@main}
 \newcounter{gradu@pagecount@app}
@@ -178,11 +168,6 @@
 \def\gradu@AppPageCount{\textbf{?}}
 \def\gradu@MainPageCount{\textbf{?}}
 
-\iffi
-\def\selectdefaultlanguage{\selectlanguage{finnish}}
-\else
-\def\selectdefaultlanguage{\selectlanguage{english}}
-\fi
 \AtBeginDocument{\selectdefaultlanguage}
 
 \def\gradu@date{\today}
@@ -200,19 +185,19 @@
 
 \newcommand{\gradu@toolate}{%
   \ClassError{gradu3}{%
-    \iffi%
-    Bibliografiatietoja ei voi antaa enaa dokumentin alun jalkeen.%
-    \else%
-    Bibliographical data cannot be given after the beginning of document.%
-    \fi%
+    \iflanguage{finnish}{%
+      Bibliografiatietoja ei voi antaa enaa otsikkosivun jalkeen.%
+    }{%
+      Bibliographical data cannot be given after the title page.%
+    }
   }{%
-    \iffi%
-    Komennot kuten \textbackslash title voi antaa vain ennen
-    \textbackslash begin\{document\}-komentoa.
-    \else%
-    You can give commands like \textbackslash title only before
-    the \textbackslash begin\{document\} command.
-    \fi%
+    \iflanguage{finnish}{%
+      Komennot kuten \string\title voi antaa vain ennen
+      \string\maketitle-komentoa.
+    }{%
+      You can give commands like  title only before
+      the \string\maketitle command.
+    }%
   }%
 }
 
@@ -245,77 +230,77 @@
   \vspace{4truecm}%
   \par%
   \raggedleft%
-  \iffi%
-  \gradu@aine{} \gradu@tyyppi%
-  \else%
-  \gradu@type{} \gradu@aine%
-  \fi%
+  \iflanguage{finnish}{%
+    \gradu@aine{} \gradu@tyyppi%
+  }{%
+    \gradu@type{} \gradu@aine%
+  }%
   \par%
   \raggedleft
   \gradu@date%
   \vfill%
   \vspace{1truecm plus 1truecm minus .5truecm}%
-  \iffi
-  \center{\large\textbf{\gradu@yliopisto}}%
-  \else
-  \center{\large\textbf{\gradu@university}}%
-  \fi
+  \iflanguage{finnish}{%
+    \center{\large\textbf{\gradu@yliopisto}}%
+  }{%
+    \center{\large\textbf{\gradu@university}}%
+  }%
   \center{\textbf{\gradu@laitos}}%
 \end{titlepage}%
 \newpage%
 %%% METADATA PAGE
   \noindent%
-  \iffi%
-  \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
-  \gradu@author@render{,\space}{\space ja\space}\par%
-  \else%
-  \noindent\textbf{Author\ifthenelse{\value{gradu@author@count}>1}{s}{}:} %
-  \gradu@author@render{,\space}{,\space and\space}\par%
-  \fi%
-  \iffi%
-  \noindent\textbf{Yhteystiedot:} %
-  \gradu@yhteystiedot@render{,\space}{\space ja\space}\par%
-  \else%
-  \noindent\textbf{Contact information:}
-  \gradu@yhteystiedot@render{,\space}{,\space and\space}\par%
-  \fi
+  \iflanguage{finnish}{%
+    \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
+    \gradu@author@render{,\space}{\space ja\space}\par%
+  }{%
+    \noindent\textbf{Author\ifthenelse{\value{gradu@author@count}>1}{s}{}:} %
+    \gradu@author@render{,\space}{,\space and\space}\par%
+  }%
+  \iflanguage{finnish}{%
+    \noindent\textbf{Yhteystiedot:} %
+    \gradu@yhteystiedot@render{,\space}{\space ja\space}\par%
+  }{%
+    \noindent\textbf{Contact information:}
+    \gradu@yhteystiedot@render{,\space}{,\space and\space}\par%
+  }%
   \noindent{%
     \textbf{%
-      \iffi%
-      Ohjaaja\ifthenelse{\value{gradu@ohjaaja@count}>1}{t}{}:%
-      \else%
-      Supervisor\ifthenelse{\value{gradu@ohjaaja@count}>1}{s}{}:%
-      \fi%
+      \iflanguage{finnish}{%
+        Ohjaaja\ifthenelse{\value{gradu@ohjaaja@count}>1}{t}{}:%
+      }{%
+        Supervisor\ifthenelse{\value{gradu@ohjaaja@count}>1}{s}{}:%
+      }%
     }\space%
-    \iffi%
-    \gradu@ohjaaja@render{,\space}{\space ja\space}\par%
-    \else%
-    \gradu@ohjaaja@render{,\space}{,\space and\space}\par%
-    \fi
+    \iflanguage{finnish}{%
+      \gradu@ohjaaja@render{,\space}{\space ja\space}\par%
+    }{%
+      \gradu@ohjaaja@render{,\space}{,\space and\space}\par%
+    }%
   }\par%
-  \iffi
-  \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
-  \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
-  \noindent\textbf{Ty\"o:} {%
-    \gradu@HeadToUpper\gradu@tyyppi%
-  }\par%
-  \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@linja\par%
-  \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
-  \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
-  \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-  \noindent\textbf{Abstract:} \gradu@abstract\par%
-  \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
-  \else%
-  \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
-  \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
-  \noindent\textbf{Project:} \gradu@type\par%
-  \noindent\textbf{Study line:} \gradu@linja\par%
-  \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
-  \noindent\textbf{Abstract:} \gradu@abstract\par%
-  \noindent\textbf{Keywords:} \gradu@keywords\par%
-  \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
-  \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-  \fi%
+  \iflanguage{finnish}{%
+    \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
+    \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
+    \noindent\textbf{Ty\"o:} {%
+      \gradu@HeadToUpper\gradu@tyyppi%
+    }\par%
+    \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@linja\par%
+    \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
+    \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
+    \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+    \noindent\textbf{Abstract:} \gradu@abstract\par%
+    \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
+  }{%
+    \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
+    \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
+    \noindent\textbf{Project:} \gradu@type\par%
+    \noindent\textbf{Study line:} \gradu@linja\par%
+    \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
+    \noindent\textbf{Abstract:} \gradu@abstract\par%
+    \noindent\textbf{Keywords:} \gradu@keywords\par%
+    \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
+    \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+  }%
 %%% POSTPROCESSING
   \def\gradu@f##1{%
     \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
@@ -336,11 +321,11 @@
   \chapter*{\termlistname}%
   \begin{list}{% default label
       \texttt{\string\item[\textrm{\textit{%
-            \iffi%
-            Tämä jäi tyhjäksi!%
-            \else%
-            You left this blank!%
-            \fi%
+            \iflanguage{finnish}{%
+              Tämä jäi tyhjäksi!%
+            }{%
+              You left this blank!%
+            }%
             }}]}%
     }{%declarations
       \renewcommand{\makelabel}[1]{##1\hfill}%
@@ -414,13 +399,13 @@
 
 \let\gradu@thebibliography\thebibliography
 \def\thebibliography#1{%
-  \iffi%
-  \def\refname{L\"ahteet}%
-  \def\bibname{L\"ahteet}%
-  \else%
-  \def\refname{References}%
-  \def\bibname{References}%
-  \fi%
+  \iflanguage{finnish}{%
+    \def\refname{L\"ahteet}%
+    \def\bibname{L\"ahteet}%
+  }{%
+    \def\refname{References}%
+    \def\bibname{References}%
+  }%
   \gradu@thebibliography{#1}%
 }
 
