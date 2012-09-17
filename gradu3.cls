@@ -7,8 +7,8 @@
 %%                     PLEASE READ THE MANUAL!                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\filedate{2012/09/14}
-\def\fileversion{3.0pre2}
+\def\filedate{2012/09/17}
+\def\fileversion{3.0pre3}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
@@ -91,7 +91,7 @@
   in Information Technology%
   \fi%
 }
-\gradu@DeclareMetadataCommand{linja}{\relax}
+\gradu@DeclareMetadataCommand{linja}{}
 \gradu@DeclareMetadataCommand{tyyppi}{pro gradu -tutkielma}
 \gradu@DeclareMetadataCommand{type}{Master's Thesis}
 %\gradu@DeclareMetadataCommand{tiivistelma} -- needs \long
@@ -296,6 +296,7 @@
   \noindent\textbf{Ty\"o:} {%
     \gradu@HeadToUpper\gradu@tyyppi%
   }\par%
+  \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@linja\par%
   \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
   \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
@@ -305,6 +306,7 @@
   \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
   \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
   \noindent\textbf{Project:} \gradu@type\par%
+  \noindent\textbf{Study line:} \gradu@linja\par%
   \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
   \noindent\textbf{Abstract:} \gradu@abstract\par%
   \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
