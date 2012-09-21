@@ -496,10 +496,6 @@
   }
 }
 
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% MISCELLANEOUS
-
 \newenvironment{chapterquote}[1]{%
   \begin{quote}\em
   \def\gradu@quoteattr{#1}
