@@ -7,8 +7,8 @@
 %%                     PLEASE READ THE MANUAL!                           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\def\filedate{2012/09/17}
-\def\fileversion{3.0pre3}
+\def\filedate{2012/09/21}
+\def\fileversion{3.0pre4}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
@@ -313,9 +313,7 @@
   \global\let\abstract\gradu@toolate%  
 }
 
-\newcommand{\preface}{\chapter*{\prefacename}
-\addcontentsline{toc}{chapter}{\prefacename}
-}
+\newcommand{\preface}{\chapter*{\prefacename}}
 
 \newenvironment{thetermlist}{% begin
   \chapter*{\termlistname}%
