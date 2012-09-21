@@ -509,17 +509,5 @@
   \@endparenv
 }
 
-\let\gradu@thebibliography\thebibliography
-\def\thebibliography#1{%
-  \iflanguage{finnish}{%
-    \def\refname{L\"ahteet}%
-    \def\bibname{L\"ahteet}%
-  }{%
-    \def\refname{References}%
-    \def\bibname{References}%
-  }%
-  \gradu@thebibliography{#1}%
-}
-
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
