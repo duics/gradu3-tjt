@@ -115,7 +115,7 @@
 
 
 \DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
-\DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
+\DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{english}}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions
