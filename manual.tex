@@ -2,6 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
 \usepackage{url}
+\usepackage{booktabs}
 
 \newenvironment{cmds}
   {\begin{description}\renewcommand{\makelabel}[1]{\texttt{\textbackslash##1}\hfill}}
@@ -231,36 +232,69 @@ runs to complete the generation of the bibliograpgy.
 \appendix
 \section{Usage changes from \cls{gradu2} to \cls{gradu3}}
 
+\begin{table}\centering
+  \begin{tabular}{ll}
+    \toprule
+    \cls{gradu2}  & \cls{gradu3}  \\
+    \midrule
+    \opt{altlinespread} & behaviour not supported \\
+    \opt{altsubsec}     & behaviour not supported \\
+    \opt{copyright}     & behaviour not supported \\
+    \opt{kandi}         & \opt{bachelor} \\
+    \opt{logo}          & behaviour not supported \\
+    \opt{lof}           & now default behaviour \\
+    \opt{lot}           & now default behaviour \\
+    \opt{newtitle}      & behaviour not supported  \\
+    \opt{nocopyright}   & now default behaviour \\
+    \opt{nonumbib}      & now default behaviour \\
+    \opt{nottoc}        & now default behaviour \\
+    \opt{numbib}        & behaviour not supported \\
+    \opt{oldtitle}      & now default behaviour \\
+    \opt{palatino}      & behaviour not supported \\
+    \opt{shortthesis}   & \opt{bachelor} (for the typical use) \\
+    \opt{surnamefirst}  & behaviour now unnecessary \\
+    \opt{toc}           & behaviour not supported \\
+    \bottomrule
+  \end{tabular}
+  \caption{Changes in option names from \cls{gradu2} to \cls{gradu3}}
+  \label{tbl:optchange}
+\end{table}
+
+\begin{table}\centering
+  \begin{tabular}{ll}
+    \toprule
+    \cls{gradu2}         & \cls{gradu3}  \\
+    \midrule
+    ---                  & \cmd{maketitle} \\
+    ---                  & \cmd{supervisor} \\
+    \cmd{acmccs}         & behaviour not supported \\
+    \cmd{aine}           & \cmd{subject}\\
+    \cmd{copyrightowner} & behaviour not supported \\
+    \cmd{fulltitle}      & behaviour not supported \\
+    \cmd{laitos}         & \cmd{department}\\
+    \cmd{license}        & behaviour not supported \\
+    \cmd{linja}          & \cmd{studyline}\\
+    \cmd{paikka}         & behaviour not supported \\
+    \cmd{setauthor}      & \cmd{author} (different syntax)\\
+    \cmd{termlist}       & the \env{thetermlist} environment\\
+    \cmd{tyyppi}         & \cmd{type}\\
+    \cmd{yhteystiedot}   & \cmd{contactinformation}\\
+    \cmd{yliopisto}      & \cmd{university}\\
+    \cmd{ysa}            & behaviour not supported \\
+    \bottomrule
+  \end{tabular}
+  \caption{Changes in command names from \cls{gradu2} to \cls{gradu3}}
+  \label{tbl:cmdchange}
+\end{table}
+
 The old \cls{gradu2} class had a lot of options to cater for differing
 tastes in the face of very underspecified departmental requirements.
 Since \cls{gradu3} is based on new stricter requirements, there is no
-longer need for so many options\footnote{Remember, the more options a
-  class has, the easier it is to break.}.
-
-Therefore, the following options supported by \cls{gradu2} are no
-longer recognized: \opt{altlinespread}, \opt{altsubsec},
-\opt{copyright}, \opt{logo}, \opt{lof}, \opt{lot}, \opt{newtitle},
-\opt{nocopyright}, \opt{nonumbib}, \opt{nottoc}, \opt{numbib},
-\opt{oldtitle}, \opt{palatino}, \opt{shortthesis}, \opt{surnamefirst},
-and \opt{toc}.  Also, unknown options are no longer passed
-automatically to the underlying class \cls{report}.
-
-Similarly, the commands \cmd{acmccs}, \cmd{copyrightowner},
-\cmd{copyrightyear}, \cmd{fulltitle}, \cmd{license}, \cmd{paikka},
-\cmd{setauthor}, \cmd{termlist} and \cmd{ysa} have been removed.
-Further, the conditional \cmd{ifgradu@pdf} has been removed (users
-should let \pack{hyperref} figure out the correct driver by itself).
-
-In \cls{gradu3}, use the standard \LaTeX{} command \cmd{author} to
-specify the thesis author.  Unlike in standard \LaTeX, however,
-multiple authors should be specified by giving each their own
-\cmd{author} command; \cmd{and} may not be used.  This also makes the
-(now removed) option \opt{surnamefirst} obsolete, as the class no
-longer cares what part of the name contains the surname.
-
-The \cmd{maketitle} command is now mandatory after
-\cmd{begin\{document\}}, just like in standard \LaTeX{} but unlike in
-\cls{gradu2}.
+longer need for so many options;\footnote{Remember, the more options a
+  class has, the easier it is to break.} see
+Table~\ref{tbl:optchange}.  Since the interface is being broken in
+any case, changes have been made to commands
+(Table~\ref{tbl:cmdchange}).
 
 The \cls{gradu3} class uses the \pack{biblatex-chicago} package for
 bibliography formatting.  This causes major changes to most documents.
@@ -271,9 +305,5 @@ the new bibliography tools.
 
 Appendices cannot be \cmd{chapter}s in \cls{gradu3}; use \cmd{section}
 to introduce each appendix after the \cmd{appendix} command.
-
-The following commands are new in \cls{gradu3}: \cmd{ohjaaja}.
-
-The following environments are new in \cls{gradu3}: \env{thetermlist}.
 
 \end{document}
