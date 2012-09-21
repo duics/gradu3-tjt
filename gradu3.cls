@@ -247,13 +247,13 @@
   }%
 }
 
-\pagenumbering{roman}
 \def\gradu@HeadToUpper#1{%
   \edef\fooA{#1}%
   \def\fooB##1{##1}%
   \def\fooC##1##2\relax{\uppercase{\fooB{##1}}##2}%
   \expandafter\fooC\fooA\relax%
 }
+\pagenumbering{Roman}
 \renewcommand{\maketitle}{%
 \begingroup
 %%%% TITLE PAGE
@@ -285,6 +285,7 @@
   }%
   \center{\textbf{\gradu@laitos}}%
 \end{titlepage}%
+\pagenumbering{roman}
 \newpage%
 %%% METADATA PAGE
   \noindent%
