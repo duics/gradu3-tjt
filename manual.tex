@@ -183,8 +183,6 @@ environments:
 \begin{envs}
 \item[thetermlist] is a list environment used to generate a term list;
   it generates a chapter heading before the list.
-\item[thebibliography] allows to specify a list of references. Should be put
-before the appendices.
 \item[appendix] inserts an ``Appendices'' line into the table of contents and
 the chapters inside the environments will be numbered with
 letters instead of numbers, beginning from ``A''.
@@ -193,6 +191,44 @@ letters instead of numbers, beginning from ``A''.
   the quote.  You should start the text of the chapter immediately
   after this environment; do not leave empty lines there.
 \end{envs}
+
+\section{Citing sources}\label{sec:bibliographies}
+
+The \cls{gradu3} class uses \cls{biblatex-chicago} for citations and
+for the bibliography.  The following notes give the basics; see the
+\textsc{Bib\LaTeX} and \cls{biblatex-chicago} manuals for more
+advanced information.
+
+You should list all your sources in one or more bibliographical
+databases in the \textsc{Bib\TeX} format.  There are tools to help you
+construct such databases, or you can do it by hand, if you want.
+
+For each such database, put a command
+\cmd{addbibresource\{\textit{file.bib}\}} in the document preamble
+(that is, between the \cmd{documentclass} and \cmd{begin\{document\}}
+commands), where \texttt{\textit{file.bib}} is the file name of the
+particular database.
+
+Add the command \cmd{printbibliography} just before the \cmd{appendix}
+or \cmd{end\{document\}} command, whichever comes first.
+
+To cite a source, there are several commands available.  Assuming that
+there is a source labeled as \texttt{pierce02}, authored by Pierce and
+published in 2002, then the command \cmd{cite\{pierce02\}} will
+produce ``Pierce (2002)'' (without the quotes), and the command
+\cmd{parencite\{pierce02\}} will produce ``(Pierce 2002)'' (without
+the quotes).  To include a page reference, add it in square brackets
+after the command name; for example,
+\cmd{cite[p.\textasciitilde{}32]\{pierce02\}} will produce ``Pierce
+(2002, p.~32)'' (without the quotes).
+
+To countermand excessive cleverness on the part of \textsc{Bib\LaTeX},
+if a citation command produces nothing or just an empty pair of
+parentheses, put a \cmd{citereset\{\}} command somewhere between the
+offending citation and the previous citation.
+
+You will need to run the \texttt{biber} program in between \LaTeX{}
+runs to complete the generation of the bibliograpgy.
 
 \appendix
 \section{Usage changes from \cls{gradu2} to \cls{gradu3}}
@@ -225,6 +261,13 @@ longer cares what part of the name contains the surname.
 The \cmd{maketitle} command is now mandatory after
 \cmd{begin\{document\}}, just like in standard \LaTeX{} but unlike in
 \cls{gradu2}.
+
+The \cls{gradu3} class uses the \pack{biblatex-chicago} package for
+bibliography formatting.  This causes major changes to most documents.
+Most notably, \env{thebibliography} and \cmd{bibliographystyle} cannot
+be used, and a \cmd{bibliography} command should not be used.  See
+Section~\ref{sec:bibliographies} for more information about how to use
+the new bibliography tools.
 
 The following commands are new in \cls{gradu3}: \cmd{ohjaaja}.
 

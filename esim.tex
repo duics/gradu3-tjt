@@ -1,7 +1,9 @@
 \documentclass[finnish,latin1]{gradu3}
 
 % HUOM! T‰m‰n tulee olla viimeinen \usepackage koko dokumentissa!
-\usepackage[bookmarksopen,bookmarksnumbered]{hyperref}
+\usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
+
+\addbibresource{esim.bib}
 
 \title{P ja NP ovat samat}
 \author{Antti-Juhani Kaijanaho}
@@ -49,8 +51,17 @@ Yksi kaksi kolme nelj‰ viisi kuusi seitsem‰n kahdeksan yhdeks‰n
 kymmenen yksitoista kaksitoista kolmetoista nelj‰toista viisitoista
 kuusitoista seitsem‰ntoista kahdeksantoista yhdeks‰ntoista.
 
-L‰hteit‰h‰n k‰ytet‰‰n \cite[s.~12]{pierce02:_types_progr_languag}.
- 
+L‰hteit‰h‰n k‰ytet‰‰n:
+cite: \cite[s.~12]{pierce02:_types_progr_languag};\citereset{}
+Cite: \Cite[s.~12]{pierce02:_types_progr_languag};\citereset{}
+Cite (no page): \Cite{pierce02:_types_progr_languag};\citereset{}
+autocite: \autocite[s.~12]{pierce02:_types_progr_languag};\citereset{}
+parencite: \parencite[s.~12]{pierce02:_types_progr_languag};\citereset{}
+parencite (no page): \parencite{pierce02:_types_progr_languag};\citereset{}
+Parencite: \Parencite[s.~12]{pierce02:_types_progr_languag};\citereset{}
+textcite: \textcite[s.~12]{pierce02:_types_progr_languag};\citereset{}
+Textcite: \Textcite[s.~12]{pierce02:_types_progr_languag};
+
 aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 
 aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 
 aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa 
@@ -239,9 +250,7 @@ grevfv
 gbsgbgws
 
 
-\bibliographystyle{finplain} % tai joku muu, sovi ohjaajasi kanssa
-\bibliography{esim}
-
+\printbibliography
 \appendix
 
 \chapter{Ensimm‰inen liite}

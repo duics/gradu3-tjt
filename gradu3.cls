@@ -132,7 +132,11 @@
 \RequirePackage{mathptmx}
 \RequirePackage[scaled=.92]{helvet}
 \RequirePackage{courier}
+\RequirePackage[authordate,backend=biber]{biblatex-chicago}
 
+\DefineBibliographyStrings{finnish}{%
+  bibliography={L\"ahteet}%
+}
 \setlength\parindent{0pt}
 \setlength\parskip{10pt}
 
