@@ -361,12 +361,26 @@
 }
 
 \renewcommand\appendix{\par\clearpage%
-  \gdef\gradu@pagecount@curr{gradu@pagecount@app}
-  \addtocontents{toc}{\protect\contentsline{chapter}{\appendicesname}{\thepage}{}}
-  \setcounter{chapter}{0}%
+  \gdef\gradu@pagecount@curr{gradu@pagecount@app}%
+  \chapter*{\appendicesname}%
   \setcounter{section}{0}%
-  \gdef\@chapapp{\appendixname}%
-  \gdef\thechapter{\@Alph\c@chapter}}
+  \gdef\thesection{\@Alph\c@section}%
+  \renewcommand{\chapter}{%
+    \ClassError{gradu3}{%
+      \iflanguage{finnish}{%
+        \string\chapter-komentoa ei saa kayttaa liitteissa%
+      }{%
+        The \string\chapter command cannot be used in the appendices%
+      }%
+    }{%
+      \iflanguage{finnish}{%
+        Kayta sen sijasta \string\section-komentoa.%
+      }{%
+        Use the \string\section command instead.%
+      }%
+    }%
+  }
+}
 
 \def\@makechapterhead#1{%
   \vspace*{2em}%
@@ -385,7 +399,12 @@
     \interlinepenalty\@M
     \Large \bfseries  #1\par\nobreak
     \vskip 1em
-  }}
+  }%
+  \ifthenelse{\equal{\thepage}{\arabic{page}}}{%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{#1}%
+  }{}%
+}
 
 \renewcommand\section{\@startsection%
   {section}%

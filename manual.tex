@@ -172,6 +172,8 @@ lowercase roman to arabic, starting from 1 again.
 \item[chapter] Beginning of a chapter
 \item[section] Beginning of a section
 \item[subsection] Beginning of a subsection
+\item[appendix] starts the appendices.  Use \cmd{section} to give a
+  title to each appendix.
 \end{cmds}
 
 Note that \cmd{subsubsection}, \cmd{paragraph} and \cmd{subparagraph} are
@@ -183,9 +185,6 @@ environments:
 \begin{envs}
 \item[thetermlist] is a list environment used to generate a term list;
   it generates a chapter heading before the list.
-\item[appendix] inserts an ``Appendices'' line into the table of contents and
-the chapters inside the environments will be numbered with
-letters instead of numbers, beginning from ``A''.
 \item[chapterquote] allows you to add a quote to the beginning of a
   chapter.  It takes one mandatory argument: the attribution line for
   the quote.  You should start the text of the chapter immediately
@@ -268,6 +267,9 @@ Most notably, \env{thebibliography} and \cmd{bibliographystyle} cannot
 be used, and a \cmd{bibliography} command should not be used.  See
 Section~\ref{sec:bibliographies} for more information about how to use
 the new bibliography tools.
+
+Appendices cannot be \cmd{chapter}s in \cls{gradu3}; use \cmd{section}
+to introduce each appendix after the \cmd{appendix} command.
 
 The following commands are new in \cls{gradu3}: \cmd{ohjaaja}.
 
