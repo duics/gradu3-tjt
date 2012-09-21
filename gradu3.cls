@@ -41,10 +41,7 @@
 \DeclareOption{next}{\gdef\gradu@inputenc{next}}
 \DeclareOption{utf8}{\gdef\gradu@inputenc{utf8}}
 
-\DeclareOption{kandi}{%
-  \gdef\gradu@tyyppi{kandidaatintutkielma}%
-  \gdef\gradu@type{Bachelor's Thesis}%
-}
+\DeclareOption{bachelor}{\gdef\gradu@default@@type{\gradu@bachelortype}}
 
 \DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
 \DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{english}}}
@@ -139,20 +136,19 @@
 }
 \gradu@DeclareMetadataCommand{title}{}
 \gradu@DeclareMetadataCommand{translatedtitle}{}
-\gradu@DeclareMetadataCommand{yliopisto}{Jyv\"askyl\"an yliopisto}
-\gradu@DeclareMetadataCommand{university}{University of Jyv\"askyl\"a}
-\gradu@DeclareMetadataCommand{laitos}{\gradu@default@laitos}
-\gradu@DeclareMetadataCommand{aine}{\gradu@default@aine}
-\gradu@DeclareMetadataCommand{linja}{}
-\gradu@DeclareMetadataCommand{tyyppi}{pro gradu -tutkielma}
-\gradu@DeclareMetadataCommand{type}{Master's Thesis}
+\gradu@DeclareMetadataCommand{university}{\gradu@default@university}
+\gradu@DeclareMetadataCommand{department}{\gradu@default@department}
+\gradu@DeclareMetadataCommand{subject}{\gradu@default@subject}
+\gradu@DeclareMetadataCommand{studyline}{}
+\def\gradu@default@@type{\gradu@default@type}
+\gradu@DeclareMetadataCommand{type}{\gradu@default@@type}
 %\gradu@DeclareMetadataCommand{tiivistelma} -- needs \long
 %\gradu@DeclareMetadataCommand{abstract} -- needs \long
 \gradu@DeclareMetadataCommand{avainsanat}{}
 \gradu@DeclareMetadataCommand{keywords}{}
 \gradu@DeclareMetadataListCommand{author}
-\gradu@DeclareMetadataListCommand{ohjaaja}
-\gradu@DeclareMetadataListCommand{yhteystiedot}
+\gradu@DeclareMetadataListCommand{supervisor}
+\gradu@DeclareMetadataListCommand{contactinformation}
 
 \def\gradu@date{\today}
 \renewcommand{\date}[1]{%
@@ -160,7 +156,6 @@
   \gdef\gradu@date{#1}%
 }
 \newcommand{\setdate}[3]{\gdef\day{#1}\gdef\month{#2}\year=#3}
-\newcommand{\contactinformation}[1]{\yhteystiedot{#1}}
 
 \def\gradu@tiivistelma{\gradu@muistitko{tiivistelma}}
 \long\def\tiivistelma#1{\gdef\gradu@tiivistelma{\begin{foreignlanguage}{finnish}#1\end{foreignlanguage}}}
@@ -192,16 +187,22 @@
   \def\listfigurename{Kuviot}%
   \def\listtablename{Taulukot}%
   \def\figurename{Kuvio}%
-  \def\gradu@default@laitos{Tietotekniikan laitos}%
-  \def\gradu@default@aine{Tietotekniikan}%
+  \def\gradu@default@university{Jyv\"askyl\"an yliopisto}%
+  \def\gradu@default@department{Tietotekniikan laitos}%
+  \def\gradu@default@subject{Tietotekniikan}%
+  \def\gradu@default@type{pro gradu "-tutkielma}%
+  \def\gradu@bachelortype{kandidaatintutkielma}%
 }
 \addto\captionsenglish{
   \def\gradu@msg@muistitko{Did you remember to use the}
   \def\gradu@msg@komentoa{ command?}
   \def\termlistname{Glossary}
   \def\appendicesname{Appendices}
-  \def\graduDefaultLaitos{Department of Mathematical Information Technology}
-  \def\gradu@default@aine{in Information Technology}%
+  \def\gradu@default@university{University of Jyv\"askyl\"a}%
+  \def\gradu@default@department{Department of Mathematical Information Technology}
+  \def\gradu@default@subject{in Information Technology}%
+  \def\gradu@default@type{Master's Thesis}%
+  \def\gradu@bachelortype{Bachelor's Thesis}%
 }
 \AtBeginDocument{\selectdefaultlanguage}
 
@@ -269,21 +270,17 @@
   \par%
   \raggedleft%
   \iflanguage{finnish}{%
-    \gradu@aine{} \gradu@tyyppi%
+    \gradu@subject{} \gradu@type%
   }{%
-    \gradu@type{} \gradu@aine%
+    \gradu@type{} \gradu@subject%
   }%
   \par%
   \raggedleft
   \gradu@date%
   \vfill%
   \vspace{1truecm plus 1truecm minus .5truecm}%
-  \iflanguage{finnish}{%
-    \center{\large\textbf{\gradu@yliopisto}}%
-  }{%
-    \center{\large\textbf{\gradu@university}}%
-  }%
-  \center{\textbf{\gradu@laitos}}%
+  \center{\large\textbf{\gradu@university}}%
+  \center{\textbf{\gradu@department}}%
 \end{titlepage}%
 \pagenumbering{roman}
 \newpage%
@@ -298,32 +295,32 @@
   }%
   \iflanguage{finnish}{%
     \noindent\textbf{Yhteystiedot:} %
-    \gradu@yhteystiedot@render{,\space}{\space ja\space}\par%
+    \gradu@contactinformation@render{,\space}{\space ja\space}\par%
   }{%
     \noindent\textbf{Contact information:}
-    \gradu@yhteystiedot@render{,\space}{,\space and\space}\par%
+    \gradu@contactinformation@render{,\space}{,\space and\space}\par%
   }%
   \noindent{%
     \textbf{%
       \iflanguage{finnish}{%
-        Ohjaaja\ifthenelse{\value{gradu@ohjaaja@count}>1}{t}{}:%
+        Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
       }{%
-        Supervisor\ifthenelse{\value{gradu@ohjaaja@count}>1}{s}{}:%
+        Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
       }%
     }\space%
     \iflanguage{finnish}{%
-      \gradu@ohjaaja@render{,\space}{\space ja\space}\par%
+      \gradu@supervisor@render{,\space}{\space ja\space}\par%
     }{%
-      \gradu@ohjaaja@render{,\space}{,\space and\space}\par%
+      \gradu@supervisor@render{,\space}{,\space and\space}\par%
     }%
   }\par%
   \iflanguage{finnish}{%
     \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
     \noindent\textbf{Ty\"o:} {%
-      \gradu@HeadToUpper\gradu@tyyppi%
+      \gradu@HeadToUpper\gradu@type%
     }\par%
-    \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@linja\par%
+    \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@studyline\par%
     \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
     \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
     \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
@@ -333,7 +330,7 @@
     \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
     \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
     \noindent\textbf{Project:} \gradu@type\par%
-    \noindent\textbf{Study line:} \gradu@linja\par%
+    \noindent\textbf{Study line:} \gradu@studyline\par%
     \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
     \noindent\textbf{Abstract:} \gradu@abstract\par%
     \noindent\textbf{Keywords:} \gradu@keywords\par%

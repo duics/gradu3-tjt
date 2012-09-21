@@ -116,7 +116,7 @@ You should not invoke \cmd{usepackage\{inputenc\}} yourself!
 \section{Other options}
 
 \begin{opts}
-\item[kandi] This is a Bachelor's thesis.
+\item[bachelor] This is a Bachelor's thesis.
 \end{opts}
 
 \section{Title and Metadata Commands}
@@ -131,29 +131,28 @@ metadata pages.
 \item[title] document's title (mandatory)
 \item[author] documents's author (mandatory).  This command can be
   repeated to specify more than one author.
-\item[ohjaaja] thesis supervisor (mandatory).  This command can be
+\item[supervisor] thesis supervisor (mandatory).  This command can be
   repeated to specify more than one supervisor.
 \item[date] document's publishing date (defaults to the current date)
   \textbf{deprecated, use \textbackslash setdate instead}
 \item[setdate] takes three arguments: day, month, year (all numeric);
   sets document's publishing date (defaults to the current date)
-\item[yliopisto] the university to which this thesis will be
-  submitted, in Finnish (defaults to ``Jyväskylän yliopisto'')
 \item[university] the university to which this thesis will be
-  submitted, in English (defaults to ``University of Jyväskylä'')
-\item[laitos] the department  to which this thesis will be submitted (defaults to ``Tietotekniikan laitos'' in Finnish and ``Department of Mathematical Information Technology'' in English)
-\item[aine] the formal subject (major or minor) whose thesis this is
+  submitted (defaults to ``Jyväskylän yliopisto'' in Finnish and
+  ``University of Jyväskylä'')
+\item[department] the department  to which this thesis will be submitted (defaults to ``Tietotekniikan laitos'' in Finnish and ``Department of Mathematical Information Technology'' in English)
+\item[subject] the formal subject (major or minor) whose thesis this is
   (defaults to ``Tietotekniikan'' in Finnish and ``in Information
   Technology'' in English
-\item[linja] study line (mandatory)
+\item[studyline] study line (mandatory)
 \item[tyyppi] type of work in Finnish (defaults to ``pro gradu -tutkielma'')
-\item[type] type of work in English (defaults to ``A Master's Thesis'')
+\item[type] type of work (defaults to ``pro gradu -tutkielma'' in
+  Finnish and ``A Master's Thesis'' in English, except when the
+  \opt{bachelor} option has been used)
 \item[keywords] document's keywords in English (mandatory)
 \item[avainsanat] document's keywords in Finnish (mandatory)
 \item[contactinformation] author's contact information (mandatory). Can be
 specified multiple times for multiple authors.
-\item[yhteystiedot] author's contact information (synonym of
-\cmd{contactinformation})
 \item[tiivistelma] abstract in Finnish (mandatory)
 \item[abstract] abstract in English (mandatory)
 \item[translatedtitle] title in the other language (mandatory)
