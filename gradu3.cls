@@ -53,7 +53,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% LOAD BASE CLASS
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{draft}{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{final}{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{leqno}{\PassOptionsToClass{\CurrentOption}{report}}
+\DeclareOption{fleqn}{\PassOptionsToClass{\CurrentOption}{report}}
 \ProcessOptions
 \LoadClass[a4paper,12pt]{report}
 

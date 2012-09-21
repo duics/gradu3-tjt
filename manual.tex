@@ -243,12 +243,14 @@ longer recognized: \opt{altlinespread}, \opt{altsubsec},
 \opt{copyright}, \opt{logo}, \opt{lof}, \opt{lot}, \opt{newtitle},
 \opt{nocopyright}, \opt{nonumbib}, \opt{nottoc}, \opt{numbib},
 \opt{oldtitle}, \opt{palatino}, \opt{shortthesis}, \opt{surnamefirst},
-and \opt{toc}.  Similarly, the commands \cmd{acmccs},
-\cmd{copyrightowner}, \cmd{copyrightyear}, \cmd{fulltitle},
-\cmd{license}, \cmd{paikka}, \cmd{setauthor}, \cmd{termlist} and
-\cmd{ysa} have been removed.  Further, the conditional
-\cmd{ifgradu@pdf} has been removed (users should let \pack{hyperref}
-figure out the correct driver by itself).
+and \opt{toc}.  Also, unknown options are no longer passed
+automatically to the underlying class \cls{report}.
+
+Similarly, the commands \cmd{acmccs}, \cmd{copyrightowner},
+\cmd{copyrightyear}, \cmd{fulltitle}, \cmd{license}, \cmd{paikka},
+\cmd{setauthor}, \cmd{termlist} and \cmd{ysa} have been removed.
+Further, the conditional \cmd{ifgradu@pdf} has been removed (users
+should let \pack{hyperref} figure out the correct driver by itself).
 
 In \cls{gradu3}, use the standard \LaTeX{} command \cmd{author} to
 specify the thesis author.  Unlike in standard \LaTeX, however,
