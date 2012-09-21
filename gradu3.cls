@@ -190,7 +190,7 @@
   \def\gradu@default@university{Jyv\"askyl\"an yliopisto}%
   \def\gradu@default@department{Tietotekniikan laitos}%
   \def\gradu@default@subject{Tietotekniikan}%
-  \def\gradu@default@type{pro gradu "-tutkielma}%
+  \def\gradu@default@type{pro gradu -tutkielma}%
   \def\gradu@bachelortype{kandidaatintutkielma}%
 }
 \addto\captionsenglish{
@@ -303,7 +303,7 @@
   \noindent{%
     \textbf{%
       \iflanguage{finnish}{%
-        Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
+        Ohjaaja\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
       }{%
         Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
       }%
