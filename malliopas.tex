@@ -1,0 +1,364 @@
+\documentclass[utf8]{gradu3}
+% Jos työ on kandidaatintutkielma eikä pro gradu, käytä ylläolevan asemesta
+% \documentclass[utf8,bachelor]{gradu3}
+
+\usepackage{graphicx} % kuvien mukaan ottamista varten
+
+\usepackage{amsmath} % hyödyllinen jos tekstisi sisältää matikkaa,
+                     % ei pakollinen
+
+\usepackage{booktabs} % hyvä kauniiden taulukoiden tekemiseen
+
+% HUOM! Tämän tulee olla viimeinen \usepackage koko dokumentissa!
+\usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
+
+\addbibresource{malliopas.bib} % Lähdetietokannan tiedostonimi
+
+\begin{document}
+
+\title{\LaTeX-tutkielmapohjan {gradu3} käyttö}
+\translatedtitle{Usage of the {gradu3} document class for \LaTeX\ theses}
+\studyline{Kaikki suuntautumisvaihtoehdot}
+\avainsanat{%
+  \LaTeX,
+  {gradu3},
+  pro gradu -tutkielmat,
+  kandidaatintutkielmat,
+  käyttöohje}
+\keywords{\LaTeX, {gradu3}, Master's Theses, Bachelor's Theses}
+\tiivistelma{%
+  Tämä kirjoitelma on esimerkki siitä, kuinka
+  {gradu3}-tutkielmapohjaa käytetään.  Se sisältää myös
+  käyttöohjeet ja tutkielman rakennetta koskevia ohjeita.
+
+  Tutkielman tiivistelmä on tyypillisesti lyhyt esitys, jossa
+  kerrotaan tutkielman taustoista, tavoitteesta, tutkimusmenetelmistä,
+  saavutetuista tuloksista, tulosten tulkinnasta ja johtopäätöksistä.
+  Tiivistelmän tulee olla niin lyhyt, että se, englanninkielinen
+  abstrakti ja muut metatiedot mahtuvat kaikki samalle sivulle.
+}
+\abstract{%
+  This document is a sample {gradu3} thesis document class
+  document.  It also functions as a user manual and supplies
+  guidelines for structuing a thesis document.
+
+  The English abstract of a thesis should usually say exactly the same
+  things as the Finnish tiivistelmä.
+}
+
+\author{Antti-Juhani Kaijanaho}
+\contactinformation{Ag~C416.1, \texttt{antti-juhani.kaijanaho@jyu.fi}}
+% jos useita tekijöitä, anna useampi \author-komento
+\supervisor{Ohjaamaton työ}
+% jos useita ohjaajia, anna useampi \supervisor-komento
+
+\type{tutkielmapohjan esimerkki ja käsikirja} % et tarvitse tätä riviä tutkielmassa!
+
+\maketitle
+
+\preface
+Tähän voit kirjoittaa tutkielmasi esipuheen.  Tutkielmissa on
+harvemmin esipuheita, mutta jos sen kirjoitat, pidä se lyhyenä
+(enintään sivu).
+
+Esipuheen tulisi kertoa ennemminkin tutkielmaprosessista kuin
+tutkielman sisällöstä.  Esimerkiksi jos tutkielman aiheen valintaan
+tai tekemiseen liittyy jokin erikoinen sattumus, voit siitä kertoa
+esipuheessa.  Tapana esipuheessa on myös kiittää nimeltä mainiten
+tärkeimpiä tutkielman tekemisessä auttaneita ihmisiä -- ainakin
+ohjaajia, puolisoa ja lapsia.  (Yleensä perhe on auttanut vähintään
+tukemalla ja kannustamalla.)
+
+Esipuhe kannattaa kirjoittaa minä-muodossa. Tavanomaista on myös
+allekirjoittaa se.
+
+Jyväskylässä \today
+
+\bigskip
+
+Tutkielman tekijä
+
+\begin{thetermlist}
+\item[\TeX] Donald Knuthin 1977--1989 laatima eräajotyyppinen
+  ladontajärjestelmä \parencite[ks.][]{knuth86:_texbook}. 
+\item[\LaTeX] \TeX in päälle rakennettu rakenteisten kirjoitelmien
+  ladontaan tarkoitettu järjestelmä \parencite[ks.][]{lamport94:_latex}.
+  Siitä on nykyään käytössä versio \LaTeXe.
+\end{thetermlist}
+
+\mainmatter
+
+\chapter{Johdanto}
+
+Tutkielman varsinainen teksti alkaa aina luvulla ''Johdanto''.  Sen
+kirjoittamisen voi hyvin jättää aivan tutkielman kirjoitusprosessin
+loppuvaiheisiin.
+
+Johdanto kannattaa aloittaa napakasti esittämällä heti alussa
+tutkielman pääväite tai tutkimuskysymys.  Tämän jälkeen kannattaa
+selventää asioita määrittelemällä tarvittavat
+käsitteet.\footnote{Määritelmät vasta väitteen jälkeen! Äläkä
+  jaarittele johdannossa.}  Johdannossa voit myös kertoa, miksi väite
+on käytännön tai tieteen (tai parhaimmillaan molempien) kannalta
+relevantti ja mielenkiintoinen.  Erinomaista olisi, jos kertoisit
+johdannossa lyhyesti myös, mikä on tutkielmasi kontribuutio eli mitä
+sellaista tietoa tutkielmasi sisältää, jonka olet itse selvittänyt sen
+sijaan että olisit sen lähteestä lukenut.  Kontribuutio voi hyvin olla
+myös se, että olet itse tarkastanut jonkin lähteestä löytyneen
+väitteen todenperäisyyden.  Johdannon lopuksi on tapana esitellä
+lyhyesti tutkielman rakenne -- mitä missäkin luvussa käsitellään.
+
+Tämä malli olettaa, että tunnet \LaTeX-järjestelmän käytön perusasiat.
+Alkuperäinen \LaTeX-kirja \parencite{lamport94:_latex} on järjestelmän
+virallinen käyttöopas.  Olen myös itse kirjoittanut aiheesta
+opaskirjan \parencite{kaijanaho03:_latex_ams_latex}.\footnote{Monet
+  \TeX- ja \LaTeX-kirjat käyttävät kansikuviensa aiheena kissaeläintä.
+  Oman monisteeni kansikuva oli varsin abstrakti kisuli,
+  ks.~kuvio~\ref{fig:opus-kissa}.}  Hyvä suomenkielinen, vapaasti
+verkosta saatavilla oleva opas on \textit{Pitkänpuoleinen johdanto
+  \LaTeXe:n käyttöön} \parencite{oetiker:_pitka_latex}.  Muista lukea
+tämän mallin ladotun version (PDF tms) lisäksi sen \LaTeX-lähdekoodi!
+
+\begin{figure}[h]\centering
+  \includegraphics[height=5cm,keepaspectratio]{opus-kissa}
+  \caption[\LaTeX-oppaani \parencite{kaijanaho03:_latex_ams_latex}
+  kansikuva]{\LaTeX-oppaani \parencite{kaijanaho03:_latex_ams_latex}
+    kansikuva on tässä vain esimerkkinä kuvan ottamisesta mukaan
+    tutkielmaan.}
+  \label{fig:opus-kissa}
+\end{figure}
+
+Huomaa, että tämän mallin esittämät ohjeet eivät ole millään tavalla
+virallisia.  Noudata aina ohjaajasi neuvoja vaikka ne poikkeaisivatkin
+tämän mallin ohjeista.
+
+\chapter{Tutkielman rakenne}
+
+Yhteensä tutkielmassa on hyvä olla 5–9 numeroitua
+lukua, siis Johdanto ja Yhteenveto mukaan lukien.  Tarvittaessa voit
+käyttää alilukuja tarkempaan jäsentelyyn.
+
+Johdannon ja Yhteenvedon väliin jääviä lukuja kutsutaan toisinaan
+tutkielman \textit{käsittelyosaksi}.  Usein sen katsotaan jakaantuvan
+vielä kahtia, jolloin käsittelyosa alkaa \textit{teoriaosalla} ja
+päättyy joko \textit{päälauseeseen}, \textit{konstruktiiviseen osaan}
+tai \textit{empiiriseen osaan}.
+
+\section{Teoriaosa}
+
+Tutkielman teoriaosan tarkoituksena on esitellä tutkielmassa
+tarvittava teoreettinen tausta.  Tämä on syytä tehdä vähintään sillä
+tarkkuudella, että tutkielman lukija pystyy pelkästään tutkielman
+itsensä perusteella ymmärtämään kaikki tutkielmassa käytettävät
+erityiskäsitteet ja "=menetelmät.  Monissa tutkielmissa teoria
+esitellään tätä perusteellisemmin, onhan kyse opinnäytteestä eli
+oppineisuuden osoittamisesta.
+
+Teoriataustan järkevä esitys- ja käyttötapa riippuu siitä, minkä
+tyyppisestä tutkimuksesta tutkielmassasi on kyse.
+Matemaattis-teoreettisen työn teoriaosa on aivan eri näköinen kuin
+konstruktiivisen ohjelmistonkehitystyön teoriaosa; näistä myös eroaa
+olennaisesti ihmistieteellisiin traditioihin nojautuvan määrällisen
+tai laadullisen tutkimustuön teoriaosa.  Muita samantyyppisiä
+tutkielmia ja julkaistuja tutkimusraportteja lukemalla saat kyllä
+käsityksen siitä, mitä omalta työltäsi vaaditaan.
+
+\subsection{Lähteiden käyttö}
+
+Teoriaosa perustuu lähes aina yksinomaan lähdekirjallisuuteen.
+
+Muista varoa plagiointia.  Jos kopioit joko sellaisenaan tai lievästi
+muutettuna (tai esimerkiksi englannista suomennettuna) tekstiä jostain
+lähteestä, tee selväksi, että olet tehnyt niin.  Merkitse lainaukset
+ja anna täsmällinen lähdeviite.  Jos et lainaa sanatarkasti, merkitse
+tekemäsi muutokset.  Useimmissa tilanteissa on kuitenkin parempi
+esittää asia omin sanoin, mieluiten useamman lähteen perusteella.
+Merkitse tällöinkin käyttämäsi lähteet.
+
+\section{Teorian jälkeen}
+
+Teoriaosan jälkeen tulee työsi varsinainen kontribuutio:
+\begin{itemize}
+\item Matemaattis-teoreettisessa työssä se on yleensä jono itse
+  laatimiasi määritelmiä ja lemmoja, jotka kulminoituvat työn
+  päälauseen todistukseen.
+\item Konstruktiivisessa työssä se on itse laatimasi tietokoneohjelma
+  tai muu artefakti.
+\item Empiirisessä työssä se on jotain empiiristä tutkimusmenetelmää
+  soveltamalla saavutettu joukko empiirisiä tuloksia.
+\end{itemize}
+
+Tutkielmassa kontribuutio esitellään varsin tarkasti, tehdyt valinnat
+perustellen.  Erityisesti matemaattis-teoreettisissa ja empiirisissä
+töissä on syytä noudattaa kulloisenkin tutkimustradition käytänteitä
+-- esimerkiksi ihmistieteellinen koeasetalma on kuvattava tarkasti.
+
+\chapter{Tutkielmapohjan erityispiirteet}
+
+Pääsääntöisesti {gradu3} käyttäytyy kuten \LaTeX in mukana
+tuleva {report}-kirjoitelmaluokka.  Eroja kuitenkin on:
+\begin{itemize}
+\item Sinun ei tarvitse ladata {inputenc}-, {fontenc}-
+  eikä {babel}-pakettia.
+  \begin{itemize}
+  \item Käyttämäsi merkistö sinun pitää ilmoittaa
+    {\string\documentclass}-komennon optiona.  Nykyään
+    {utf8} on lähes pomminvarma valinta.
+  \item Jos tutkielmasi on englanninkielinen, ilmoita se
+    {\string\documentclass}-komennon optiolla {english}.
+  \end{itemize}
+\item Jos tutkielmasi on kandidaatintutkielma, käytä
+  {\string\documentclass}-komennon optiota {bachelor}.
+\item Ilmoita tutkielmasi metatiedot taulukossa~\ref{tbl:metatiedot}
+  esitetyillä komennoilla.  Ne tulee antaa ennen
+  {\string\maketitle}-komentoa.
+\begin{table}[h]\centering
+  \begin{tabular}{lp{9cm}}
+    \toprule
+    Komento & Tarkoitus \\
+    \midrule
+    {\string\title}
+    & Työn otsikko (älä käytä {\string\thanks}-komentoa) \\
+    {\string\translatedtitle}
+    & Suomenkielisen työn englanninkielinen otsikko, englanninkielisen työn suomenkielinen otsikko\\
+    {\string\studyline}
+    & Suuntautumisvaihtoehtosi \\
+    {\string\tiivistelma}
+    & Suomenkielinen tiivistelmä \\
+    {\string\abstract}
+    & Englanninkielinen abstrakti \\
+    {\string\avainsanat}
+    & Suomenkieliset avainsanat \\
+    {\string\keywords}
+    & Englanninkieliset avainsanat \\
+    {\string\author}
+    & Kirjoittajan nimi (jos useita, anna kukin omana komentonaan -- {\string\and}-komentoa ei tueta) \\
+    {\string\contactinformation}
+    & Kirjoittajan yhteystiedot \\
+    {\string\supervisor}
+    & Tutkielman ohjaaja (jos useita, anna kukin omana komentonaan)\\
+    \bottomrule
+  \end{tabular}
+  \caption{Metatietojen ilmoituskomennot}\label{tbl:metatiedot}
+\end{table}
+\item Voit \string\maketitle-komennon jälkeen halutessasi kirjoittaa
+  esipuheen.  Sen otsikon saat komennolla \string\preface.
+\item Mahdollisen esipuheen jälkeen voit kirjoittaa termiluettelon
+  käyttämällä thetermlist-ympäristöä.  Sen sisällä voit käyttää
+  \string\item[\textit{termi}]"-komentoa merkitsemään määriteltävän
+  termin.
+\item Käytä \string\maketitle-komennon ja mahdollisten esipuheen ja
+  termiluettelon jälkeen \string\mainmatter-komentoa.  Se laatii
+  automaattisesti sisällys-, kuvio- ja taulukkoluettelot.
+\item Tutkielmassa on oltava ainakin yksi kuvio ja yksi taulukko.
+\item Komentoja \string\subsubsection, \string\paragraph{} ja
+  \string\subparagraph{} ei tueta.
+\item Liitteet eivät ole lukuja (\string\chapter) vaan alilukuja
+  (\string\section).
+\item Lähdeluettelon tekemiseen käytetään automaattisesti
+  \textsc{Bib\LaTeX}-järjestelmää \parencite{biblatex-manual} ja sen
+  Chicago-tyyliä \parencite{biblatex-chicago-manual}.  Tarvitset
+  erillisen \textsc{Bib\TeX}-tiedostomuodossa olevan lähdetietokannan.
+  Sen laatimisessa voit käyttää apuna monia
+  lähteidenhallintajärjestelmiä, mutta sen voi laatia myös käsin.
+  Tarvitset myös {biber}-ohjelman, jolla tietokanta kääntyy \LaTeX in
+  ymmärtämään muotoon.\footnote{Huomaa, että perinteinen
+    {bibtex}-ohjelma ei toimi {gradu3}-tutkielmapohjan käyttämän
+    Chicago"-bibliografiatyylin kanssa.}
+\end{itemize}
+
+\chapter{Yhteenveto}
+
+Tutkielman viimeinen luku on Yhteenveto.  Sen on hyvä olla lyhyt;
+siinä todetaan, mitä tutkielmassa esitetyn nojalla voidaan sanoa
+johdannon väitteen totuudesta tai tutkimuskysymyksen vastauksesta.
+Yhteenvedossa tuodaan myös esille tutkielman heikkoudet (erityisesti
+tekijät, jotka heikentävät tutkielman tulosten luotettavuutta), ellei
+niitä ole jo aiemmin tuotu esiin esimerkiksi Pohdinta-luvussa.  Tässä
+luvussa voidaan myös tuoda esille, mitä tutkimusta olisi tämän
+tutkielman tulosten valossa syytä tehdä seuraavaksi.
+
+Jos Yhteenveto alkaa pitkittyä, se kannattaa jakaa kahtia niin, että
+tulosten tulkinta otetaan omaksi Pohdinta-luvukseen, jolloin
+Yhteenvedosta tulee varsin lyhyt ja lakoninen.
+
+Yhteenvedon jälkeen tulee \string\printbibliography-komennolla
+laadittu lähdeluettelo ja sen jälkeen mahdolliset liitteet.
+
+\printbibliography
+
+\appendix
+\section{Siirtyminen gradu2:sta gradu3:een}
+
+Keskeneräisen tutkielman siirtäminen gradu2:sta gradu3:een ei ole
+kovin vaikeata.  Aluksi on totta kai vaihdettava
+\string\documentclass-komennossa gradu2 gradu3:ksi.  Komennon
+optioista suurin osa on poistettava, koska niitä ei enää tueta;
+ainoastaan merkistön ilmoittava optio jää jäljelle.  Mahdollinen
+kandi-optio vaihdetaan optioksi bachelor.
+
+Taulukossa~\ref{tbl:cmdchange} on lueteltu tarvittavat
+komentovaihdokset.  Viiva tarkoittaa, ettei vastaavaa komentoa ole
+lainkaan.  Huomaa erityisesti uudet komennot.
+
+\begin{table}[h]\centering
+  \begin{tabular}{ll}
+    \toprule
+    gradu2                 & gradu3  \\
+    \midrule
+    ---                    & \string\maketitle \\
+    ---                    & \string\supervisor \\
+    \string\acmccs         & --- \\
+    \string\aine           & \string\subject\\
+    \string\copyrightowner & --- \\
+    \string\fulltitle      & --- \\
+    \string\laitos         & \string\department\\
+    \string\license        & --- \\
+    \string\linja          & \string\studyline\\
+    \string\paikka         & --- \\
+    \string\setauthor      & \string\author\\
+    \string\termlist       & thetermlist-ympäristö\\
+    \string\tyyppi         & \string\type\\
+    \string\yhteystiedot   & \string\contactinformation\\
+    \string\yliopisto      & \string\university\\
+    \string\ysa            & --- \\
+    \bottomrule
+  \end{tabular}
+  \caption{Komentomuutokset gradu2:sta gradu3:een}
+  \label{tbl:cmdchange}
+\end{table}
+
+Huomaa myös, että gradu3:sta käytettäessä tutkielmassa on oltava
+ainakin yksi kuvio ja ainakin yksi taulukko.
+
+Isoin työ voi aiheutua lähdeluettelon laatimistekniikan muuttumiseen
+sopeutumisesta.
+
+\section{Harvemmin tarvittavat ominaisuudet}
+
+Aiemmin esiteltyjen lisäksi gradu3 tarjoaa seuraavat lisäominaisuudet:
+\begin{itemize}
+\item \LaTeXe:n vakio-optiot draft ja final toimivat.
+\item Vaikka tutkielman suomenkielisyyttä ei tarvitse erikseen
+  mainita, finnish-optio toimii.
+\item \string\university-komennolla voit ilmoittaa tutkielman
+  kotiyliopistoksi jonkin muun kuin Jyväskylän yliopiston.
+\item  \string\department-komennolla voit ilmoittaa tutkielman
+  kotilaitokseksi jonkin muun kuin Tietotekniikan laitoksen.
+\item \string\subject-komennolla voit ilmoittaa tutkielman
+  oppiaineeksi jonkin muun kuin tietotekniikan.  Huomaa, että oppiaine
+  tulisi suomenkielisissä tutkielmissa kirjoittaa genetiivimuodossa ja
+  isolla alkukirjaimella (''Tietotekniikan''), englanninkielisissä
+  tuktkielmissa in-preposition kanssa (''in Information Technology'').
+\item \string\type-komennolla voit ilmoittaa tutkielman tyypin, jos se
+  on jokin muu kuin pro gradu (oletus) tai kandidaatintutkielma
+  (optiolla bachelor).
+\item \string\setdate-komennolla voit asettaa päivämäärän
+  haluamaksesi.  Komennolle annetaan kolme parametria -- päivä,
+  kuukausi ja vuosi -- numeerisessa muodossa.
+\item Ympäristöllä chapterquote voit laittaa luvun alkuun
+  mietelauseen.  Sillä on yksi pakollinen parametri (lainauksen
+  attribuutio).
+\end{itemize}
+
+\end{document}
