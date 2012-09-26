@@ -62,7 +62,7 @@
 % Generic list support
 \let\gradu@listitem\relax
 \def\gradu@appendlist#1#2{\xdef#1{#1\noexpand\gradu@listitem{#2}}}
-\def\gradu@map#1#2{\begingroup\let\gradu@listitem#1#2\endgroup}
+\def\gradu@map#1#2{{\let\gradu@listitem#1#2}}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,7 +86,7 @@
 }
 \newcounter{gradu@listrender@count}
 \def\gradu@DeclareMetadataListCommand#1{%
-  \newcounter{gradu@#1@count}
+  \newcounter{gradu@#1@count}%
   \gradu@appendlist\gradu@metadatacommands{#1}%
   \expandafter\def\csname#1\endcsname##1{%
     \expandafter\gradu@appendlist\csname gradu@#1\endcsname{##1}%
@@ -98,21 +98,21 @@
       \gradu@muistitko{#1}%
     }{%
       \setcounter{gradu@listrender@count}{\value{gradu@#1@count}}%
-      \begingroup%
-      \def\gradu@f####1{%
-        \addtocounter{gradu@listrender@count}{-1}%
-        ####1%
-        \ifthenelse{\value{gradu@listrender@count} = 0}{%
-        }{%
-          \ifthenelse{\value{gradu@listrender@count} = 1}{%
-            ##2%
+      {%
+        \def\gradu@f####1{%
+          \addtocounter{gradu@listrender@count}{-1}%
+          ####1%
+          \ifthenelse{\value{gradu@listrender@count} = 0}{%
           }{%
-            ##1%
+            \ifthenelse{\value{gradu@listrender@count} = 1}{%
+              ##2%
+            }{%
+              ##1%
+            }%
           }%
         }%
+        \expandafter\gradu@map\expandafter\gradu@f\csname gradu@#1\endcsname%
       }%
-      \expandafter\gradu@map\expandafter\gradu@f\csname gradu@#1\endcsname%
-      \endgroup%
     }%
   }%
 }
@@ -144,8 +144,8 @@
 \def\gradu@abstract{\gradu@muistitko{abstract}}
 \long\def\abstract#1{\gdef\gradu@abstract{\begin{foreignlanguage}{english}#1\end{foreignlanguage}}}
 
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %% BASIC FORMATTING
 
 \renewcommand{\baselinestretch}{1.2} % this makes for a 1.45 line spacing
@@ -154,45 +154,57 @@
 \setlength\parskip{10pt}
 \setlength\bibhang{0pt}
 
-\def\@listi{\leftmargin\leftmargini%
-            \parsep 10pt%
-            \topsep 0pt%
-            \itemsep 0pt%
+\def\@listi{%
+  \leftmargin\leftmargini%
+  \parsep 10pt%
+  \topsep 0pt%
+  \itemsep 0pt%
 }
 \let\@listI\listi
 \@listi
-\def\@listii {\leftmargin\leftmarginii
-              \labelwidth\leftmarginii
-              \advance\labelwidth-\labelsep
-              \topsep    0pt%
-              \parsep    10pt%
-              \itemsep   0pt}
-\def\@listiii{\leftmargin\leftmarginiii
-              \labelwidth\leftmarginiii
-              \advance\labelwidth-\labelsep
-              \topsep    0pt%
-              \parsep    0pt%
-              \itemsep   0pt}
-\def\@listiv {\leftmargin\leftmarginiv
-              \labelwidth\leftmarginiv
-              \advance\labelwidth-\labelsep}
-\def\@listv  {\leftmargin\leftmarginv
-              \labelwidth\leftmarginv
-              \advance\labelwidth-\labelsep}
-\def\@listvi {\leftmargin\leftmarginvi
-              \labelwidth\leftmarginvi
-              \advance\labelwidth-\labelsep}
+\def\@listii{%
+  \leftmargin\leftmarginii%
+  \labelwidth\leftmarginii%
+  \advance\labelwidth-\labelsep%
+  \topsep    0pt%
+  \parsep    10pt%
+  \itemsep   0pt%
+}
+\def\@listiii{%
+  \leftmargin\leftmarginiii%
+  \labelwidth\leftmarginiii%
+  \advance\labelwidth-\labelsep%
+  \topsep    0pt%
+  \parsep    0pt%
+  \itemsep   0pt%
+}
+\def\@listiv{%
+  \leftmargin\leftmarginiv%
+  \labelwidth\leftmarginiv%
+  \advance\labelwidth-\labelsep%
+}
+\def\@listv{%
+  \leftmargin\leftmarginv%
+  \labelwidth\leftmarginv%
+  \advance\labelwidth-\labelsep%
+}
+\def\@listvi{%
+  \leftmargin\leftmarginvi%
+  \labelwidth\leftmarginvi%
+  \advance\labelwidth-\labelsep%
+}
 
 \long\def\@makecaption#1#2{%
-  \vskip\abovecaptionskip
+  \vskip\abovecaptionskip%
   \sbox\@tempboxa{#1. #2}%
-  \ifdim \wd\@tempboxa >\hsize
-    #1. #2\par
+  \ifdim \wd\@tempboxa >\hsize%
+    #1. #2\par%
   \else
-    \global \@minipagefalse
+    \global \@minipagefalse%
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
-  \fi
-  \vskip\belowcaptionskip}
+  \fi%
+  \vskip\belowcaptionskip%
+}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -216,13 +228,13 @@
   \def\gradu@default@type{pro gradu -tutkielma}%
   \def\gradu@bachelortype{kandidaatintutkielma}%
 }
-\addto\captionsenglish{
-  \def\gradu@msg@muistitko{Did you remember to use the}
-  \def\gradu@msg@komentoa{ command?}
-  \def\termlistname{Glossary}
-  \def\appendicesname{Appendices}
+\addto\captionsenglish{%
+  \def\gradu@msg@muistitko{Did you remember to use the}%
+  \def\gradu@msg@komentoa{ command?}%
+  \def\termlistname{Glossary}%
+  \def\appendicesname{Appendices}%
   \def\gradu@default@university{University of Jyv\"askyl\"a}%
-  \def\gradu@default@department{Department of Mathematical Information Technology}
+  \def\gradu@default@department{Department of Mathematical Information Technology}%
   \def\gradu@default@subject{in Information Technology}%
   \def\gradu@default@type{Master's Thesis}%
   \def\gradu@bachelortype{Bachelor's Thesis}%
@@ -271,6 +283,7 @@
   }%
 }
 
+% Converts the first character of the (expanded) argument to upper case.
 \def\gradu@HeadToUpper#1{%
   \edef\fooA{#1}%
   \def\fooB##1{##1}%
@@ -279,106 +292,106 @@
 }
 \pagenumbering{Roman}
 \renewcommand{\maketitle}{%
-  \begingroup
-  \def\ps@titlepage{%
-    \let\@mkboth\@gobbletwo%
-    \let\@oddhead\@empty%
-    \def\@oddfoot{\hfill%
-      \begin{minipage}{\textwidth}
-        \mbox{}\hfill\gradu@university\hfill\mbox{}\\[10pt]%
-        \mbox{}\hfill\gradu@department\hfill\mbox{}%
-      \end{minipage}\hfill%
-    }%
-    \let\@evenhead\@empty%
-    \let\@evenfoot\@empty%
-  }
-  %%%% TITLE PAGE
-\begin{titlepage}%
- \thispagestyle{titlepage}%
- \vspace*{164pt}%
-  \begingroup%
-  \def\gradu@f##1{\centerline{\textbf{##1}}}%
-  \gradu@map\gradu@f\gradu@author\par%
-  \endgroup
-  \vspace{36pt}%
-  \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
-  \vspace{164pt}%
-  \par%
-  \raggedleft%
-  \iflanguage{finnish}{%
-    \gradu@subject{} \gradu@type%
-  }{%
-    \gradu@type{} \gradu@subject%
-  }%
-  \par%
-  \raggedleft
-  \gradu@date%
-%  \vfill%
-%  \vspace{1truecm plus 1truecm minus .5truecm}%
-%  \center{\large\textbf{\gradu@university}}%
-%  \center{\textbf{\gradu@department}}%
-\end{titlepage}%
-\pagenumbering{roman}
-\newpage%
-%%% METADATA PAGE
-  \noindent%
-  \iflanguage{finnish}{%
-    \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
-    \gradu@author@render{,\space}{\space ja\space}\par%
-  }{%
-    \noindent\textbf{Author\ifthenelse{\value{gradu@author@count}>1}{s}{}:} %
-    \gradu@author@render{,\space}{,\space and\space}\par%
-  }%
-  \iflanguage{finnish}{%
-    \noindent\textbf{Yhteystiedot:} %
-    \gradu@contactinformation@render{,\space}{\space ja\space}\par%
-  }{%
-    \noindent\textbf{Contact information:}
-    \gradu@contactinformation@render{,\space}{,\space and\space}\par%
-  }%
-  \noindent{%
-    \textbf{%
-      \iflanguage{finnish}{%
-        Ohjaaja\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
-      }{%
-        Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
+  {%
+    \def\ps@titlepage{%
+      \let\@mkboth\@gobbletwo%
+      \let\@oddhead\@empty%
+      \def\@oddfoot{\hfill%
+        \begin{minipage}{\textwidth}%
+          \mbox{}\hfill\gradu@university\hfill\mbox{}\\[10pt]%
+          \mbox{}\hfill\gradu@department\hfill\mbox{}%
+        \end{minipage}\hfill%
       }%
-    }\space%
+      \let\@evenhead\@empty%
+      \let\@evenfoot\@empty%
+    }
+    %%%% TITLE PAGE
+    \begin{titlepage}%
+      \thispagestyle{titlepage}%
+      \vspace*{164pt}%
+      {%
+        \def\gradu@f##1{\centerline{\textbf{##1}}}%
+        \gradu@map\gradu@f\gradu@author\par%
+      }%
+      \vspace{36pt}%
+      \centerline{%
+        \Large\textbf{\parbox[top][\height][c]{\textwidth}{%
+            \centering \gradu@title%
+          }}%
+      }%
+      \vspace{164pt}%
+      \par%
+      \raggedleft%
+      \iflanguage{finnish}{%
+        \gradu@subject{} \gradu@type%
+      }{%
+        \gradu@type{} \gradu@subject%
+      }%
+      \par%
+      \raggedleft
+      \gradu@date%
+    \end{titlepage}%
+    \pagenumbering{roman}
+    \newpage%
+    %%% METADATA PAGE
+    \noindent%
     \iflanguage{finnish}{%
-      \gradu@supervisor@render{,\space}{\space ja\space}\par%
+      \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
+      \gradu@author@render{,\space}{\space ja\space}\par%
     }{%
-      \gradu@supervisor@render{,\space}{,\space and\space}\par%
+      \noindent\textbf{Author\ifthenelse{\value{gradu@author@count}>1}{s}{}:} %
+      \gradu@author@render{,\space}{,\space and\space}\par%
     }%
-  }\par%
-  \iflanguage{finnish}{%
-    \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
-    \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
-    \noindent\textbf{Ty\"o:} {%
-      \gradu@HeadToUpper\gradu@type%
+    \iflanguage{finnish}{%
+      \noindent\textbf{Yhteystiedot:} %
+      \gradu@contactinformation@render{,\space}{\space ja\space}\par%
+    }{%
+      \noindent\textbf{Contact information:}
+      \gradu@contactinformation@render{,\space}{,\space and\space}\par%
+    }%
+    \noindent{%
+      \textbf{%
+        \iflanguage{finnish}{%
+          Ohjaaja\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
+        }{%
+          Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
+        }%
+      }\space%
+      \iflanguage{finnish}{%
+        \gradu@supervisor@render{,\space}{\space ja\space}\par%
+      }{%
+        \gradu@supervisor@render{,\space}{,\space and\space}\par%
+      }%
     }\par%
-    \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@studyline\par%
-    \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
-    \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
-    \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-    \noindent\textbf{Abstract:} \gradu@abstract\par%
-    \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
-  }{%
-    \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
-    \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
-    \noindent\textbf{Project:} \gradu@type\par%
-    \noindent\textbf{Study line:} \gradu@studyline\par%
-    \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
-    \noindent\textbf{Abstract:} \gradu@abstract\par%
-    \noindent\textbf{Keywords:} \gradu@keywords\par%
-    \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
-    \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+    \iflanguage{finnish}{%
+      \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
+      \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
+      \noindent\textbf{Ty\"o:} {%
+        \gradu@HeadToUpper\gradu@type%
+      }\par%
+      \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@studyline\par%
+      \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
+      \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
+      \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+      \noindent\textbf{Abstract:} \gradu@abstract\par%
+      \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
+    }{%
+      \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
+      \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
+      \noindent\textbf{Project:} \gradu@type\par%
+      \noindent\textbf{Study line:} \gradu@studyline\par%
+      \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
+      \noindent\textbf{Abstract:} \gradu@abstract\par%
+      \noindent\textbf{Keywords:} \gradu@keywords\par%
+      \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
+      \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+    }%
+    %%% POSTPROCESSING
+    \def\gradu@f##1{%
+      \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
+    }%
+    \gradu@map\gradu@f\gradu@metadatacommands%
   }%
-%%% POSTPROCESSING
-  \def\gradu@f##1{%
-    \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
-  }%
-  \gradu@map\gradu@f\gradu@metadatacommands%
-\endgroup
   \global\let\author\gradu@toolate%
   \global\let\date\gradu@toolate%  
   \global\let\tiivistelma\gradu@toolate%  
@@ -408,28 +421,28 @@
 \let\listoffigures\@undefined
 \let\tableofcontents\@undefined
 
-\newcommand{\mainmatter}{
+\newcommand{\mainmatter}{%
   % lists of figures and tables and contents
-  \begingroup%
-  \setlength\parskip{0pt}%
-  \def\addvspace##1{}%
+  {%
+    \setlength\parskip{0pt}%
+    \def\addvspace##1{}%
+    \clearpage%
+    {%
+      \def\numberline##1{\figurename~##1.~}%
+      \@makeschapterhead{\listfigurename}%
+      \@starttoc{lof}%
+      \def\numberline##1{\tablename~##1.~}%
+      \@makeschapterhead{\listtablename}%
+      \@starttoc{lot}%
+    }%
+    \clearpage%
+    \@makeschapterhead{\contentsname}%
+    \vspace{-10pt}%
+    \@starttoc{toc}%
+  }%
   \clearpage%
-  \begingroup%
-  \def\numberline##1{\figurename~##1.~}
-  \@makeschapterhead{\listfigurename}
-  \@starttoc{lof}
-  \def\numberline##1{\tablename~##1.~}
-  \@makeschapterhead{\listtablename}
-  \@starttoc{lot}
-  \endgroup%
-  \clearpage%
-  \@makeschapterhead{\contentsname}
-  \vspace{-10pt}%
-  \@starttoc{toc}%
-  \endgroup%
-  \clearpage
-  \pagenumbering{arabic}
-  \setcounter{chapter}{0}
+  \pagenumbering{arabic}%
+  \setcounter{chapter}{0}%
 }
 
 %%
@@ -439,21 +452,24 @@
 \setcounter{secnumdepth}{2}
 \def\@makechapterhead#1{%
   \vspace*{12pt}%
-  {\parindent \z@ \raggedright \normalfont
-    \Large \bfseries 
-    \ifnum \c@secnumdepth >\m@ne
-      \thechapter\hskip2ex
-    \fi
-    #1\par\nobreak
-    \vskip 1em
-  }}
+  {%
+    \parindent \z@ \raggedright \normalfont%
+    \Large \bfseries%
+    \ifnum \c@secnumdepth >\m@ne%
+      \thechapter\hskip2ex%
+    \fi%
+    #1\par\nobreak%
+    \vskip 1em%
+  }%
+}
 \def\@makeschapterhead#1{%
   \vspace*{12pt}%
-  {\parindent \z@ \raggedright
-    \normalfont
-    \interlinepenalty\@M
-    \Large \bfseries  #1\par\nobreak
-    \vskip 1em
+  {%
+    \parindent \z@ \raggedright%
+    \normalfont%
+    \interlinepenalty\@M%
+    \Large \bfseries  #1\par\nobreak%
+    \vskip 1em%
   }%
   \ifthenelse{\equal{\thepage}{\arabic{page}}}{%
     \phantomsection%
@@ -475,13 +491,14 @@
   {2}%
   {\z@}%
   {-\baselineskip}%
-  {2ex}
+  {2ex}%
   {\normalfont\bfseries\normalsize}%
 }
 
-\renewcommand\subsubsection{\ClassError{gradu3}{Don't use sectioning below subsection}{}}
-\renewcommand\paragraph{\ClassError{gradu3}{Don't use sectioning below subsection}{}}
-\renewcommand\subparagraph{\ClassError{gradu3}{Don't use sectioning below subsection}{}}
+\def\gradu@forbiddensection{\ClassError{gradu3}{Don't use sectioning below subsection}{}}
+\let\subsubsection\gradu@forbiddensection
+\let\paragraph\gradu@forbiddensection
+\let\subparagraph\gradu@forbiddensection
 
 \newcommand{\preface}{\chapter*{\prefacename}}
 
@@ -494,7 +511,7 @@
             }{%
               You left this blank!%
             }%
-            }}]}%
+          }}]}%
     }{%declarations
       \renewcommand{\makelabel}[1]{##1\hfill}%
       \setlength{\labelwidth}{4.8cm}%
@@ -524,16 +541,16 @@
         Use the \string\section command instead.%
       }%
     }%
-  }
+  }%
 }
 
 \newenvironment{chapterquote}[1]{%
-  \begin{quote}\em
-  \def\gradu@quoteattr{#1}
+  \begin{quote}\em%
+  \def\gradu@quoteattr{#1}%
 }{%
-  \\\mbox{}\hfill---~\gradu@quoteattr
-  \end{quote}
-  \@endparenv
+  \\\mbox{}\hfill---~\gradu@quoteattr%
+  \end{quote}%
+  \@endparenv%
 }
 
 %%
