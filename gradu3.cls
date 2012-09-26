@@ -45,6 +45,7 @@
 
 \DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
 \DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{english}}}
+\def\selectdefaultlanguage{\selectlanguage{finnish}}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
