@@ -459,7 +459,7 @@
       \thechapter\hskip2ex%
     \fi%
     #1\par\nobreak%
-    \vskip 1em%
+    \vskip 10pt%
   }%
 }
 \def\@makeschapterhead#1{%
@@ -469,7 +469,7 @@
     \normalfont%
     \interlinepenalty\@M%
     \Large \bfseries  #1\par\nobreak%
-    \vskip 1em%
+    \vskip 10pt%
   }%
   \ifthenelse{\equal{\thepage}{\arabic{page}}}{%
     \phantomsection%
@@ -481,8 +481,8 @@
   {section}%
   {1}%
   {\z@}%
-  {-2em}%
-  {1em}%
+  {-14pt}%
+  {0.01pt}%
   {\normalfont\bfseries\large}%
 }
 
@@ -490,8 +490,8 @@
   {subsection}%
   {2}%
   {\z@}%
-  {-\baselineskip}%
-  {2ex}%
+  {-14pt}%
+  {0.01pt}%
   {\normalfont\bfseries\normalsize}%
 }
 
