@@ -61,6 +61,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% REQUIRED PACKAGES
 
+\RequirePackage{fixltx2e}
 \RequirePackage{ifthen}
 \RequirePackage{chngcntr}
 \RequirePackage{everyshi}[1994/12/09]
