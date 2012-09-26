@@ -21,31 +21,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS OPTIONS
 
-\def\gradu@inputenc{utf8}
-\DeclareOption{ansinew}{\gdef\gradu@inputenc{ansinew}}
-\DeclareOption{applemac}{\gdef\gradu@inputenc{applemac}}
-\DeclareOption{ascii}{\gdef\gradu@inputenc{ascii}}
-\DeclareOption{cp1250}{\gdef\gradu@inputenc{cp1250}}
-\DeclareOption{cp1252}{\gdef\gradu@inputenc{cp1252}}
-\DeclareOption{cp437}{\gdef\gradu@inputenc{cp437}}
-\DeclareOption{cp437de}{\gdef\gradu@inputenc{cp437de}}
-\DeclareOption{cp850}{\gdef\gradu@inputenc{cp850}}
-\DeclareOption{cp852}{\gdef\gradu@inputenc{cp852}}
-\DeclareOption{cp865}{\gdef\gradu@inputenc{cp865}}
-\DeclareOption{decmulti}{\gdef\gradu@inputenc{decmulti}}
-\DeclareOption{latin1}{\gdef\gradu@inputenc{latin1}}
-\DeclareOption{latin2}{\gdef\gradu@inputenc{latin2}}
-\DeclareOption{latin3}{\gdef\gradu@inputenc{latin3}}
-\DeclareOption{latin5}{\gdef\gradu@inputenc{latin5}}
-\DeclareOption{latin9}{\gdef\gradu@inputenc{latin9}}
-\DeclareOption{next}{\gdef\gradu@inputenc{next}}
-\DeclareOption{utf8}{\gdef\gradu@inputenc{utf8}}
-
 \DeclareOption{bachelor}{\gdef\gradu@default@@type{\gradu@bachelortype}}
 
 \DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
 \DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{english}}}
 \def\selectdefaultlanguage{\selectlanguage{finnish}}
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{inputenc}}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,7 +46,7 @@
 \RequirePackage{ifthen}
 \RequirePackage{chngcntr}
 \RequirePackage{everyshi}[1994/12/09]
-\RequirePackage[\gradu@inputenc]{inputenc}
+\RequirePackage{inputenc}
 \RequirePackage[T1]{fontenc}
 \RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
 \RequirePackage[finnish,english]{babel}
