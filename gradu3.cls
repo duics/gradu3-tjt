@@ -10,8 +10,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\filedate{2012/09/21}
-\def\fileversion{3.0pre4}
+\def\filedate{2012/09/26}
+\def\fileversion{3.0pre5}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
@@ -170,6 +170,47 @@
 
 \setlength\parindent{0pt}
 \setlength\parskip{10pt}
+\setlength\bibhang{0pt}
+
+\def\@listi{\leftmargin\leftmargini%
+            \parsep 10pt%
+            \topsep 0pt%
+            \itemsep 0pt%
+}
+\let\@listI\listi
+\@listi
+\def\@listii {\leftmargin\leftmarginii
+              \labelwidth\leftmarginii
+              \advance\labelwidth-\labelsep
+              \topsep    0pt%
+              \parsep    10pt%
+              \itemsep   0pt}
+\def\@listiii{\leftmargin\leftmarginiii
+              \labelwidth\leftmarginiii
+              \advance\labelwidth-\labelsep
+              \topsep    0pt%
+              \parsep    0pt%
+              \itemsep   0pt}
+\def\@listiv {\leftmargin\leftmarginiv
+              \labelwidth\leftmarginiv
+              \advance\labelwidth-\labelsep}
+\def\@listv  {\leftmargin\leftmarginv
+              \labelwidth\leftmarginv
+              \advance\labelwidth-\labelsep}
+\def\@listvi {\leftmargin\leftmarginvi
+              \labelwidth\leftmarginvi
+              \advance\labelwidth-\labelsep}
+
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1. #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1. #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -256,17 +297,30 @@
 }
 \pagenumbering{Roman}
 \renewcommand{\maketitle}{%
-\begingroup
-%%%% TITLE PAGE
+  \begingroup
+  \def\ps@titlepage{%
+    \let\@mkboth\@gobbletwo%
+    \let\@oddhead\@empty%
+    \def\@oddfoot{\hfill%
+      \begin{minipage}{\textwidth}
+        \mbox{}\hfill\gradu@university\hfill\mbox{}\\[10pt]%
+        \mbox{}\hfill\gradu@department\hfill\mbox{}%
+      \end{minipage}\hfill%
+    }%
+    \let\@evenhead\@empty%
+    \let\@evenfoot\@empty%
+  }
+  %%%% TITLE PAGE
 \begin{titlepage}%
-  \vspace*{7truecm plus 1truecm minus 3truecm}%
+ \thispagestyle{titlepage}%
+ \vspace*{164pt}%
   \begingroup%
   \def\gradu@f##1{\centerline{\textbf{##1}}}%
   \gradu@map\gradu@f\gradu@author\par%
   \endgroup
-  \vspace{2truecm}%
+  \vspace{36pt}%
   \centerline{\Large\textbf{\parbox[top][\height][c]{\textwidth}{\centering \gradu@title}}}%
-  \vspace{4truecm}%
+  \vspace{164pt}%
   \par%
   \raggedleft%
   \iflanguage{finnish}{%
@@ -277,10 +331,10 @@
   \par%
   \raggedleft
   \gradu@date%
-  \vfill%
-  \vspace{1truecm plus 1truecm minus .5truecm}%
-  \center{\large\textbf{\gradu@university}}%
-  \center{\textbf{\gradu@department}}%
+%  \vfill%
+%  \vspace{1truecm plus 1truecm minus .5truecm}%
+%  \center{\large\textbf{\gradu@university}}%
+%  \center{\textbf{\gradu@department}}%
 \end{titlepage}%
 \pagenumbering{roman}
 \newpage%
@@ -381,11 +435,9 @@
   \begingroup%
   \def\numberline##1{\figurename~##1.~}
   \@makeschapterhead{\listfigurename}
-  \vspace{-10pt}%
   \@starttoc{lof}
   \def\numberline##1{\tablename~##1.~}
   \@makeschapterhead{\listtablename}
-  \vspace{-10pt}%
   \@starttoc{lot}
   \endgroup%
   \clearpage%
@@ -404,7 +456,7 @@
 
 \setcounter{secnumdepth}{2}
 \def\@makechapterhead#1{%
-  \vspace*{2em}%
+  \vspace*{12pt}%
   {\parindent \z@ \raggedright \normalfont
     \Large \bfseries 
     \ifnum \c@secnumdepth >\m@ne
@@ -414,7 +466,7 @@
     \vskip 1em
   }}
 \def\@makeschapterhead#1{%
-  \vspace*{2em}%
+  \vspace*{12pt}%
   {\parindent \z@ \raggedright
     \normalfont
     \interlinepenalty\@M
