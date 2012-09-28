@@ -64,6 +64,14 @@
 \def\gradu@appendlist#1#2{\xdef#1{#1\noexpand\gradu@listitem{#2}}}
 \def\gradu@map#1#2{{\let\gradu@listitem#1#2}}
 
+% use this instead of \vspace* on the top of a page
+\def\gradu@topvspace#1{%
+  \vspace*{-\topskip}%
+  \vspace{#1}%
+  \vspace{-\parskip}%
+  \nointerlineskip%
+}
+
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% METADATA COMMANDS
@@ -308,7 +316,7 @@
     %%%% TITLE PAGE
     \begin{titlepage}%
       \thispagestyle{titlepage}%
-      \vspace*{164pt}%
+      \gradu@topvspace{164pt}%
       {%
         \def\gradu@f##1{\centerline{\textbf{##1}}}%
         \gradu@map\gradu@f\gradu@author\par%
@@ -428,11 +436,14 @@
     \def\addvspace##1{}%
     \clearpage%
     {%
-      \def\numberline##1{\figurename~##1.~}%
       \@makeschapterhead{\listfigurename}%
+      \def\numberline##1{\figurename~##1.~}%
       \@starttoc{lof}%
+    }%
+    {%
+      \vspace{24pt}%
+      \gradu@chapterheadline{\listtablename}%
       \def\numberline##1{\tablename~##1.~}%
-      \@makeschapterhead{\listtablename}%
       \@starttoc{lot}%
     }%
     \clearpage%
@@ -449,28 +460,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CHAPTERS AND SECTIONS
 
-\setcounter{secnumdepth}{2}
-\def\@makechapterhead#1{%
-  \vspace*{12pt}%
-  {%
-    \parindent \z@ \raggedright \normalfont%
-    \Large \bfseries%
-    \ifnum \c@secnumdepth >\m@ne%
-      \thechapter\hskip2ex%
-    \fi%
-    #1\par\nobreak%
-    \vskip 10pt%
-  }%
-}
-\def\@makeschapterhead#1{%
-  \vspace*{12pt}%
+\def\gradu@chapterheadline#1{%
   {%
     \parindent \z@ \raggedright%
     \normalfont%
     \interlinepenalty\@M%
-    \Large \bfseries  #1\par\nobreak%
+    \Large \bfseries%
+    #1\par\nobreak%
     \vskip 10pt%
   }%
+}
+
+\setcounter{secnumdepth}{2}
+\def\@makechapterhead#1{%
+  \gradu@topvspace{12pt}%
+  \gradu@chapterheadline{%
+    \ifnum \c@secnumdepth >\m@ne%
+    \thechapter\hskip2ex%
+    \fi%
+    #1%
+  }%
+}
+\def\@makeschapterhead#1{%
+  \gradu@topvspace{12pt}%
+  \gradu@chapterheadline{#1}%
   \ifthenelse{\equal{\thepage}{\arabic{page}}}{%
     \phantomsection%
     \addcontentsline{toc}{chapter}{#1}%
