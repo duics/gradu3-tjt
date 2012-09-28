@@ -61,7 +61,8 @@
 
 % Generic list support
 \let\gradu@listitem\relax
-\def\gradu@appendlist#1#2{\xdef#1{#1\noexpand\gradu@listitem{#2}}}
+\def\gradu@appendlist#1#2{%
+  \expandafter\gdef\expandafter#1\expandafter{#1\gradu@listitem{#2}}}
 \def\gradu@map#1#2{{\let\gradu@listitem#1#2}}
 
 % use this instead of \vspace* on the top of a page
