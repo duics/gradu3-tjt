@@ -167,7 +167,7 @@
   \leftmargin\leftmargini%
   \parsep 10pt%
   \topsep 0pt%
-  \itemsep 0pt%
+  \itemsep -10pt%
 }
 \let\@listI\listi
 \@listi
@@ -177,15 +177,15 @@
   \advance\labelwidth-\labelsep%
   \topsep    0pt%
   \parsep    10pt%
-  \itemsep   0pt%
+  \itemsep   -10pt%
 }
 \def\@listiii{%
   \leftmargin\leftmarginiii%
   \labelwidth\leftmarginiii%
   \advance\labelwidth-\labelsep%
   \topsep    0pt%
-  \parsep    0pt%
-  \itemsep   0pt%
+  \parsep    10pt%
+  \itemsep   -10pt%
 }
 \def\@listiv{%
   \leftmargin\leftmarginiv%
