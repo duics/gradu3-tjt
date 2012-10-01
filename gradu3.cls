@@ -10,8 +10,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\filedate{2012/09/26}
-\def\fileversion{3.0pre5}
+\def\filedate{2012/10/01}
+\def\fileversion{3.0pre6}
 \def\fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
@@ -436,19 +436,30 @@
   {%
     \setlength\parskip{0pt}%
     \def\addvspace##1{}%
-    \clearpage%
-    {%
-      \@makeschapterhead{\listfigurename}%
-      \renewcommand{\baselinestretch}{1}\normalfont%
-      \def\numberline##1{\figurename~##1.~}%
-      \@starttoc{lof}%
-    }%
-    {%
+    \ifthenelse{\gradu@FigureCount = 0 \and \gradu@TableCount = 0}{}{%
+      \clearpage%
+      \gradu@topvspace{12pt}%
+    }
+    \ifthenelse{\gradu@FigureCount = 0}{%
+      \gradu@opentocfile{lof}%
+    }{%
+      {%
+        \gradu@chapterheadline{\listfigurename}%
+        \renewcommand{\baselinestretch}{1}\normalfont%
+        \def\numberline##1{\figurename~##1.~}%
+        \@starttoc{lof}%
+      }%
       \vspace{24pt}%
-      \gradu@chapterheadline{\listtablename}%
-      \renewcommand{\baselinestretch}{1}\normalfont%
-      \def\numberline##1{\tablename~##1.~}%
-      \@starttoc{lot}%
+    }%
+    \ifthenelse{\gradu@TableCount = 0}{%
+      \gradu@opentocfile{lot}%
+    }{%
+      {%
+        \gradu@chapterheadline{\listtablename}%
+        \renewcommand{\baselinestretch}{1}\normalfont%
+        \def\numberline##1{\tablename~##1.~}%
+        \@starttoc{lot}%
+      }%
     }%
     \clearpage%
     \@makeschapterhead{\contentsname}%
@@ -459,6 +470,27 @@
   \clearpage%
   \pagenumbering{arabic}%
   \setcounter{chapter}{0}%
+}
+
+% This is automatically done by \@starttoc, but we need to do it
+% manually when we don't actually call \@starttoc, so that the
+% corresponding file is written to.  Otherwise, we'd first get an
+% empty list with a section title and then, on the third run, would
+% the list be actually there.
+\def\gradu@opentocfile#1{%
+  \if@filesw%
+    \expandafter\newwrite\csname tf@#1\endcsname%
+    \immediate\openout \csname tf@#1\endcsname \jobname.#1\relax%
+  \fi%
+}
+\def\gradu@FigureCount{0}
+\def\gradu@TableCount{0}
+\AtEndDocument{%
+  \clearpage%
+  \immediate\write\@auxout%
+  {\string\gdef\string\gradu@FigureCount{\the\c@figure}}%
+  \immediate\write\@auxout%
+  {\string\gdef\string\gradu@TableCount{\the\c@table}}%
 }
 
 %%
