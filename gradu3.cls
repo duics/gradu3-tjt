@@ -439,18 +439,21 @@
     \clearpage%
     {%
       \@makeschapterhead{\listfigurename}%
+      \renewcommand{\baselinestretch}{1}\normalfont%
       \def\numberline##1{\figurename~##1.~}%
       \@starttoc{lof}%
     }%
     {%
       \vspace{24pt}%
       \gradu@chapterheadline{\listtablename}%
+      \renewcommand{\baselinestretch}{1}\normalfont%
       \def\numberline##1{\tablename~##1.~}%
       \@starttoc{lot}%
     }%
     \clearpage%
     \@makeschapterhead{\contentsname}%
     \vspace{-10pt}%
+    \renewcommand{\baselinestretch}{1}\normalfont%
     \@starttoc{toc}%
   }%
   \clearpage%
