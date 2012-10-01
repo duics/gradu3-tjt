@@ -157,7 +157,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %% BASIC FORMATTING
 
-\renewcommand{\baselinestretch}{1.2} % this makes for a 1.45 line spacing
+\renewcommand{\baselinestretch}{1.5}
 
 \setlength\parindent{0pt}
 \setlength\parskip{10pt}
