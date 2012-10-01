@@ -117,6 +117,14 @@ lyhyesti tutkielman rakenne -- mitä missäkin luvussa käsitellään.
   \label{fig:opus-kissa}
 \end{figure}
 
+Tämä malli käsittelee Jyväskylän yliopiston tietotekniikan laitoksella
+tehtävien kandidaatintutkielmien ja pro gradu "=töiden laatimista
+avustavaa \LaTeX-kirjoitelmaluokkaa gradu3.  Apua sen käyttämiseen
+voit saada Tutkielma-TeX"-postituslistalta
+(\url{http://lists.jyu.fi/mailman/listinfo/tutkielma-tex}).
+Kommentteja, parannusehdotuksia ja bugiraportteja voit lähettää myös
+minulle suoraan.
+
 Tämä malli olettaa, että tunnet \LaTeX-järjestelmän käytön perusasiat.
 Alkuperäinen \LaTeX-kirja \parencite{lamport94:_latex} on järjestelmän
 virallinen käyttöopas.  Olen myös itse kirjoittanut aiheesta
@@ -220,7 +228,8 @@ tuleva {report}-kirjoitelmaluokka.  Eroja kuitenkin on:
     {\string\title}
     & Työn otsikko (älä käytä {\string\thanks}-komentoa) \\
     {\string\translatedtitle}
-    & Suomenkielisen työn englanninkielinen otsikko, englanninkielisen työn suomenkielinen otsikko\\
+    & Suomenkielisen työn englanninkielinen otsikko
+    englanninkielisen työn suomenkielinen otsikko\\
     {\string\studyline}
     & Suuntautumisvaihtoehtosi \\
     {\string\tiivistelma}
@@ -248,9 +257,8 @@ tuleva {report}-kirjoitelmaluokka.  Eroja kuitenkin on:
   \string\item[\textit{termi}]"-komentoa merkitsemään määriteltävän
   termin.
 \item Käytä \string\maketitle-komennon ja mahdollisten esipuheen ja
-  termiluettelon jälkeen \string\mainmatter-komentoa.  Se laatii
-  automaattisesti sisällys-, kuvio- ja taulukkoluettelot.
-\item Tutkielmassa on oltava ainakin yksi kuvio ja yksi taulukko.
+  termiluettelon jälkeen \string\mainmatter"-komentoa.  Se laatii
+  automaattisesti tarvittavat sisällys-, kuvio- ja taulukkoluettelot.
 \item Komentoja \string\subsubsection, \string\paragraph{} ja
   \string\subparagraph{} ei tueta.
 \item Liitteet eivät ole lukuja (\string\chapter) vaan alilukuja
@@ -258,10 +266,10 @@ tuleva {report}-kirjoitelmaluokka.  Eroja kuitenkin on:
 \item Lähdeluettelon tekemiseen käytetään automaattisesti
   \textsc{Bib\LaTeX}-järjestelmää \parencite{biblatex-manual} ja sen
   Chicago-tyyliä \parencite{biblatex-chicago-manual}.  Tarvitset
-  erillisen \textsc{Bib\TeX}-tiedostomuodossa olevan lähdetietokannan.
+  erillisen \textsc{Bib\TeX}"-tiedostomuodossa olevan lähdetietokannan.
   Sen laatimisessa voit käyttää apuna monia
   lähteidenhallintajärjestelmiä, mutta sen voi laatia myös käsin.
-  Tarvitset myös {biber}-ohjelman, jolla tietokanta kääntyy \LaTeX in
+  Tarvitset myös {biber}"-ohjelman, jolla tietokanta kääntyy \LaTeX in
   ymmärtämään muotoon.\footnote{Huomaa, että perinteinen
     {bibtex}-ohjelma ei toimi {gradu3}-tutkielmapohjan käyttämän
     Chicago"-bibliografiatyylin kanssa.}
@@ -328,9 +336,6 @@ lainkaan.  Huomaa erityisesti uudet komennot.
   \label{tbl:cmdchange}
 \end{table}
 
-Huomaa myös, että gradu3:sta käytettäessä tutkielmassa on oltava
-ainakin yksi kuvio ja ainakin yksi taulukko.
-
 Isoin työ voi aiheutua lähdeluettelon laatimistekniikan muuttumiseen
 sopeutumisesta.
 
@@ -354,7 +359,7 @@ Aiemmin esiteltyjen lisäksi gradu3 tarjoaa seuraavat lisäominaisuudet:
   on jokin muu kuin pro gradu (oletus) tai kandidaatintutkielma
   (optiolla bachelor).
 \item \string\setdate-komennolla voit asettaa päivämäärän
-  haluamaksesi.  Komennolle annetaan kolme parametria -- päivä,
+  haluamaksesi.  Anna komennolle kolme parametria -- päivä,
   kuukausi ja vuosi -- numeerisessa muodossa.
 \item Ympäristöllä chapterquote voit laittaa luvun alkuun
   mietelauseen.  Sillä on yksi pakollinen parametri (lainauksen
