@@ -157,7 +157,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %% BASIC FORMATTING
 
-\renewcommand{\baselinestretch}{1.5}
+% This matches Word 1.5 line spacing in our empirical tests.
+\renewcommand{\baselinestretch}{1.43}  
 
 \setlength\parindent{0pt}
 \setlength\parskip{10pt}
