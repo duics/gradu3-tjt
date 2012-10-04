@@ -10,12 +10,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\filedate{2012/10/01}
-\def\fileversion{3.0pre6}
-\def\fileinfo{JY MIT Gradut}
+\def\graduclsdate{2012/10/04}
+\def\graduclsversion{3.0}
+\def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gradu3}[\filedate\space\fileversion\space\fileinfo]
-\typeout{gradu3 <\filedate:\fileversion> - Tietotekniikan laitoksen graduille}
+\ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
+\typeout{gradu3 <\graduclsdate:\graduclsversion> - Tietotekniikan laitoksen graduille}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
