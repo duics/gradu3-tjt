@@ -10,8 +10,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\graduclsdate{2012/10/04}
-\def\graduclsversion{3.0}
+\def\graduclsdate{2012/10/05}
+\def\graduclsversion{3.1}
 \def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
@@ -21,7 +21,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS OPTIONS
 
+\newif\ifgradu@stdbib
+\gradu@stdbibtrue
+
 \DeclareOption{bachelor}{\gdef\gradu@default@@type{\gradu@bachelortype}}
+\DeclareOption{manualbib}{\gradu@stdbibfalse}
 
 \DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
 \DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{english}}}
@@ -53,7 +57,9 @@
 \RequirePackage{mathptmx}
 \RequirePackage[scaled=.92]{helvet}
 \RequirePackage{courier}
+\ifgradu@stdbib
 \RequirePackage[authordate,backend=biber]{biblatex-chicago}
+\fi
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -162,7 +168,9 @@
 
 \setlength\parindent{0pt}
 \setlength\parskip{10pt}
+\ifgradu@stdbib
 \setlength\bibhang{0pt}
+\fi
 
 \def\@listi{%
   \leftmargin\leftmargini%
@@ -220,9 +228,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% LOCALIZATION
 
+\ifgradu@stdbib
 \DefineBibliographyStrings{finnish}{%
   bibliography={L\"ahteet}%
 }
+\fi
 
 \addto\captionsfinnish{%
   \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}%
