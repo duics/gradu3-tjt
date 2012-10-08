@@ -11,7 +11,7 @@
 %% CLASS DECLARATION
 
 \def\graduclsdate{2012/10/08}
-\def\graduclsversion{3.2pre1}
+\def\graduclsversion{3.2pre2}
 \def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
@@ -567,7 +567,7 @@
   \begin{list}{% default label
       \texttt{\string\item[\textrm{\textit{%
             \iflanguage{finnish}{%
-              Tämä jäi tyhjäksi!%
+              T\"am\"a jäi tyhjäksi!%
             }{%
               You left this blank!%
             }%
