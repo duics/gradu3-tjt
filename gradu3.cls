@@ -11,7 +11,7 @@
 %% CLASS DECLARATION
 
 \def\graduclsdate{2012/10/08}
-\def\graduclsversion{3.2pre2}
+\def\graduclsversion{3.2}
 \def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
