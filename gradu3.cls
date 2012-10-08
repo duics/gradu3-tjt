@@ -10,8 +10,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\graduclsdate{2012/10/05}
-\def\graduclsversion{3.1}
+\def\graduclsdate{2012/10/08}
+\def\graduclsversion{3.2pre1}
 \def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
@@ -24,6 +24,7 @@
 \newif\ifgradu@stdbib
 \gradu@stdbibtrue
 
+\def\gradu@default@@type{\gradu@default@type}
 \DeclareOption{bachelor}{\gdef\gradu@default@@type{\gradu@bachelortype}}
 \DeclareOption{manualbib}{\gradu@stdbibfalse}
 
@@ -137,7 +138,6 @@
 \gradu@DeclareMetadataCommand{department}{\gradu@default@department}
 \gradu@DeclareMetadataCommand{subject}{\gradu@default@subject}
 \gradu@DeclareMetadataCommand{studyline}{}
-\def\gradu@default@@type{\gradu@default@type}
 \gradu@DeclareMetadataCommand{type}{\gradu@default@@type}
 %\gradu@DeclareMetadataCommand{tiivistelma} -- needs \long
 %\gradu@DeclareMetadataCommand{abstract} -- needs \long
