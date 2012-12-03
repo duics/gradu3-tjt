@@ -10,8 +10,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\graduclsdate{2012/10/08}
-\def\graduclsversion{3.2}
+\def\graduclsdate{2012/12/03}
+\def\graduclsversion{3.3}
 \def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
@@ -59,7 +59,7 @@
 \RequirePackage[scaled=.92]{helvet}
 \RequirePackage{courier}
 \ifgradu@stdbib
-\RequirePackage[authordate,backend=biber]{biblatex-chicago}
+\RequirePackage[authordate,backend=biber,noibid]{biblatex-chicago}
 \fi
 
 %%
