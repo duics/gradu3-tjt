@@ -172,18 +172,6 @@ tai laadullisen tutkimustuön teoriaosa.  Muita samantyyppisiä
 tutkielmia ja julkaistuja tutkimusraportteja lukemalla saat kyllä
 käsityksen siitä, mitä omalta työltäsi vaaditaan.
 
-\subsection{Lähteiden käyttö}
-
-Teoriaosa perustuu lähes aina yksinomaan lähdekirjallisuuteen.
-
-Muista varoa plagiointia.  Jos kopioit joko sellaisenaan tai lievästi
-muutettuna (tai esimerkiksi englannista suomennettuna) tekstiä jostain
-lähteestä, tee selväksi, että olet tehnyt niin.  Merkitse lainaukset
-ja anna täsmällinen lähdeviite.  Jos et lainaa sanatarkasti, merkitse
-tekemäsi muutokset.  Useimmissa tilanteissa on kuitenkin parempi
-esittää asia omin sanoin, mieluiten useamman lähteen perusteella.
-Merkitse tällöinkin käyttämäsi lähteet.
-
 \section{Teorian jälkeen}
 
 Teoriaosan jälkeen tulee työsi varsinainen kontribuutio:
@@ -201,6 +189,221 @@ Tutkielmassa kontribuutio esitellään varsin tarkasti, tehdyt valinnat
 perustellen.  Erityisesti matemaattis-teoreettisissa ja empiirisissä
 töissä on syytä noudattaa kulloisenkin tutkimustradition käytänteitä
 -- esimerkiksi ihmistieteellinen koeasetelma on kuvattava tarkasti.
+
+\chapter{Lähteiden käyttö}
+
+Teoriaosa perustuu lähes aina yksinomaan lähdekirjallisuuteen.  Myös
+kontribuutio"-osassa on lähteiden käyttö toisinaan tarpeen.
+
+Muista varoa plagiointia.  Jos kopioit joko sellaisenaan tai lievästi
+muutettuna (tai esimerkiksi englannista suomennettuna) tekstiä jostain
+lähteestä, tee selväksi, että olet tehnyt niin.  Merkitse lainaukset
+ja anna täsmällinen lähdeviite.  Jos et lainaa sanatarkasti, merkitse
+tekemäsi muutokset.  Useimmissa tilanteissa on kuitenkin parempi
+esittää asia omin sanoin, mieluiten useamman lähteen perusteella.
+Merkitse tällöinkin käyttämäsi lähteet.
+
+Lähdeluettelon laadintaan {gradu3} käyttää automaattisesti
+\textsc{Bib\LaTeX}-järjestelmää \parencite{biblatex-manual} ja sen
+Chicago-tyyliä \parencite{biblatex-chicago-manual}.  Tämän
+automatiikan saa pois \string\documentclass-optiolla manualbib, mutta
+tällöin joudut itse huolehtimaan lähdeluettelon muotoilusta eivätkä
+tässä luvussa esitetyt tekniikat ole (välttämättä) käytettävissä.
+Huomaa, että Tietotekniikan laitoksen graduissa on suositeltavaa
+käyttää Chicago-tyylistä lähdeluetteloa.
+
+\section{Lähdeviittaukset}
+
+Lähteisiin voit viitata kahdella tavalla.  Ensinnäkin voit käyttää
+lähdettä lauseen subjektina: \textcite[luku~8.8.4]{aho-compilers}
+kuvaavat lyhyesti graafinvärityksen käyttämisen kääntäjän
+rekisterinvalinnassa.  Tällöin viittaukseen käytetään
+\string\textcite-komentoa.  Toisekseen lähdeviite voi olla
+sivuhuomautus, jota ei ääneen luettaessa mainita: Graafinväritys on
+yksi mahdollinen tapa valita
+rekisterit \parencite[luku~8.8.4]{aho-compilers}.  Tämä toteutetaan
+\string\parencite-komennolla.
+
+Sekä \string\textcite- että \string\parencite-komennot ottavat kolme
+parametria, joista kaksi on valinnaisia.  Ensimmäinen (valinnainen)
+parametri on esihuomautus, toinen (valinnainen) parametri on
+jälkihuomautus ja kolmas (pakollinen) parametri on lähdeviittauksen
+koodi \parencite[ks.][luku~3.7]{biblatex-manual}.  Edellisen virkkeen
+lähdeviite tehtiin seuraavalla komennolla:
+
+\begingroup\footnotesize
+\begin{verbatim}
+\parencite[ks.][luku~3.7]{biblatex-manual}
+\end{verbatim}
+\endgroup
+
+Jos komennolle annetaan vain yksi valinnainen (eli hakasulkeisiin
+kirjoitettu) argumentti, se tulkitaan jälkihuomautukseksi.  Jos
+halutaan antaa vain esihuomautus ilman jälkihuomautusta, on
+jälkihuomautus jätettävä tyhjäksi
+\parencite[ks.][]{biblatex-manual}:
+
+\begingroup\footnotesize
+\begin{verbatim}
+\parencite[ks.][]{biblatex-manual}
+\end{verbatim}
+\endgroup
+
+On myös mahdollista viitata useampaan lähteeseen samassa viittauksessa 
+%
+\parencites%
+  [ks.][luku~3.7]{biblatex-manual}%
+  [ks.~lähteiden käytöstä yleisesti myös][luku~5.3.2]%
+    {biblatex-chicago-manual}%
+\relax.
+%
+Tämä tehdään komennolla \string\parencites, jolle annetaan kutakin
+lähdettä kohti samat argumentit kuin yksittäiselle
+\string\parencite"-komennolle.  Komento on hyvä (mutta ei pakko)
+päättää \string\relax-komentoon, jotta yllätyksiltä vältyttäisiin.
+
+\begingroup\footnotesize
+\begin{verbatim}
+\parencites%
+  [ks.][luku~3.7]{biblatex-manual}%
+  [ks.~lähteiden käytöstä yleisesti myös][luku~5.3.2]%
+    {biblatex-chicago-manual}%
+\relax.
+\end{verbatim}
+\endgroup
+
+Jos jaat \string\parencites"-komennon usealle riville, päätä rivit
+kommenttimerkillä (kuten yllä), jotta tulokseen ei ilmaantuisi
+ylimääräisiä välilyöntejä.
+
+\section{Lähdetietokanta}
+
+Lähteet lisätään erilliseen \textsc{Bib\TeX}"-tiedostomuodossa olevaan
+lähdetietokantaan.  Sen laatimisessa voit käyttää apuna monia
+lähteidenhallintajärjestelmiä, mutta sen voi laatia myös käsin.
+Tietokannan nimi kirjoitetaan \string\addbibresource-komennon
+argumentiksi.
+
+\textsc{Bib\TeX}-muotoinen lähdetietokanta on erityisellä tavalla
+muotoiltu tekstitiedosto.  Se koostuu tietueista, jotka alkavat
+@-merkillä ja sitä seuraavalla tietuetyypin nimellä.  Muu osa
+tietueesta kirjoitetaan aaltosulkeiden sisään.  Esimerkiksi edellä
+mainittu kääntäjäkirja \parencite{aho-compilers} voidaan
+esittää seuraavanlaisena tietueena:
+
+\begingroup\footnotesize
+\begin{verbatim}
+@Book{aho-compilers,
+  author =       {Alfred V. Aho and Monica S. Lam and Ravi Sethi and
+                  Jeffrey D. Ullman},
+  title =        {Compilers},
+  subtitle =     {Principles, Techniques, \& Tools},
+  publisher =    {Pearson Addison Wesley},
+  year =         2007,
+  address =      {Boston},
+  edition =      2
+}
+\end{verbatim}
+\endgroup%
+
+Tämän tietueen tyyppi on book, joka tarkoittaa luonnollisestikin
+kirjaa.  Aaltosulkeiden sisällä oleva ensimmäinen sana on tietueen
+koodi, jota käytetään \string\textcite- ja
+\string\parencite"-komennoissa.  Sen jälkeen tulee pilkku ja joukko
+nimettyjä kenttiä kuten kirjan kirjoittaja (author), nimi (title),
+alaotsikko (subtitle) ja julkaisija (publisher).  Numerotietoja
+lukuunottamatta kenttien sisällöt laitetaan aaltosulkeisiin.
+
+Kirjoittajien nimet kirjoitetaan tietuekenttään pääosin täysin
+tavanomaisella tavalla.  Vaihtoehtoisesti nimi voidaan esittää myös
+muodossa sukunimi-pilkku-etunimi (Aho, Alfred V.), ja joissakin
+erityistapauksissa (esimerkiksi moniosainen väliviivaton sukunimi) se
+on myös pakko tehdä niin.  Jos kirjoittajia on useita, heidän nimensä
+erotetaan sanalla and (jota ei pidä suomentaa!).  Jos kaikkia
+kirjoittajia ei luetella, laitetaan viimeisen nimen perään (ilman
+lainausmerkkejä ''and others''.
+
+Tieteellinen lehtiartikkeli \parencite[esim.][]{strachey-fundamentals}
+kirjoitetaan esimerkiksi seuraavanlaiseksi tietueeksi:
+
+\begingroup\footnotesize
+\begin{verbatim}
+@Article{strachey-fundamentals,
+  author =       {Christopher Strachey},
+  title =        {Fundamental Concepts in Programming Languages},
+  journal =      {Higher-Order and Symbolic Computation},
+  year =         2000,
+  volume =       13,
+  number =       {1--2},
+  pages =        {11--49},
+  doi =          {10.1023/A:1010000313106}
+}
+\end{verbatim}
+\endgroup
+
+Huomaa erityisesti kenttä doi, johon voi kirjoittaa artikkelin
+digitaalisen tunnisteen (Digital Object Identifier, DOI).  Se on
+yleensä parempi valinta kuin mikään URL, koska DOI on pysyvä
+artikkelin tunnistetieto.  Useimmat DOIt on lisäksi muutettavissa
+URLiksi lisäämällä sen alkuun \url{http://dx.doi.org/}.
+
+Tarkempia tietoja lähdetietokannan rakenteesta löytyy
+\textsc{Bib\TeX}in manuaalista \parencite{bibtexing},
+\textsc{Bib\LaTeX}in manuaalista \parencite[luku~2]{biblatex-manual}
+sekä \textsc{Bib\LaTeX}-Chicagon manuaalista
+\parencite[luvut 5.1--5.2]{biblatex-chicago-manual}.
+
+\section{Lähdeluettelo}
+
+Lähdetietokanta muutetaan lähdeluetteloksi apuohjelmalla {biber}.  Se
+on varsin uusi, joten se puuttuu useimmista koneista, joiden
+\TeX-asennus ei ole aivan ajantasalla.  Yliopiston suorakäyttökoneista
+se löytyy tällä hetkellä vain charra.it.jyu.fi-koneesta.
+Ubuntu-asennuksiin se on saatavissa versiosta 12.10 alkaen ja
+Debian-asennuksiin Wheezystä alkaen.  Windowsiin se on asennettavissa
+MikTeX-pakettina miktex-biber-bin.
+
+Komentoriviltä biberin käyttö on yksinkertaista.  Kun \LaTeX\ (tai
+pdf\LaTeX) on kerran ajettu, ajetaan biber parametrinaan dokumentin
+nimi.  Tämän jälkeen ajetaan \LaTeX\ (tai pdf\LaTeX) vähintään kerran
+(kunnes edellisen ajon lopussa ei enää pyydetä uutta ajoa).
+Esimerkiksi näin:
+
+\begingroup\footnotesize
+\begin{verbatim}
+$ pdflatex malliopas
+[...]
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                malliopas
+(biblatex)                and rerun LaTeX afterwards.
+[..]
+Output written on malliopas.pdf (18 pages, 96855 bytes).
+Transcript written on malliopas.log.
+$ biber malliopas
+INFO - This is Biber 0.9.9
+[...]
+INFO - Output to malliopas.bbl
+$ pdflatex malliopas
+[...]
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+[...]
+Output written on malliopas.pdf (21 pages, 107373 bytes).
+Transcript written on malliopas.log.
+$ pdflatex malliopas
+[...]
+Output written on malliopas.pdf (21 pages, 107509 bytes).
+Transcript written on malliopas.log.
+\end{verbatim}
+\endgroup
+
+\section{Tiedossa olevat ongelmat}
+
+Lähdeluettelon ja lähdeviitteiden suomen kielen tuki ei ole
+toistaiseksi aivan virheetöntä.  Viitattaessa useaman tekijän
+lähteeseen tulee lähdeviitteeseen merkintä ''et~al.'', kun vakiintunut
+suomalainen ilmaisu on ''ym.''.  Lisäksi jos lähdetietokantaan
+kirjoittaa urldate-päiväyksen, tulee se lähdeluetteloon
+virheellisessä muodossa.  Kumpikin vika korjaantunee aikanaan.
 
 \chapter{Tutkielmapohjan erityispiirteet}
 
@@ -229,7 +432,7 @@ tuleva {report}-kirjoitelmaluokka.  Eroja kuitenkin on:
     {\string\title}
     & Työn otsikko (älä käytä {\string\thanks}-komentoa) \\
     {\string\translatedtitle}
-    & Suomenkielisen työn englanninkielinen otsikko
+    & Suomenkielisen työn englanninkielinen otsikko,
     englanninkielisen työn suomenkielinen otsikko\\
     {\string\studyline}
     & Suuntautumisvaihtoehtosi \\
@@ -264,22 +467,8 @@ tuleva {report}-kirjoitelmaluokka.  Eroja kuitenkin on:
   \string\subparagraph{} ei tueta.
 \item Liitteet eivät ole lukuja (\string\chapter) vaan alilukuja
   (\string\section).
-\item Lähdeluettelon tekemiseen käytetään automaattisesti
-  \textsc{Bib\LaTeX}-järjestelmää \parencite{biblatex-manual} ja sen
-  Chicago-tyyliä \parencite{biblatex-chicago-manual}.  Tarvitset
-  erillisen \textsc{Bib\TeX}"-tiedostomuodossa olevan lähdetietokannan.
-  Sen laatimisessa voit käyttää apuna monia
-  lähteidenhallintajärjestelmiä, mutta sen voi laatia myös käsin.
-  Tarvitset myös {biber}"-ohjelman, jolla tietokanta kääntyy \LaTeX in
-  ymmärtämään muotoon.\footnote{Huomaa, että perinteinen
-    {bibtex}-ohjelma ei toimi {gradu3}-tutkielmapohjan käyttämän
-    Chicago"-bibliografiatyylin kanssa.}
-  \begin{itemize}
-  \item Tämän automatiikan saa pois \string\documentclass-optiolla
-    manualbib.  Tällöin joudut itse huolehtimaan lähdeluettelon
-    muotoilusta.  Huomaa, että Tietotekniikan laitoksen graduissa on
-    suositeltavaa käyttää Chicago-tyylistä lähdeluetteloa.
-  \end{itemize}
+\item Lähdeluettelon ja lähdeviitteiden tekemisestä kerrottiin
+  edellisessä luvussa.
 \end{itemize}
 
 \chapter{Yhteenveto}
