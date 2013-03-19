@@ -230,7 +230,8 @@
 
 \ifgradu@stdbib
 \DefineBibliographyStrings{finnish}{%
-  bibliography={L\"ahteet}%
+  bibliography={L\"ahteet},%
+  andothers={ym\adddot}%
 }
 \fi
 
