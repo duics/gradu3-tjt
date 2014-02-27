@@ -497,6 +497,31 @@ Transcript written on malliopas.log.
 Lähdeluettelon ja lähdeviitteiden toiminta ei ole toistaiseksi aivan
 virheetöntä.
 
+\textsc{Bib\LaTeX}in versiossa 2.6 (julkaistu 30.4.2013) on virhe,
+joka aiheuttaa seuraavan virheilmoituksen:%
+{\footnotesize%
+\begin{verbatim}
+Runaway argument?
+{bibliography = {{Kirjallisuusluettelo}{Kirjallisuus}}, references = \ETC.
+! Paragraph ended before \DeclareBibliographyStrings was complete.
+\end{verbatim}
+}%
+Virhe on korjattu heti seuraavassa versiossa 2.7 (julkaistu 7.7.2013).
+Jos päivittäminen ei tule kyseeseen, pikakorjaus vikaan on etsiä
+tiedostosta \texttt{.../biblatex/lbx/finnish.lbx} rivi%
+{\footnotesize%
+\begin{verbatim}
+editorsan        = {{toimittaneet ja selityksin varustaneet,% FIXME: unsure
+\end{verbatim}
+}%
+ja korjata se muotoon%
+{\footnotesize%
+\begin{verbatim}
+editorsan        = {{toimittaneet ja selityksin varustaneet}% FIXME: unsure
+\end{verbatim}
+}%
+(eli pilkku vaihdetaan päättäväksi aaltosulkeeksi).
+
 Jos artikkelilla ei ole tekijää, lähdeluettelossa kyseisen artikkelin
 merkintä alkaa vuosiluvulla.  Tämä vika on korjattu
 \textsc{Bib\LaTeX}-Chicagon versiossa 0.9.9c (julkaistu 15.3.2013).
