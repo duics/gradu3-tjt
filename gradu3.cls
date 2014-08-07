@@ -10,8 +10,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\graduclsdate{2014/03/19}
-\def\graduclsversion{3.4}
+\def\graduclsdate{2014/08/07}
+\def\graduclsversion{3.5}
 \def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
