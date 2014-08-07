@@ -386,20 +386,22 @@
       \noindent\textbf{Contact information:}
       \gradu@contactinformation@render{,\space}{,\space and\space}\par%
     }%
-    \noindent{%
-      \textbf{%
+    \ifthenelse{\NOT\boolean{gradu@bsc}\OR\value{gradu@supervisor@count}>0}{%
+      \noindent{%
+        \textbf{%
+          \iflanguage{finnish}{%
+            Ohjaaja\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
+          }{%
+            Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
+          }%
+        }\space%
         \iflanguage{finnish}{%
-          Ohjaaja\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
+          \gradu@supervisor@render{,\space}{\space ja\space}\par%
         }{%
-          Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
+          \gradu@supervisor@render{,\space}{,\space and\space}\par%
         }%
-      }\space%
-      \iflanguage{finnish}{%
-        \gradu@supervisor@render{,\space}{\space ja\space}\par%
-      }{%
-        \gradu@supervisor@render{,\space}{,\space and\space}\par%
-      }%
-    }\par%
+      }\par%
+    }{}%
     \iflanguage{finnish}{%
       \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
       \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
