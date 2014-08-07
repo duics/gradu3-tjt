@@ -24,8 +24,13 @@
 \newif\ifgradu@stdbib
 \gradu@stdbibtrue
 
+\newif\ifgradu@bsc
+\gradu@bscfalse
+
 \def\gradu@default@@type{\gradu@default@type}
-\DeclareOption{bachelor}{\gdef\gradu@default@@type{\gradu@bachelortype}}
+\DeclareOption{bachelor}{%
+  \gdef\gradu@default@@type{\gradu@bachelortype}%
+  \gradu@bsctrue}
 \DeclareOption{manualbib}{\gradu@stdbibfalse}
 
 \DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
@@ -78,6 +83,17 @@
   \vspace{#1}%
   \vspace{-\parskip}%
   \nointerlineskip%
+}
+
+% For use inside \titlepage\ for parts that are optional for BSc
+\def\gradu@bsc@optional#1#2{%
+  \ifthenelse{\equal{\csname gradu@#2\endcsname}{\relax}}{%
+    \ifgradu@bsc\else%
+    \noindent\textbf{#1:} \gradu@muistitko{#2}\par%
+    \fi%
+  }{%
+    \noindent\textbf{#1:} \csname gradu@#2\endcsname\par%
+  }%
 }
 
 %%
@@ -137,7 +153,7 @@
 \gradu@DeclareMetadataCommand{university}{\gradu@default@university}
 \gradu@DeclareMetadataCommand{department}{\gradu@default@department}
 \gradu@DeclareMetadataCommand{subject}{\gradu@default@subject}
-\gradu@DeclareMetadataCommand{studyline}{}
+\gradu@DeclareMetadataCommand{studyline}{\relax}
 \gradu@DeclareMetadataCommand{type}{\gradu@default@@type}
 %\gradu@DeclareMetadataCommand{tiivistelma} -- needs \long
 %\gradu@DeclareMetadataCommand{abstract} -- needs \long
@@ -390,7 +406,7 @@
       \noindent\textbf{Ty\"o:} {%
         \gradu@HeadToUpper\gradu@type%
       }\par%
-      \noindent\textbf{Suuntautumisvaihtoehto:} \gradu@studyline\par%
+      \gradu@bsc@optional{Suuntautumisvaihtoehto}{studyline}%
       \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
       \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
       \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
@@ -400,7 +416,7 @@
       \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
       \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
       \noindent\textbf{Project:} \gradu@type\par%
-      \noindent\textbf{Study line:} \gradu@studyline\par%
+      \gradu@bsc@optional{Study line}{studyline}%
       \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
       \noindent\textbf{Abstract:} \gradu@abstract\par%
       \noindent\textbf{Keywords:} \gradu@keywords\par%
