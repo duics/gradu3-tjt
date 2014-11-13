@@ -10,8 +10,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\graduclsdate{2014/08/07}
-\def\graduclsversion{3.5}
+\def\graduclsdate{2014/11/13}
+\def\graduclsversion{3.6}
 \def\gradu@fileinfo{JY MIT Gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
@@ -33,9 +33,16 @@
   \gradu@bsctrue}
 \DeclareOption{manualbib}{\gradu@stdbibfalse}
 
-\DeclareOption{finnish}{\def\selectdefaultlanguage{\selectlanguage{finnish}}}
-\DeclareOption{english}{\def\selectdefaultlanguage{\selectlanguage{english}}}
+\DeclareOption{finnish}{%
+  \def\selectdefaultlanguage{\selectlanguage{finnish}}%
+  \def\gradu@sortlocale{fi}%
+}
+\DeclareOption{english}{%
+  \def\selectdefaultlanguage{\selectlanguage{english}}%
+  \def\gradu@sortlocale{en}%
+}
 \def\selectdefaultlanguage{\selectlanguage{finnish}}
+\def\gradu@sortlocale{fi}
 
 \DeclareOption*{\PassOptionsToPackage{\CurrentOption}{inputenc}}
 
@@ -64,7 +71,7 @@
 \RequirePackage[scaled=.92]{helvet}
 \RequirePackage{courier}
 \ifgradu@stdbib
-\RequirePackage[authordate,backend=biber,noibid]{biblatex-chicago}
+\RequirePackage[authordate,backend=biber,sortlocale=\gradu@sortlocale,noibid]{biblatex-chicago}
 \fi
 
 %%
