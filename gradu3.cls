@@ -10,12 +10,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% CLASS DECLARATION
 
-\def\graduclsdate{2014/11/13}
-\def\graduclsversion{3.6}
-\def\gradu@fileinfo{JY MIT Gradut}
+\def\graduclsdate{2017/11/30}
+\def\graduclsversion{3.7}
+\def\gradu@fileinfo{JY tietotekniikan gradut}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
-\typeout{gradu3 <\graduclsdate:\graduclsversion> - Tietotekniikan laitoksen graduille}
+\typeout{gradu3 <\graduclsdate:\graduclsversion> - Tietotekniikan graduille}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -267,7 +267,7 @@
   \def\listtablename{Taulukot}%
   \def\figurename{Kuvio}%
   \def\gradu@default@university{Jyv\"askyl\"an yliopisto}%
-  \def\gradu@default@department{Tietotekniikan laitos}%
+  \def\gradu@default@department{Informaatioteknologian tiedekunta}%
   \def\gradu@default@subject{Tietotekniikan}%
   \def\gradu@default@type{pro gradu -tutkielma}%
   \def\gradu@bachelortype{kandidaatintutkielma}%
@@ -278,7 +278,7 @@
   \def\termlistname{Glossary}%
   \def\appendicesname{Appendices}%
   \def\gradu@default@university{University of Jyv\"askyl\"a}%
-  \def\gradu@default@department{Department of Mathematical Information Technology}%
+  \def\gradu@default@department{Faculty of Information Technology}%
   \def\gradu@default@subject{in Information Technology}%
   \def\gradu@default@type{Master's Thesis}%
   \def\gradu@bachelortype{Bachelor's Thesis}%
