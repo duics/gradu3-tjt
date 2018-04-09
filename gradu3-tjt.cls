@@ -300,6 +300,8 @@
   \def\gradu@msg@komentoa{ command?}%
   \def\termlistname{Glossary}%
   \def\appendicesname{Appendices}%
+  \def\listfigurename{FIGURES}%
+  \def\listtablename{TABLES}%
   \def\gradu@default@university{University of Jyv\"askyl\"a}%
   \def\gradu@default@department{Faculty of Information Technology}%
   \def\gradu@default@subject{in Information Technology}%
