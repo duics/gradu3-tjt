@@ -70,6 +70,9 @@
 \RequirePackage{mathptmx}
 \RequirePackage[scaled=.92]{helvet}
 \RequirePackage{courier}
+\RequirePackage{setspace}
+\RequirePackage{microtype}
+\RequirePackage{mathpazo}
 \ifgradu@stdbib
 \RequirePackage[authordate,backend=biber,sortlocale=\gradu@sortlocale,noibid]{biblatex-chicago}
 \fi
@@ -106,8 +109,6 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% METADATA COMMANDS
-
-% From datakurre/tutkielma
 
 % From Gradu3.cls
 
@@ -175,6 +176,8 @@
 \gradu@DeclareMetadataListCommand{contactinformation}
 
 \def\gradu@date{\today}
+\def\gradu@year{\the\year}
+
 \renewcommand{\date}[1]{%
   \ClassWarning{gradu3}{\noexpand\date is deprecated!}%
   \gdef\gradu@date{#1}%
@@ -191,7 +194,23 @@
 %% BASIC FORMATTING
 
 % This matches Word 1.5 line spacing in our empirical tests.
-\renewcommand{\baselinestretch}{1.43}  
+% \renewcommand{\baselinestretch}{1.43}  
+
+% From datakurre/tutkielma
+\singlespacing
+
+\newcommand{\tablefontsize}{\footnotesize}
+\newcommand{\quotefontsize}{\footnotesize}
+\newcommand{\examplefontsize}{\footnotesize}
+\newcommand{\tablespacing}{\singlespacing}
+\newcommand{\quotespacing}{\singlespacing}
+\newcommand{\examplespacing}{\singlespacing}
+\newcommand{\captionfontsize}{\footnotesize}
+
+\widowpenalty10000
+\clubpenalty10000
+
+% From gradu3.cls
 
 \setlength\parindent{0pt}
 \setlength\parskip{10pt}
@@ -331,6 +350,42 @@
   }%
 }
 
+
+\renewcommand{\maketitle}{%
+  \thispagestyle{empty}
+  \renewcommand\Large{\@setfontsize\Large{16}{16}}
+  \begin{singlespace}%
+    \mbox{}\vfill%
+      {%
+        \def\gradu@f##1{\centerline{\textbf{##1}}}%
+        \gradu@map\gradu@f\gradu@author\par%
+      }%
+    \begin{onehalfspace}%
+    \begin{center}%
+    \Large\textbf{%
+      \MakeUppercase{\gradu@title}}%
+    \end{center}%
+    \begin{center}%
+    \Large\textbf{%
+      % \MakeUppercase{\gradu@titlesecond}
+    }%
+    \end{center}%
+    \end{onehalfspace}%
+    \newcommand{\tablefontsizeorig}{\tablefontsize}
+    \newcommand{\tablespacingorig}{\tablespacing}
+    \renewcommand{\tablefontsize}{\tablefontsizeorig}
+    \renewcommand{\tablespacing}{\tablespacingorig}
+    \vfill%
+    \begin{center}%
+      \includegraphics[height=2.7cm]{logo.jpg}\par%
+      \MakeUppercase{\gradu@university}\par%
+      \MakeUppercase{\gradu@department}\par%
+      \gradu@year\par%
+    \end{center}%
+  \end{singlespace}%
+}
+
+
 % Converts the first character of the (expanded) argument to upper case.
 \def\gradu@HeadToUpper#1{%
   \edef\fooA{#1}%
@@ -338,115 +393,115 @@
   \def\fooC##1##2\relax{\uppercase{\fooB{##1}}##2}%
   \expandafter\fooC\fooA\relax%
 }
-\pagenumbering{Roman}
-\renewcommand{\maketitle}{%
-  {%
-    \def\ps@titlepage{%
-      \let\@mkboth\@gobbletwo%
-      \let\@oddhead\@empty%
-      \def\@oddfoot{\hfill%
-        \begin{minipage}{\textwidth}%
-          \mbox{}\hfill\gradu@university\hfill\mbox{}\\[10pt]%
-          \mbox{}\hfill\gradu@department\hfill\mbox{}%
-        \end{minipage}\hfill%
-      }%
-      \let\@evenhead\@empty%
-      \let\@evenfoot\@empty%
-    }
-    %%%% TITLE PAGE
-    \begin{titlepage}%
-      \thispagestyle{titlepage}%
-      \gradu@topvspace{164pt}%
-      {%
-        \def\gradu@f##1{\centerline{\textbf{##1}}}%
-        \gradu@map\gradu@f\gradu@author\par%
-      }%
-      \vspace{36pt}%
-      \centerline{%
-        \Large\textbf{\parbox[top][\height][c]{\textwidth}{%
-            \centering \gradu@title%
-          }}%
-      }%
-      \vspace{164pt}%
-      \par%
-      \raggedleft%
-      \iflanguage{finnish}{%
-        \gradu@subject{} \gradu@type%
-      }{%
-        \gradu@type{} \gradu@subject%
-      }%
-      \par%
-      \raggedleft
-      \gradu@date%
-    \end{titlepage}%
-    \pagenumbering{roman}
-    \newpage%
-    %%% METADATA PAGE
-    \noindent%
-    \iflanguage{finnish}{%
-      \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
-      \gradu@author@render{,\space}{\space ja\space}\par%
-    }{%
-      \noindent\textbf{Author\ifthenelse{\value{gradu@author@count}>1}{s}{}:} %
-      \gradu@author@render{,\space}{,\space and\space}\par%
-    }%
-    \iflanguage{finnish}{%
-      \noindent\textbf{Yhteystiedot:} %
-      \gradu@contactinformation@render{,\space}{\space ja\space}\par%
-    }{%
-      \noindent\textbf{Contact information:}
-      \gradu@contactinformation@render{,\space}{,\space and\space}\par%
-    }%
-    \ifthenelse{\NOT\boolean{gradu@bsc}\OR\value{gradu@supervisor@count}>0}{%
-      \noindent{%
-        \textbf{%
-          \iflanguage{finnish}{%
-            Ohjaaja\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
-          }{%
-            Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
-          }%
-        }\space%
-        \iflanguage{finnish}{%
-          \gradu@supervisor@render{,\space}{\space ja\space}\par%
-        }{%
-          \gradu@supervisor@render{,\space}{,\space and\space}\par%
-        }%
-      }\par%
-    }{}%
-    \iflanguage{finnish}{%
-      \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
-      \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
-      \noindent\textbf{Ty\"o:} {%
-        \gradu@HeadToUpper\gradu@type%
-      }\par%
-      \gradu@bsc@optional{Suuntautumisvaihtoehto}{studyline}%
-      \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
-      \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
-      \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-      \noindent\textbf{Abstract:} \gradu@abstract\par%
-      \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
-    }{%
-      \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
-      \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
-      \noindent\textbf{Project:} \gradu@type\par%
-      \gradu@bsc@optional{Study line}{studyline}%
-      \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
-      \noindent\textbf{Abstract:} \gradu@abstract\par%
-      \noindent\textbf{Keywords:} \gradu@keywords\par%
-      \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
-      \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
-    }%
-    %%% POSTPROCESSING
-    \def\gradu@f##1{%
-      \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
-    }%
-    \gradu@map\gradu@f\gradu@metadatacommands%
-  }%
-  \global\let\author\gradu@toolate%
-  \global\let\date\gradu@toolate%  
-  \global\let\tiivistelma\gradu@toolate%  
-  \global\let\abstract\gradu@toolate%  
-}
+% \pagenumbering{Roman}
+% \renewcommand{\maketitle}{%
+%   {%
+%     \def\ps@titlepage{%
+%       \let\@mkboth\@gobbletwo%
+%       \let\@oddhead\@empty%
+%       \def\@oddfoot{\hfill%
+%         \begin{minipage}{\textwidth}%
+%           \mbox{}\hfill\gradu@university\hfill\mbox{}\\[10pt]%
+%           \mbox{}\hfill\gradu@department\hfill\mbox{}%
+%         \end{minipage}\hfill%
+%       }%
+%       \let\@evenhead\@empty%
+%       \let\@evenfoot\@empty%
+%     }
+%     %%%% TITLE PAGE
+%     \begin{titlepage}%
+%       \thispagestyle{titlepage}%
+%       \gradu@topvspace{164pt}%
+%       {%
+%         \def\gradu@f##1{\centerline{\textbf{##1}}}%
+%         \gradu@map\gradu@f\gradu@author\par%
+%       }%
+%       \vspace{36pt}%
+%       \centerline{%
+%         \Large\textbf{\parbox[top][\height][c]{\textwidth}{%
+%             \centering \gradu@title%
+%           }}%
+%       }%
+%       \vspace{164pt}%
+%       \par%
+%       \raggedleft%
+%       \iflanguage{finnish}{%
+%         \gradu@subject{} \gradu@type%
+%       }{%
+%         \gradu@type{} \gradu@subject%
+%       }%
+%       \par%
+%       \raggedleft
+%       \gradu@date%
+%     \end{titlepage}%
+%     \pagenumbering{roman}
+%     \newpage%
+%     %%% METADATA PAGE
+%     \noindent%
+%     \iflanguage{finnish}{%
+%       \textbf{Tekij\"a\ifthenelse{\value{gradu@author@count}>1}{t}{}:} %
+%       \gradu@author@render{,\space}{\space ja\space}\par%
+%     }{%
+%       \noindent\textbf{Author\ifthenelse{\value{gradu@author@count}>1}{s}{}:} %
+%       \gradu@author@render{,\space}{,\space and\space}\par%
+%     }%
+%     \iflanguage{finnish}{%
+%       \noindent\textbf{Yhteystiedot:} %
+%       \gradu@contactinformation@render{,\space}{\space ja\space}\par%
+%     }{%
+%       \noindent\textbf{Contact information:}
+%       \gradu@contactinformation@render{,\space}{,\space and\space}\par%
+%     }%
+%     \ifthenelse{\NOT\boolean{gradu@bsc}\OR\value{gradu@supervisor@count}>0}{%
+%       \noindent{%
+%         \textbf{%
+%           \iflanguage{finnish}{%
+%             Ohjaaja\ifthenelse{\value{gradu@supervisor@count}>1}{t}{}:%
+%           }{%
+%             Supervisor\ifthenelse{\value{gradu@supervisor@count}>1}{s}{}:%
+%           }%
+%         }\space%
+%         \iflanguage{finnish}{%
+%           \gradu@supervisor@render{,\space}{\space ja\space}\par%
+%         }{%
+%           \gradu@supervisor@render{,\space}{,\space and\space}\par%
+%         }%
+%       }\par%
+%     }{}%
+%     \iflanguage{finnish}{%
+%       \noindent\textbf{Ty\"on nimi:} {\let\\\relax \gradu@title\par}%
+%       \noindent\textbf{Title in English:} \gradu@translatedtitle\par%
+%       \noindent\textbf{Ty\"o:} {%
+%         \gradu@HeadToUpper\gradu@type%
+%       }\par%
+%       \gradu@bsc@optional{Suuntautumisvaihtoehto}{studyline}%
+%       \noindent\textbf{Sivum\"a\"ar\"a:} \gradu@MainPageCount+\gradu@AppPageCount\par%
+%       \noindent\textbf{Tiivistelm\"a:} \gradu@tiivistelma\par%
+%       \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+%       \noindent\textbf{Abstract:} \gradu@abstract\par%
+%       \noindent\textbf{Keywords:} \begin{foreignlanguage}{english}\gradu@keywords\end{foreignlanguage}\par%
+%     }{%
+%       \noindent\textbf{Title:} {\let\\\relax \gradu@title\par}%
+%       \noindent\textbf{Ty\"on nimi:} \gradu@translatedtitle\par%
+%       \noindent\textbf{Project:} \gradu@type\par%
+%       \gradu@bsc@optional{Study line}{studyline}%
+%       \noindent\textbf{Page count:} \gradu@MainPageCount+\gradu@AppPageCount\par%
+%       \noindent\textbf{Abstract:} \gradu@abstract\par%
+%       \noindent\textbf{Keywords:} \gradu@keywords\par%
+%       \noindent\textbf{Suomenkielinen tiivistelm\"a:} \gradu@tiivistelma\par%
+%       \noindent\textbf{Avainsanat:} \gradu@avainsanat\par%
+%     }%
+%     %%% POSTPROCESSING
+%     \def\gradu@f##1{%
+%       \expandafter\gdef\csname##1\endcsname{\gradu@toolate}%
+%     }%
+%     \gradu@map\gradu@f\gradu@metadatacommands%
+%   }%
+%   \global\let\author\gradu@toolate%
+%   \global\let\date\gradu@toolate%  
+%   \global\let\tiivistelma\gradu@toolate%  
+%   \global\let\abstract\gradu@toolate%  
+% }
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
