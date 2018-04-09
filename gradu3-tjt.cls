@@ -276,8 +276,11 @@
 
 \ifgradu@stdbib
 \DefineBibliographyStrings{finnish}{%
-  bibliography={L\"ahteet},%
+  bibliography={L\"AHTEET},%
   andothers={ym\adddot}%
+}
+\DefineBibliographyStrings{english}{%
+  bibliography={REFERENCES}%
 }
 \fi
 
