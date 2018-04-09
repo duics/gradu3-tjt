@@ -14,8 +14,8 @@
 \def\graduclsversion{3.7}
 \def\gradu@fileinfo{JY tietotekniikan gradut}
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{gradu3}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
-\typeout{gradu3 <\graduclsdate:\graduclsversion> - Tietotekniikan graduille}
+\ProvidesClass{gradu3-tjt}[\graduclsdate\space\graduclsversion\space\gradu@fileinfo]
+\typeout{gradu3-tjt <\graduclsdate:\graduclsversion> - Tietojärjestelmätieteen graduille}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -65,7 +65,7 @@
 \RequirePackage{everyshi}[1994/12/09]
 \RequirePackage{inputenc}
 \RequirePackage[T1]{fontenc}
-\RequirePackage[left=35mm,right=20mm,top=35mm,bottom=35mm,nohead]{geometry}
+\RequirePackage[left=30mm,right=30mm,top=30mm,bottom=25mm,foot=12pt]{geometry}
 \RequirePackage[finnish,english]{babel}
 \RequirePackage{mathptmx}
 \RequirePackage[scaled=.92]{helvet}
@@ -106,6 +106,10 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% METADATA COMMANDS
+
+% From datakurre/tutkielma
+
+% From Gradu3.cls
 
 \def\gradu@muistitko#1{\textit{\gradu@msg@muistitko} \texttt{\textbackslash #1}\textit{\gradu@msg@komentoa}}
 
