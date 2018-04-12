@@ -1,7 +1,15 @@
+% gradu3.cls
+%
 % Originally written by Antti-Juhani Kaijanaho on December 2002.
 % You may treat this file as if it were in the public domain.
 % Subsequently modified by Matthieu Weber and Antti-Juhani Kaijanaho.
-% Currently maintained by Antti-Juhani Kaijanaho <antti-juhani.kaijanaho@jyu.fi>
+%
+% gradu3-tjt.cls
+%
+% Styles based on tukielma.cls originally written by
+% Asko Soukka <asko.soukka@iki.fi>. Updated to match current reporting
+% guidelines and gradu3.cls by Max Salminen <max.salminen@protonmail.ch>
+%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                     PLEASE READ THE MANUAL!                           %%
