@@ -569,14 +569,15 @@
         \@starttoc{lot}%
       }%
     }%
+    \thispagestyle{empty}
     \clearpage%
     \@makeschapterhead{\contentsname}%
     \vspace{-10pt}%
     \renewcommand{\baselinestretch}{1}\normalfont%
     \@starttoc{toc}%
+    \thispagestyle{empty}
   }%
   \clearpage%
-  \pagenumbering{arabic}%
   \setcounter{chapter}{0}%
 }
 
