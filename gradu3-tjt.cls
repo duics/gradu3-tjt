@@ -82,7 +82,7 @@
 \RequirePackage{microtype}
 \RequirePackage{mathpazo}
 \ifgradu@stdbib
-\RequirePackage[authordate,backend=biber,sortlocale=\gradu@sortlocale,noibid]{biblatex-chicago}
+\RequirePackage[authordate,citetracker=true,backend=biber,maxcitenames=1,sortlocale=\gradu@sortlocale,noibid]{biblatex-chicago}
 \fi
 
 %%
@@ -202,7 +202,10 @@
 %% BASIC FORMATTING
 
 % This matches Word 1.5 line spacing in our empirical tests.
-% \renewcommand{\baselinestretch}{1.43}  
+% \renewcommand{\baselinestretch}{1.43}
+
+% Show all names on first and et. al. next citation
+\AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}}
 
 % From datakurre/tutkielma
 \singlespacing
