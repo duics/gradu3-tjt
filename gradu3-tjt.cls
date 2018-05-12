@@ -69,6 +69,12 @@
 
 \RequirePackage{fixltx2e}
 \RequirePackage{ifthen}
+% Workaround for older version of chngcntr that might still exist in some
+% texlive distros
+% See: https://tex.stackexchange.com/questions/425600/latex-error-command-counterwithout-already-defined
+\let\counterwithout\relax
+\let\counterwithin\relax
+% Workaround end 
 \RequirePackage{chngcntr}
 \RequirePackage{everyshi}[1994/12/09]
 \RequirePackage{inputenc}
