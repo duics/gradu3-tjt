@@ -210,6 +210,9 @@
 % This matches Word 1.5 line spacing in our empirical tests.
 % \renewcommand{\baselinestretch}{1.43}
 
+% Years to parentheseses in /cite
+\renewcommand{\cite}[2][]{\citeauthor{#2} (\citeyear[#1]{#2})}
+
 % Show all names on first and et. al. next citation
 \AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}}
 
