@@ -17,7 +17,7 @@ repository.
 ### Ubuntu
 
 ```bash
-sudo apt install texlive biber latexmk texlive-latex-extras texlive-lang-european texlive-bibtex-extra
+sudo apt install texlive biber latexmk texlive-latex-extra texlive-lang-european texlive-bibtex-extra
 ```
 
 ### Windows
