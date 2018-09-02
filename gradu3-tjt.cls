@@ -210,9 +210,6 @@
 % This matches Word 1.5 line spacing in our empirical tests.
 % \renewcommand{\baselinestretch}{1.43}
 
-% Years to parentheseses in /cite
-\renewcommand{\cite}[2][]{\citeauthor{#2} (\citeyear[#1]{#2})}
-
 % Show all names on first and et. al. next citation
 \AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}}
 
@@ -313,8 +310,9 @@
   \def\listtablename{Taulukot}%
   \def\figurename{Kuvio}%
   \def\gradu@default@university{Jyv\"askyl\"an yliopisto}%
+  \def\gradu@default@location{Jyv\"askyl\"a}%
   \def\gradu@default@department{Informaatioteknologian tiedekunta}%
-  \def\gradu@default@subject{Tietotekniikan}%
+  \def\gradu@default@subject{Tietojärjestelmätiede}%
   \def\gradu@default@type{pro gradu -tutkielma}%
   \def\gradu@bachelortype{kandidaatintutkielma}%
 }
@@ -326,8 +324,9 @@
   \def\listfigurename{FIGURES}%
   \def\listtablename{TABLES}%
   \def\gradu@default@university{University of Jyv\"askyl\"a}%
+  \def\gradu@default@location{Jyv\"askyl\"a}%
   \def\gradu@default@department{Faculty of Information Technology}%
-  \def\gradu@default@subject{in Information Technology}%
+  \def\gradu@default@subject{Information systems science}%
   \def\gradu@default@type{Master's Thesis}%
   \def\gradu@bachelortype{Bachelor's Thesis}%
 }
@@ -339,19 +338,26 @@
 
 \newcounter{gradu@pagecount@main}
 \newcounter{gradu@pagecount@app}
+\newcounter{gradu@pagecount@total}
 \def\gradu@pagecount@curr{gradu@pagecount@main}
+\def\gradu@pagecount@curr{gradu@pagecount@total}
 \EveryShipout{%
   \addtocounter{\gradu@pagecount@curr}{1}%
 }
+
 \AtEndDocument{%
   \clearpage%
   \immediate\write\@auxout%
   {\string\gdef\string\gradu@MainPageCount{\thegradu@pagecount@main}}%
   \immediate\write\@auxout%
   {\string\gdef\string\gradu@AppPageCount{\thegradu@pagecount@app}}%
+  \immediate\write\@auxout%
+  {\string\gdef\string\gradu@TotalPageCount{\thegradu@pagecount@total}}%
 }
+
 \def\gradu@AppPageCount{\textbf{?}}
 \def\gradu@MainPageCount{\textbf{?}}
+\def\gradu@TotalPageCount{\textbf{?}}
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -375,6 +381,7 @@
   }%
 }
 
+\newcommand{\location}[1]{\def\gradu@location{#1}}
 
 \renewcommand{\maketitle}{%
 }
@@ -432,20 +439,22 @@
       \chapter*{ABSTRACT}
     }%
     \thispagestyle{empty}
-    \noindent\textbf{\ifthenelse{\value{gradu@author@count}>1}{s}{}} %
+    \noindent\textbf{\ifthenelse{\value{gradu@author@count}>1}{s}{}}%
     \gradu@author@render{\\\space}{\\\space\\\space}\\
     \iflanguage{finnish}{%
       \noindent\gradu@title\\
-      \noindent\gradu@type\\
-      \noindent\gradu@MainPageCount+\gradu@AppPageCount\par%
+      \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount\text{p.}\\
+      \noindent\gradu@subject, \gradu@type\par
       \noindent\gradu@tiivistelma\par%
       \noindent Avainsanat: \gradu@avainsanat
     }{%
+    \begin{otherlanguage}{english}
       \noindent\gradu@title\\
-      \noindent\gradu@type\\
-      \noindent\gradu@MainPageCount+\gradu@AppPageCount\par%
+      \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount\text{p.}\\
+      \noindent\gradu@subject, \gradu@type\par
       \noindent\gradu@abstract\par%
       \noindent Keywords: \gradu@keywords
+    \end{otherlanguage}
     }%
     % Foreign abstract
     \iflanguage{finnish}{%
@@ -455,20 +464,22 @@
     }%
     \thispagestyle{empty}
     \noindent%
-    \noindent\textbf{\ifthenelse{\value{gradu@author@count}>1}{s}{}} %
+    \noindent\textbf{\ifthenelse{\value{gradu@author@count}>1}{s}{}}%
     \gradu@author@render{\\\space}{\\\space\\\space}\\
     \iflanguage{finnish}{%
       \noindent\gradu@translatedtitle\\
-      \noindent\gradu@type\\
-      \noindent\gradu@MainPageCount+\gradu@AppPageCount\par%
-      \noindent\gradu@abstract\par%
+      \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount\text{ s.}\\
+      \noindent\gradu@subject, \gradu@type\par
+      \noindent\gradu@abstract\par
       \noindent Keywords: \gradu@keywords
     }{%
+    \begin{otherlanguage}{finnish}
       \noindent\gradu@translatedtitle\\
-      \noindent\gradu@type\\
-      \noindent\gradu@MainPageCount+\gradu@AppPageCount\par%
+      \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount\text{ s.}\\
+      \noindent\gradu@subject, \gradu@type\par
       \noindent\gradu@tiivistelma\par%
       \noindent Avainsanat: \gradu@avainsanat
+    \end{otherlanguage}
     }%
     %%% POSTPROCESSING
     \def\gradu@f##1{%
@@ -649,6 +660,7 @@
 
 \renewcommand\appendix{\par\clearpage%
   \gdef\gradu@pagecount@curr{gradu@pagecount@app}%
+  \gdef\gradu@pagecount@curr{gradu@pagecount@total}%
   \chapter*{\appendicesname}%
   \setcounter{section}{0}%
   \gdef\thesection{\@Alph\c@section}%
