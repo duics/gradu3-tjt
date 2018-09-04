@@ -181,6 +181,7 @@
 \gradu@DeclareMetadataCommand{subject}{\gradu@default@subject}
 \gradu@DeclareMetadataCommand{studyline}{\relax}
 \gradu@DeclareMetadataCommand{type}{\gradu@default@@type}
+\gradu@DeclareMetadataCommand{location}{\gradu@default@location}
 %\gradu@DeclareMetadataCommand{tiivistelma} -- needs \long
 %\gradu@DeclareMetadataCommand{abstract} -- needs \long
 \gradu@DeclareMetadataCommand{avainsanat}{}
@@ -380,8 +381,6 @@
     }%
   }%
 }
-
-\newcommand{\location}[1]{\def\gradu@location{#1}}
 
 \renewcommand{\maketitle}{%
 }
