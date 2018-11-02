@@ -435,11 +435,12 @@
     %%% METADATA PAGE
     % Main abstract
     \iflanguage{finnish}{%
-      \chapter*{TIIVISTELM\"A}
+      \subsection*{TIIVISTELM\"A}
     }{%
-      \chapter*{ABSTRACT}
+      \subsection*{ABSTRACT}
     }%
     \thispagestyle{empty}
+    \vspace{1cm}
     \noindent\textbf{\ifthenelse{\value{gradu@author@count}>1}{s}{}}%
     \gradu@author@render{\\\space}{\\\space\\\space}\\
     \iflanguage{finnish}{%
@@ -459,9 +460,9 @@
     }%
     % Foreign abstract
     \iflanguage{finnish}{%
-      \chapter*{ABSTRACT}
+      \subsection*{ABSTRACT}
     }{%
-      \chapter*{TIIVISTELM\"A}
+      \subsection*{TIIVISTELM\"A}
     }%
     \thispagestyle{empty}
     \noindent%
