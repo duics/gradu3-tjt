@@ -543,7 +543,8 @@
       \gradu@opentocfile{lof}%
     }{%
       {%
-        \gradu@chapterheadline{\listfigurename}%
+        \section*{\listfigurename}%
+        \vspace{1cm}%
         \renewcommand{\baselinestretch}{1}\normalfont%
         \def\numberline##1{\figurename~##1.~}%
         \@starttoc{lof}%
@@ -554,7 +555,8 @@
       \gradu@opentocfile{lot}%
     }{%
       {%
-        \gradu@chapterheadline{\listtablename}%
+        \section*{\listtablename}%
+	\vspace{1cm}%
         \renewcommand{\baselinestretch}{1}\normalfont%
         \def\numberline##1{\tablename~##1.~}%
         \@starttoc{lot}%
@@ -562,9 +564,22 @@
     }%
     \thispagestyle{empty}
     \clearpage%
-    \@makeschapterhead{\contentsname}%
-    \vspace{-10pt}%
+    \subsection*{\tocname}%
+    \vspace{.5cm}%
     \renewcommand{\baselinestretch}{1}\normalfont%
+    \iflanguage{finnish}{%
+      TIIVISTELM\"A \\
+    }{%
+      ABSTRACT \\
+    }%
+    \iflanguage{finnish}{%
+      ABSTRACT \\
+    }{%
+      TIIVISTELM\"A \\
+    }%
+    \listfigurename \\
+    \listtablename \\
+    \vspace{-10pt}%
     \@starttoc{toc}%
     \thispagestyle{empty}
   }%
