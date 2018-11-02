@@ -447,15 +447,21 @@
       \noindent\gradu@title\\
       \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount p.\\
       \noindent\gradu@subject, \gradu@type\par
+      \vspace{0.5cm}
       \noindent\gradu@tiivistelma\par%
+      \vspace{0.5cm}
       \noindent Avainsanat: \gradu@avainsanat
+      \newpage
     }{%
     \begin{otherlanguage}{english}
       \noindent\gradu@title\\
       \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount p.\\
       \noindent\gradu@subject, \gradu@type\par
+      \vspace{0.5cm}
       \noindent\gradu@abstract\par%
+      \vspace{0.5cm}
       \noindent Keywords: \gradu@keywords
+      \newpage
     \end{otherlanguage}
     }%
     % Foreign abstract
@@ -472,15 +478,21 @@
       \noindent\gradu@translatedtitle\\
       \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount s.\\
       \noindent\gradu@subject, \gradu@type\par
+      \vspace{0.5cm}
       \noindent\gradu@abstract\par
+      \vspace{0.5cm}
       \noindent Keywords: \gradu@keywords
+      \newpage
     }{%
     \begin{otherlanguage}{finnish}
       \noindent\gradu@translatedtitle\\
       \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount s.\\
       \noindent\gradu@subject, \gradu@type\par
+      \vspace{0.5cm}
       \noindent\gradu@tiivistelma\par%
+      \vspace{0.5cm}
       \noindent Avainsanat: \gradu@avainsanat
+      \newpage
     \end{otherlanguage}
     }%
     %%% POSTPROCESSING
