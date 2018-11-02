@@ -306,10 +306,11 @@
   \def\gradu@msg@muistitko{Muistitko k\"aytt\"a\"a}%
   \def\gradu@msg@komentoa{-komentoa?}%
   \def\termlistname{Termiluettelo}%
-  \def\appendicesname{Liitteet}%
-  \def\listfigurename{Kuviot}%
-  \def\listtablename{Taulukot}%
-  \def\figurename{Kuvio}%
+  \def\tocname{SIS\"ALLYS}%
+  \def\appendicesname{LIITTEET}%
+  \def\listfigurename{KUVIOT}%
+  \def\listtablename{TAULUKOT}%
+  \def\figurename{KUVIO}%
   \def\gradu@default@university{Jyv\"askyl\"an yliopisto}%
   \def\gradu@default@location{Jyv\"askyl\"a}%
   \def\gradu@default@department{Informaatioteknologian tiedekunta}%
@@ -321,6 +322,7 @@
   \def\gradu@msg@muistitko{Did you remember to use the}%
   \def\gradu@msg@komentoa{ command?}%
   \def\termlistname{Glossary}%
+  \def\tocname{CONTENTS}%
   \def\appendicesname{Appendices}%
   \def\listfigurename{FIGURES}%
   \def\listtablename{TABLES}%
