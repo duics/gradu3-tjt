@@ -442,14 +442,14 @@
     \gradu@author@render{\\\space}{\\\space\\\space}\\
     \iflanguage{finnish}{%
       \noindent\gradu@title\\
-      \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount\text{p.}\\
+      \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount p.\\
       \noindent\gradu@subject, \gradu@type\par
       \noindent\gradu@tiivistelma\par%
       \noindent Avainsanat: \gradu@avainsanat
     }{%
     \begin{otherlanguage}{english}
       \noindent\gradu@title\\
-      \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount\text{p.}\\
+      \noindent\gradu@location: \gradu@default@university, \gradu@year, \gradu@TotalPageCount p.\\
       \noindent\gradu@subject, \gradu@type\par
       \noindent\gradu@abstract\par%
       \noindent Keywords: \gradu@keywords
@@ -467,14 +467,14 @@
     \gradu@author@render{\\\space}{\\\space\\\space}\\
     \iflanguage{finnish}{%
       \noindent\gradu@translatedtitle\\
-      \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount\text{ s.}\\
+      \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount s.\\
       \noindent\gradu@subject, \gradu@type\par
       \noindent\gradu@abstract\par
       \noindent Keywords: \gradu@keywords
     }{%
     \begin{otherlanguage}{finnish}
       \noindent\gradu@translatedtitle\\
-      \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount\text{ s.}\\
+      \noindent\gradu@location: \gradu@university, \gradu@year, \gradu@TotalPageCount s.\\
       \noindent\gradu@subject, \gradu@type\par
       \noindent\gradu@tiivistelma\par%
       \noindent Avainsanat: \gradu@avainsanat
