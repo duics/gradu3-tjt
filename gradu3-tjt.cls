@@ -230,8 +230,8 @@
 
 % From gradu3.cls
 
-\setlength\parindent{0pt}
-\setlength\parskip{10pt}
+\setlength\parindent{1cm}
+\setlength\parskip{0pt}
 \ifgradu@stdbib
 \setlength\bibhang{0pt}
 \fi
