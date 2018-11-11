@@ -565,7 +565,7 @@
     \thispagestyle{empty}
     \clearpage%
     \subsection*{\tocname}%
-    \vspace{.5cm}%
+    \vspace{1cm}%
     \renewcommand{\baselinestretch}{1}\normalfont%
     \iflanguage{finnish}{%
       TIIVISTELM\"A \\
