@@ -619,7 +619,7 @@
     \interlinepenalty\@M%
     \Large \bfseries%
     #1\par\nobreak%
-    \vskip 10pt%
+    \vskip 1cm%
   }%
 }
 
@@ -646,8 +646,8 @@
   {section}%
   {1}%
   {\z@}%
-  {-14pt}%
-  {0.01pt}%
+  {18pt}%
+  {18pt}%
   {\normalfont\bfseries\large}%
 }
 
@@ -655,8 +655,8 @@
   {subsection}%
   {2}%
   {\z@}%
-  {-14pt}%
-  {0.01pt}%
+  {18pt}%
+  {18pt}%
   {\normalfont\bfseries\normalsize}%
 }
 
