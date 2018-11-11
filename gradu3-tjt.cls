@@ -440,7 +440,6 @@
       \subsection*{ABSTRACT}
     }%
     \thispagestyle{empty}
-    \vspace{1cm}
     \noindent\textbf{\ifthenelse{\value{gradu@author@count}>1}{s}{}}%
     \gradu@author@render{\\\space}{\\\space\\\space}\\
     \iflanguage{finnish}{%
