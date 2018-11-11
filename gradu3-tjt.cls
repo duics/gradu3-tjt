@@ -544,7 +544,6 @@
     }{%
       {%
         \section*{\listfigurename}%
-        \vspace{1cm}%
         \renewcommand{\baselinestretch}{1}\normalfont%
         \def\numberline##1{\figurename~##1.~}%
         \@starttoc{lof}%
@@ -556,7 +555,6 @@
     }{%
       {%
         \section*{\listtablename}%
-	\vspace{1cm}%
         \renewcommand{\baselinestretch}{1}\normalfont%
         \def\numberline##1{\tablename~##1.~}%
         \@starttoc{lot}%
@@ -565,17 +563,18 @@
     \thispagestyle{empty}
     \clearpage%
     \subsection*{\tocname}%
-    \vspace{1cm}%
     \renewcommand{\baselinestretch}{1}\normalfont%
-    \iflanguage{finnish}{%
-      TIIVISTELM\"A \\
-    }{%
-      ABSTRACT \\
-    }%
-    \iflanguage{finnish}{%
-      ABSTRACT \\
-    }{%
-      TIIVISTELM\"A \\
+    {\setlength{\parindent}{0cm}%
+      \iflanguage{finnish}{%
+        TIIVISTELM\"A \\
+      }{%
+        ABSTRACT \\
+      }%
+      \iflanguage{finnish}{%
+        ABSTRACT \\
+      }{%
+        TIIVISTELM\"A \\
+      }%
     }%
     \listfigurename \\
     \listtablename \\
